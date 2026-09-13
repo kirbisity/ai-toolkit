@@ -1,0 +1,34 @@
+# Local Output Directory
+# Contains personal notes, setup docs, templates - not for version control
+.local_output/
+
+# Personal Memory
+# User-specific context should not be committed
+memory/user-profile.md
+
+# Environment & IDE
+.env
+.env.local
+*.swp
+*.swo
+*~
+.DS_Store
+.idea/
+.vscode/settings.json
+
+# Build & Cache
+__pycache__/
+*.pyc
+*.pyo
+node_modules/
+.pytest_cache/
+.coverage
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+/temp/
+/tmp/

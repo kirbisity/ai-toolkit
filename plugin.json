@@ -1,0 +1,151 @@
+{
+  "id": "kirby-toolkit",
+  "name": "Kirby Toolkit",
+  "version": "1.0.0",
+  "description": "Comprehensive AI SDLC toolkit with universal coding principles and multi-agent workflow",
+  "author": "Team",
+  "license": "MIT",
+
+  "skills": [
+    {
+      "id": "kirby-code",
+      "name": "Kirby Code",
+      "version": "1.2.0",
+      "path": "skills/kirby-code.md",
+      "description": "Universal coding principles for all languages and frameworks",
+      "tags": ["coding", "standards", "principles", "universal"]
+    },
+    {
+      "id": "kirby-build",
+      "name": "Kirby Build",
+      "version": "1.0.0",
+      "path": "skills/kirby-build.md",
+      "description": "Multi-agent SDLC workflow: Code → Review → Test → Deploy",
+      "tags": ["workflow", "sdlc", "agents", "automation"],
+      "requires": ["kirby-code"]
+    }
+  ],
+
+  "knowledge_base": {
+    "path": "kb/",
+    "description": "Persistent knowledge and standards",
+    "sections": [
+      {
+        "id": "coding-standards",
+        "name": "Coding Standards",
+        "path": "kb/coding-standards/",
+        "description": "Language-specific conventions"
+      },
+      {
+        "id": "architectural-patterns",
+        "name": "Architectural Patterns",
+        "path": "kb/architectural-patterns/",
+        "description": "System design patterns and decisions"
+      },
+      {
+        "id": "tool-reference",
+        "name": "Tool Reference",
+        "path": "kb/tool-reference/",
+        "description": "Tool documentation and setup"
+      },
+      {
+        "id": "frameworks",
+        "name": "Frameworks",
+        "path": "kb/frameworks/",
+        "description": "Framework-specific guides"
+      },
+      {
+        "id": "decisions",
+        "name": "Architecture Decisions",
+        "path": "kb/decision-log.md",
+        "description": "5 ADRs documenting key decisions"
+      }
+    ]
+  },
+
+  "memory": {
+    "path": "memory/",
+    "description": "Long-term memory and learnings",
+    "sections": [
+      {
+        "id": "feedback",
+        "name": "Feedback",
+        "path": "memory/feedback/",
+        "description": "Discovered preferences and approaches"
+      },
+      {
+        "id": "learned-patterns",
+        "name": "Learned Patterns",
+        "path": "memory/learned-patterns/",
+        "description": "Patterns discovered through experience"
+      },
+      {
+        "id": "project-context",
+        "name": "Project Context",
+        "path": "memory/project-context/",
+        "description": "Active projects and technical context"
+      }
+    ]
+  },
+
+  "workspace": {
+    "path": "workspace/",
+    "description": "Current work tracking",
+    "sections": [
+      {
+        "id": "current-projects",
+        "path": "workspace/current-projects.md",
+        "description": "Active projects"
+      },
+      {
+        "id": "blockers",
+        "path": "workspace/blockers.md",
+        "description": "Known issues and blockers"
+      },
+      {
+        "id": "priorities",
+        "path": "workspace/priorities.md",
+        "description": "Team focus areas"
+      }
+    ]
+  },
+
+  "capabilities": {
+    "skills": true,
+    "knowledge_base": true,
+    "memory": true,
+    "workspace": true,
+    "multi_agent": true
+  },
+
+  "installation": {
+    "type": "clone_or_download",
+    "instructions": "See INSTALL.md"
+  },
+
+  "documentation": {
+    "readme": "README.md",
+    "quick_start": "README.md",
+    "architecture": "ARCHITECTURE.md",
+    "structure": "STRUCTURE.md",
+    "install": "INSTALL.md"
+  },
+
+  "requirements": {
+    "claude_code_version": ">=1.0.0",
+    "features": ["skills", "knowledge_base", "memory"]
+  },
+
+  "keywords": [
+    "sdlc",
+    "workflow",
+    "coding-standards",
+    "multi-agent",
+    "automation",
+    "principles",
+    "best-practices",
+    "knowledge-base",
+    "memory",
+    "toolkit"
+  ]
+}
