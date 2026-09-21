@@ -8,9 +8,10 @@ Reusable Claude Code skills and workflows.
   - Universal coding principles for all languages
   - Naming, comments, documentation, error handling, reusability
 
-- **[kirby-build.md](kirby-build.md)** (v1.0.0)
-  - Multi-agent SDLC workflow
-  - Phases: Code → Review → Test → Deploy
+- **[kirby-build.md](kirby-build.md)** (v2.0.0)
+  - Superpowers-backed SDLC workflow
+  - Phases: Align → Isolate → Plan → Implement → Review → Verify → Ship
+  - **Requires** the external `superpowers` plugin (>=6.0.0) — see [kb/tool-reference/superpowers.md](../kb/tool-reference/superpowers.md)
 
 ## Using Skills
 
@@ -50,4 +51,4 @@ Update this README with the new skill.
 
 ---
 
-Last Updated: 2025-09-13
+Last Updated: 2026-09-20

@@ -60,7 +60,9 @@ KB content follows semantic versioning:
 - (To be populated)
 
 ### Tool Reference
-- (To be populated)
+- [Superpowers (v1.0.0)](tool-reference/superpowers.md) ✅
+  - External skills library backing the kirby-build workflow
+  - Skill inventory, install commands, phase mapping, upgrade policy
 
 ### Architectural Patterns
 - (To be populated)
@@ -71,7 +73,8 @@ KB content follows semantic versioning:
 - [ADR-003: Memory as Append-Only](decision-log.md) — 2025-09-13
 - [ADR-004: Skills Marketplace Structure](decision-log.md) — 2025-09-13
 - [ADR-005: Workspace Daily Updates](decision-log.md) — 2025-09-13
+- [ADR-006: Depend on Superpowers](decision-log.md) — 2026-09-20
 
 ---
 
-Last Updated: 2025-09-13
+Last Updated: 2026-09-20
