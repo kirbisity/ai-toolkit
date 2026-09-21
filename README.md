@@ -1,37 +1,43 @@
 # Kirby Toolkit
 
-Claude Code plugin for SDLC workflows, coding standards, and team knowledge.
+Claude Code plugin: superpowers-backed SDLC workflow plus universal coding principles.
 
-**v1.1.0** | **MIT License**
+**v2.0.0** | **MIT License**
 
 ---
 
-## Install
+## Quickstart
 
-**1. Install the superpowers dependency** — kirby-build will not run without it:
+Two installs. Superpowers is **required** — every kirby-build phase delegates to it.
 
-```bash
+```
 /plugin install superpowers@claude-plugins-official
+/plugin marketplace add kirbisity/ai-toolkit
+/plugin install kirby-toolkit@kirby-toolkit
 ```
 
-**2. Install this toolkit:**
+Confirm with `/plugin list`; both `superpowers` and `kirby-toolkit` must appear.
 
-```bash
-git clone https://github.com/your-org/kirby-toolkit.git ~/.claude/plugins/kirby-toolkit
-```
-
-Or: `/plugin install kirby-toolkit`
-
-Details: `.local_output/docs/INSTALL.md` · Dependency details: `kb/tool-reference/superpowers.md`
-
----
-
-## Use
+## Invoke
 
 ```
-Use skill kirby-code      # Coding principles
-Use skill kirby-build     # SDLC workflow
+/kirby-build      # 7-phase SDLC workflow (Align -> ... -> Ship)
+/kirby-code       # coding principles only
 ```
+
+Or plain language — `use kirby-build to add feature X`. Skills also self-trigger
+when a request matches their description.
+
+Superpowers skills are callable directly, namespaced `superpowers:<skill>`:
+
+```
+/superpowers:brainstorming
+/superpowers:test-driven-development
+/superpowers:systematic-debugging
+```
+
+kirby-build sequences these for you, so reach for them individually only when you
+want one phase in isolation.
 
 ---
 
@@ -80,18 +86,25 @@ Use skill kirby-build     # SDLC workflow
 ## Directory Structure
 
 ```
-kirby-toolkit/
-├── README.md              # This file
-├── plugin.json            # Plugin manifest
+ai-toolkit/
+├── .claude-plugin/
+│   ├── plugin.json        # Claude Code plugin manifest
+│   └── marketplace.json   # lets this repo be added as a marketplace
+├── plugin.json            # internal manifest (KB/memory/workspace registry)
+├── README.md              # this file
 ├── LICENSE                # MIT
 │
-├── skills/                # Reusable skills
+├── skills/
+│   ├── kirby-build/SKILL.md
+│   └── kirby-code/SKILL.md
 ├── kb/                    # Knowledge Base
 ├── memory/                # Long-term learning
 ├── workspace/             # Work tracking
 └── .local_output/         # Local docs (not tracked)
-    └── docs/              # Detailed guides
 ```
+
+Skills are auto-discovered from `skills/<name>/SKILL.md` — adding one needs no
+manifest edit.
 
 ---
 
@@ -125,19 +138,16 @@ Result: consistent process from an upstream library, consistent style from ours.
 
 ---
 
-## Setup
+## Local Development
 
-Add to `.claude/settings.json`:
+To run uncommitted changes, add your clone as a marketplace instead of the GitHub repo:
 
-```json
-{
-  "plugins": {
-    "kirby-toolkit": {
-      "auto_load": ["kirby-code", "kirby-build"]
-    }
-  }
-}
 ```
+/plugin marketplace add /path/to/ai-toolkit
+/plugin install kirby-toolkit@kirby-toolkit
+```
+
+Editing a `SKILL.md` then takes effect on the next session start.
 
 ---
 
@@ -145,7 +155,7 @@ Add to `.claude/settings.json`:
 
 | Need | See |
 |------|-----|
-| Installation | `.local_output/docs/INSTALL.md` |
+| Installation | Quickstart above |
 | Architecture | `.local_output/docs/ARCHITECTURE.md` |
 | Full structure | `.local_output/docs/STRUCTURE.md` |
 | Quick reference | `.local_output/docs/QUICK-REFERENCE.md` |
@@ -232,4 +242,4 @@ Questions? See `.local_output/docs/` for detailed guides.
 
 ---
 
-[GitHub](https://github.com/your-org/kirby-toolkit) | [License](LICENSE) | v1.1.0
+[GitHub](https://github.com/kirbisity/ai-toolkit) | [License](LICENSE) | v2.0.0

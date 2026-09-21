@@ -9,7 +9,7 @@ metadata:
 # Superpowers
 
 External skills library and development methodology by Jesse Vincent, used as the
-process engine behind [kirby-build](../../skills/kirby-build.md).
+process engine behind [kirby-build](../../skills/kirby-build/SKILL.md).
 
 - **Repository:** https://github.com/obra/superpowers
 - **License:** MIT
@@ -73,7 +73,7 @@ Available but not wired into kirby-build:
 
 ## Relationship to kirby-code
 
-Superpowers governs **process**; [kirby-code](../../skills/kirby-code.md) governs
+Superpowers governs **process**; [kirby-code](../../skills/kirby-code/SKILL.md) governs
 **style**. They operate on different axes and both apply inside every phase.
 Superpowers says "write a failing test first"; kirby-code says "name it
 descriptively and skip the comment restating it."
@@ -87,7 +87,7 @@ Superpowers versions independently of this toolkit. On a major version bump:
 
 1. Diff the skill list against the table above
 2. Update kirby-build's phase mapping for renamed or removed skills
-3. Bump the `requires` floor in `plugin.json` and `skills/kirby-build.md`
+3. Bump the `requires` floor in `.claude-plugin/plugin.json` and `skills/kirby-build/SKILL.md`
 
 A renamed superpowers skill breaks kirby-build silently — the phase reference
 simply will not resolve — so the skill-list diff is the load-bearing step.
@@ -99,5 +99,5 @@ Superpowers loads a logo asset for version counting. Disable with
 
 ## Related
 
-- [kirby-build](../../skills/kirby-build.md) — the workflow that consumes these skills
+- [kirby-build](../../skills/kirby-build/SKILL.md) — the workflow that consumes these skills
 - [decision-log](../decision-log.md) — ADR-006 records the dependency decision

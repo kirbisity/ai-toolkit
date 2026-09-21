@@ -1,7 +1,7 @@
 {
   "id": "kirby-toolkit",
   "name": "Kirby Toolkit",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "description": "AI SDLC toolkit: universal coding principles plus a superpowers-backed multi-agent workflow",
   "author": "Team",
   "license": "MIT",
@@ -24,7 +24,7 @@
       "id": "kirby-code",
       "name": "Kirby Code",
       "version": "1.2.0",
-      "path": "skills/kirby-code.md",
+      "path": "skills/kirby-code/SKILL.md",
       "description": "Universal coding principles for all languages and frameworks",
       "tags": ["coding", "standards", "principles", "universal"]
     },
@@ -32,7 +32,7 @@
       "id": "kirby-build",
       "name": "Kirby Build",
       "version": "2.0.0",
-      "path": "skills/kirby-build.md",
+      "path": "skills/kirby-build/SKILL.md",
       "description": "Superpowers-backed SDLC workflow: Align → Isolate → Plan → Implement → Review → Verify → Ship",
       "tags": ["workflow", "sdlc", "agents", "automation", "superpowers", "tdd"],
       "requires": ["kirby-code", "superpowers"]
