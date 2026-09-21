@@ -1,10 +1,23 @@
 {
   "id": "kirby-toolkit",
   "name": "Kirby Toolkit",
-  "version": "1.0.0",
-  "description": "Comprehensive AI SDLC toolkit with universal coding principles and multi-agent workflow",
+  "version": "1.1.0",
+  "description": "AI SDLC toolkit: universal coding principles plus a superpowers-backed multi-agent workflow",
   "author": "Team",
   "license": "MIT",
+
+  "dependencies": {
+    "plugins": [
+      {
+        "id": "superpowers",
+        "version": ">=6.0.0",
+        "source": "https://github.com/obra/superpowers",
+        "install": "/plugin install superpowers@claude-plugins-official",
+        "required_by": ["kirby-build"],
+        "reason": "Provides the phase skills kirby-build orchestrates (TDD, planning, review, verification)"
+      }
+    ]
+  },
 
   "skills": [
     {
@@ -18,11 +31,11 @@
     {
       "id": "kirby-build",
       "name": "Kirby Build",
-      "version": "1.0.0",
+      "version": "2.0.0",
       "path": "skills/kirby-build.md",
-      "description": "Multi-agent SDLC workflow: Code → Review → Test → Deploy",
-      "tags": ["workflow", "sdlc", "agents", "automation"],
-      "requires": ["kirby-code"]
+      "description": "Superpowers-backed SDLC workflow: Align → Isolate → Plan → Implement → Review → Verify → Ship",
+      "tags": ["workflow", "sdlc", "agents", "automation", "superpowers", "tdd"],
+      "requires": ["kirby-code", "superpowers"]
     }
   ],
 
@@ -58,7 +71,13 @@
         "id": "decisions",
         "name": "Architecture Decisions",
         "path": "kb/decision-log.md",
-        "description": "5 ADRs documenting key decisions"
+        "description": "6 ADRs documenting key decisions"
+      },
+      {
+        "id": "superpowers",
+        "name": "Superpowers Reference",
+        "path": "kb/tool-reference/superpowers.md",
+        "description": "Skill inventory, install, and upgrade policy for the superpowers dependency"
       }
     ]
   },
@@ -133,7 +152,8 @@
 
   "requirements": {
     "claude_code_version": ">=1.0.0",
-    "features": ["skills", "knowledge_base", "memory"]
+    "features": ["skills", "knowledge_base", "memory"],
+    "plugins": ["superpowers>=6.0.0"]
   },
 
   "keywords": [
@@ -146,6 +166,8 @@
     "best-practices",
     "knowledge-base",
     "memory",
-    "toolkit"
+    "toolkit",
+    "superpowers",
+    "tdd"
   ]
 }

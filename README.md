@@ -2,11 +2,19 @@
 
 Claude Code plugin for SDLC workflows, coding standards, and team knowledge.
 
-**v1.0.0** | **MIT License**
+**v1.1.0** | **MIT License**
 
 ---
 
 ## Install
+
+**1. Install the superpowers dependency** — kirby-build will not run without it:
+
+```bash
+/plugin install superpowers@claude-plugins-official
+```
+
+**2. Install this toolkit:**
 
 ```bash
 git clone https://github.com/your-org/kirby-toolkit.git ~/.claude/plugins/kirby-toolkit
@@ -14,7 +22,7 @@ git clone https://github.com/your-org/kirby-toolkit.git ~/.claude/plugins/kirby-
 
 Or: `/plugin install kirby-toolkit`
 
-Details: `.local_output/docs/INSTALL.md`
+Details: `.local_output/docs/INSTALL.md` · Dependency details: `kb/tool-reference/superpowers.md`
 
 ---
 
@@ -31,14 +39,17 @@ Use skill kirby-build     # SDLC workflow
 
 ### Skills (2)
 - **kirby-code** (v1.2.0) — Universal coding principles for all languages
-- **kirby-build** (v1.0.0) — Multi-agent workflow: Code → Review → Test → Deploy
+- **kirby-build** (v2.0.0) — Superpowers-backed workflow: Align → Isolate → Plan → Implement → Review → Verify → Ship
+
+### Dependency
+- **superpowers** (>=6.0.0) — External MIT skills library ([obra/superpowers](https://github.com/obra/superpowers)) providing the process mechanics for every kirby-build phase
 
 ### Knowledge Base
 - Coding standards
 - Architectural patterns  
 - Tool reference
 - Frameworks
-- Decision log (5 ADRs)
+- Decision log (6 ADRs)
 
 ### Memory System
 - Feedback & preferences
@@ -86,17 +97,31 @@ kirby-toolkit/
 
 ## How It Works
 
-**kirby-code** = Universal principles all teams follow
+Three layers, each owning one thing:
 
-**kirby-build** = Multi-agent workflow using kirby-code standards
+| Layer | Owns | Source |
+|-------|------|--------|
+| **kirby-build** | Which phase runs, and when | this repo |
+| **superpowers** | How each phase is executed | external plugin |
+| **kirby-code** | Naming, comments, error handling, syntax | this repo |
 
-Each agent applies the same principles:
-- Code Agent writes code following standards
-- Review Agent checks code meets standards  
-- Test Agent verifies quality
-- Deploy Agent releases verified code
+Superpowers governs **process**, kirby-code governs **style**. Both apply inside
+every phase, so they never compete.
 
-Result: Consistent, high-quality codebase
+### Phase → Skill Mapping
+
+| Phase | superpowers skill |
+|-------|-------------------|
+| 0 Align | `brainstorming` |
+| 1 Isolate | `using-git-worktrees` |
+| 2 Plan | `writing-plans` |
+| 3 Implement | `subagent-driven-development` / `executing-plans` + `test-driven-development` |
+| 4 Review | `requesting-code-review` → `receiving-code-review` |
+| 5 Verify | `verification-before-completion` |
+| 6 Ship | `finishing-a-development-branch` |
+| stuck? | `systematic-debugging` |
+
+Result: consistent process from an upstream library, consistent style from ours.
 
 ---
 
@@ -125,6 +150,7 @@ Add to `.claude/settings.json`:
 | Full structure | `.local_output/docs/STRUCTURE.md` |
 | Quick reference | `.local_output/docs/QUICK-REFERENCE.md` |
 | Full index | `.local_output/docs/INDEX.md` |
+| Superpowers dependency | `kb/tool-reference/superpowers.md` |
 | KB help | `kb/README.md` |
 | Memory guide | `memory/README.md` |
 | Skills guide | `skills/README.md` |
@@ -171,6 +197,9 @@ Add to `.claude/settings.json`:
 **Skills not loading?**
 Check: `~/.claude/plugins/kirby-toolkit/skills/` exists
 
+**kirby-build phase references not resolving?**
+Check: `/plugin list` shows `superpowers`. Every phase delegates to it.
+
 **KB not accessible?**
 Check: `kb/` directory and file permissions
 
@@ -203,4 +232,4 @@ Questions? See `.local_output/docs/` for detailed guides.
 
 ---
 
-[GitHub](https://github.com/your-org/kirby-toolkit) | [License](LICENSE) | v1.0.0
+[GitHub](https://github.com/your-org/kirby-toolkit) | [License](LICENSE) | v1.1.0

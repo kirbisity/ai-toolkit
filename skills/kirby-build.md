@@ -1,188 +1,219 @@
 ---
 name: kirby-build
-description: General SDLC workflow with multiple specialized agents
-version: 1.0.0
+description: SDLC workflow that orchestrates the superpowers skills library, with kirby-code as the style layer
+version: 2.0.0
 author: Team
 status: published
 ---
 
-# Kirby Build: Multi-Agent SDLC Workflow
+# Kirby Build: Superpowers-Backed SDLC Workflow
 
-Coordinated software development workflow using specialized agents for different phases.
+Kirby Build coordinates a full development cycle by delegating each phase to a
+[superpowers](../kb/tool-reference/superpowers.md) skill. Kirby Build decides
+*which* phase runs and *when*; superpowers defines *how* each phase is executed.
 
-**Requires:** [kirby-code](kirby-code.md) skill — Universal coding principles all agents must follow
+**Requires:**
+- `superpowers` plugin (>=6.0.0) — provides every phase skill referenced below
+- [kirby-code](kirby-code.md) — style layer applied inside every phase
+
+## Division of Responsibility
+
+Three layers, no overlap. This is what keeps the integration conflict-free:
+
+| Layer | Owns | Source |
+|-------|------|--------|
+| **kirby-build** | Phase sequencing, entry/exit criteria, project gates | this skill |
+| **superpowers** | Process mechanics within each phase | `superpowers` plugin |
+| **kirby-code** | Naming, comments, error handling, syntax | [kirby-code](kirby-code.md) |
+
+When superpowers and kirby-code appear to disagree, they are answering different
+questions: superpowers governs **process**, kirby-code governs **style**. Follow
+both. If a genuine conflict surfaces, superpowers wins on process and the
+conflict is recorded in `memory/learned-patterns/`.
 
 ## Workflow Overview
 
 ```
-Code Change Request
+Request
     ↓
-[1] Code Agent → Write/modify code
+[0] Align      → skill: superpowers:brainstorming
     ↓
-[2] Review Agent → Code review & quality check
+[1] Isolate    → skill: superpowers:using-git-worktrees
     ↓
-[3] Test Agent → Run tests & validation
+[2] Plan       → skill: superpowers:writing-plans
     ↓
-[4] Deploy Agent → Build & deploy
+[3] Implement  → skill: superpowers:subagent-driven-development
+                        or superpowers:executing-plans
+                 (inner loop: superpowers:test-driven-development)
+    ↓
+[4] Review     → skill: superpowers:requesting-code-review
+                        then superpowers:receiving-code-review
+    ↓
+[5] Verify     → skill: superpowers:verification-before-completion
+    ↓
+[6] Ship       → skill: superpowers:finishing-a-development-branch
     ↓
 Complete
 ```
 
-## Phase 1: Code Agent
-
-**Responsibility:** Write, modify, refactor code
-
-**Actions:**
-- Create/edit files
-- Follow [kirby-code](kirby-code.md) principles (naming, clarity, reusability)
-- Make focused, minimal changes
-- Document decisions
-
-**Apply Skill:** [kirby-code](kirby-code.md)
-- Use skill: kirby-code
-- Naming conventions
-- Comments (WHY only, not WHAT)
-- Error handling
-- Reusability patterns
-- Simple, clear syntax
-
-**Output:** Code changes, commit message
+Stuck at any phase → `superpowers:systematic-debugging`.
 
 ---
 
-## Phase 2: Review Agent
+## Phase 0: Align
 
-**Responsibility:** Quality assurance and consistency
+**Skill:** `superpowers:brainstorming`
 
-**Checks:**
-- Correctness (does it work?)
-- Clarity (is it understandable?)
-- Consistency (matches [kirby-code](kirby-code.md) principles?)
-- Completeness (handles edge cases?)
+Refine the request into a specification before any code exists. Do not skip this
+for anything larger than a one-line fix — an unrefined spec is the most expensive
+defect to carry forward.
 
-**Apply Skill:** [kirby-code](kirby-code.md)
-- Use skill: kirby-code for universal coding principles
-  - Naming conventions
-  - Comments clarity
-  - Error handling
-  - Reusability
-
-**Tools:**
-- Static analysis
-- Code review checklist
-- Skill: [kirby-code](kirby-code.md)
-
-**Output:** Approval or requested changes
+**Exit criteria:** Written spec the requester agrees with.
 
 ---
 
-## Phase 3: Test Agent
+## Phase 1: Isolate
 
-**Responsibility:** Verify functionality and reliability
+**Skill:** `superpowers:using-git-worktrees`
 
-**Tests:**
-- Unit tests (individual functions)
-- Integration tests (components together)
-- End-to-end tests (full workflows)
-- Performance tests (if needed)
+Create an isolated worktree on a new branch. Keeps `main` clean and lets Phase 3
+run parallel agents without collisions.
 
-**Actions:**
-- Run test suite
-- Check coverage
-- Verify no regressions
-- Benchmark if critical
-
-**Output:** Test results, pass/fail
+**Exit criteria:** Worktree created, branch named after the work.
 
 ---
 
-## Phase 4: Deploy Agent
+## Phase 2: Plan
 
-**Responsibility:** Build, package, and deploy
+**Skill:** `superpowers:writing-plans`
 
-**Tasks:**
-- Build application
-- Run final checks
-- Create deployment artifact
-- Deploy to target environment
-- Verify deployment success
+Decompose the spec into bite-sized tasks (2–5 minutes each). Task granularity is
+what makes Phase 3's subagent handoffs reliable.
 
-**Safety:**
-- Backward compatibility check
-- Rollback plan ready
-- Health checks post-deploy
-
-**Output:** Deployment status, release notes
+**Exit criteria:** Written plan, each task independently verifiable.
 
 ---
 
-## Multi-Agent Coordination
+## Phase 3: Implement
 
-### Phase Transitions
+**Skill:** `superpowers:subagent-driven-development` (default) or
+`superpowers:executing-plans` (small, single-session changes)
 
-**Code → Review:**
-- Code Agent completes changes
-- Triggers Review Agent with full context
+**Inner loop:** `superpowers:test-driven-development` — RED → GREEN → REFACTOR is
+mandatory, not advisory. No production code before a failing test.
 
-**Review → Test:**
-- If approved, triggers Test Agent
-- If changes needed, back to Code Agent
+**Style:** apply [kirby-code](kirby-code.md) to every file touched — descriptive
+naming, comments that explain WHY only, focused functions, sensible defaults on
+error.
 
-**Test → Deploy:**
-- If tests pass, triggers Deploy Agent
-- If tests fail, back to Code Agent
+**Scaling out:** independent task tracks → `superpowers:dispatching-parallel-agents`.
 
-**Deploy → Complete:**
-- Deployment succeeds → workflow done
-- Deployment fails → troubleshoot, restart
+**Exit criteria:** All plan tasks complete, full test suite green.
 
-### Communication Pattern
+---
 
-Each agent:
-1. Receives context from previous phase
-2. Performs specialized work
-3. Provides clear output/decision
-4. Passes full context to next agent
+## Phase 4: Review
 
-### Failure Handling
+**Skills:** `superpowers:requesting-code-review`, then
+`superpowers:receiving-code-review`
 
-**If Review fails:** Return context + requested changes to Code Agent
-**If Tests fail:** Return test results + failing tests to Code Agent
-**If Deploy fails:** Hold for manual review before retry
+Review validates the diff against the Phase 2 plan and the kirby-code checklist.
+Critical findings block progress and return to Phase 3.
+
+**Exit criteria:** No unresolved critical findings.
+
+---
+
+## Phase 5: Verify
+
+**Skill:** `superpowers:verification-before-completion`
+
+Prove the change works with evidence, rather than asserting it. Claims of success
+without a command output or observed behavior do not clear this gate.
+
+**Exit criteria:** Evidence recorded for each spec requirement.
+
+---
+
+## Phase 6: Ship
+
+**Skill:** `superpowers:finishing-a-development-branch`
+
+Merge, PR, or cleanup decision, plus worktree teardown.
+
+**Safety gates** (kirby-build additions, retained from v1):
+- Backward compatibility confirmed
+- Rollback plan written down
+- Post-deploy health check identified
+
+**Exit criteria:** Branch merged or PR opened, worktree removed.
+
+---
+
+## Skill Reference
+
+Every superpowers skill this workflow depends on:
+
+| Phase | superpowers skill |
+|-------|-------------------|
+| 0 Align | `brainstorming` |
+| 1 Isolate | `using-git-worktrees` |
+| 2 Plan | `writing-plans` |
+| 3 Implement | `subagent-driven-development`, `executing-plans`, `test-driven-development`, `dispatching-parallel-agents` |
+| 4 Review | `requesting-code-review`, `receiving-code-review` |
+| 5 Verify | `verification-before-completion` |
+| 6 Ship | `finishing-a-development-branch` |
+| any | `systematic-debugging` |
+
+Unused but available from the plugin: `using-superpowers` (bootstrap),
+`writing-skills` (authoring), `diagnosing-superpowers` (troubleshooting).
+
+---
+
+## Phase Selection
+
+Not every request needs all seven phases.
+
+| Change type | Phases |
+|-------------|--------|
+| Feature | 0 → 6 (all) |
+| Bug fix | `systematic-debugging` → 1 → 3 → 4 → 5 → 6 |
+| Refactor | 1 → 2 → 3 → 4 → 5 → 6 |
+| Docs only | 1 → 3 → 6 |
+| Config change | 0 → 1 → 3 → 5 → 6 |
+
+Skipping a phase is a decision to record, not a shortcut to take silently.
+
+---
+
+## Migrating from v1
+
+v1 defined four self-contained agents (Code, Review, Test, Deploy). Those phases
+still exist, now backed by superpowers skills instead of prose descriptions:
+
+| v1 phase | v2 equivalent |
+|----------|---------------|
+| Code Agent | Phase 3 Implement |
+| Review Agent | Phase 4 Review |
+| Test Agent | Phase 3 inner loop + Phase 5 Verify |
+| Deploy Agent | Phase 6 Ship |
+
+New in v2: Phases 0 (Align), 1 (Isolate), 2 (Plan). Testing moved from a phase
+that follows implementation to a loop that drives it.
 
 ---
 
 ## Best Practices
 
-1. **Small changes** — Each workflow handles one feature/fix
-2. **Clear context** — Pass full information between agents
-3. **Early validation** — Catch issues in review, not production
-4. **Rollback ready** — Always have deployment rollback plan
-5. **Document decisions** — Each phase logs key decisions
+1. **Small changes** — one feature or fix per workflow run
+2. **Spec first** — Phase 0 is the cheapest place to change your mind
+3. **Tests drive code** — never the reverse
+4. **Evidence over assertion** — Phase 5 exists because "it should work" is not a result
+5. **Record skipped phases** — note what was skipped and why
 
 ---
 
-## Customization
-
-This is a template. Customize for your needs:
-
-- **Add phases:** Security check, performance profiling, etc.
-- **Skip phases:** Some changes may skip testing (docs-only)
-- **Parallel paths:** Multiple features in parallel
-- **Different standards:** Adjust per project/team
-
----
-
-## When to Use
-
-- ✅ Feature development
-- ✅ Bug fixes
-- ✅ Refactoring
-- ✅ Configuration changes
-- ✅ Documentation updates
-
----
-
-**Version:** 1.0.0  
-**Status:** Stable  
-**Last Updated:** 2025-09-13
+**Version:** 2.0.0
+**Status:** Stable
+**Requires:** superpowers >=6.0.0, kirby-code >=1.2.0
+**Last Updated:** 2026-09-20
