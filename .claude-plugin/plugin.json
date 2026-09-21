@@ -1,0 +1,12 @@
+{
+  "name": "kirby-toolkit",
+  "description": "SDLC workflow and universal coding principles. Orchestrates the superpowers skills library for process, adds kirby-code for style.",
+  "version": "2.0.0",
+  "author": {
+    "name": "kirbisity"
+  },
+  "homepage": "https://github.com/kirbisity/ai-toolkit",
+  "repository": "https://github.com/kirbisity/ai-toolkit",
+  "license": "MIT",
+  "keywords": ["sdlc", "workflow", "coding-standards", "superpowers", "tdd", "multi-agent"]
+}
