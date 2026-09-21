@@ -345,6 +345,84 @@ Project status, blockers, and priorities need to be current and accessible. Work
 
 ---
 
+## ADR-006: Depend on Superpowers Rather Than Reimplement Workflow Mechanics
+
+**Date:** 2026-09-20  
+**Status:** ACCEPTED  
+**Author:** Team
+
+### Context
+
+kirby-build v1 described its four phases (Code, Review, Test, Deploy) as prose
+guidance. Each phase told an agent what to care about but gave it no executable
+process, so output quality varied between runs — particularly around testing
+discipline and what counted as "done."
+
+The [superpowers](tool-reference/superpowers.md) library (MIT, obra/superpowers)
+provides 15 tested, self-triggering skills covering exactly these phases, plus
+three kirby-build lacked entirely: brainstorming, worktree isolation, and
+planning.
+
+Three options were evaluated:
+
+1. **Keep reimplementing** — continue expanding kirby-build's own prose
+2. **Vendor** — copy superpowers skills into `skills/`
+3. **Depend** — require the superpowers plugin, orchestrate its skills
+
+### Decision
+
+Implement **Option 3 (Depend)**. kirby-build v2.0.0 becomes an orchestration
+layer that sequences superpowers skills.
+
+- superpowers declared as a plugin dependency in `plugin.json` (>=6.0.0)
+- kirby-build phases reference skills as `superpowers:<skill-name>`
+- Nothing from superpowers is copied into this repository
+- kirby-code remains ours and applies inside every phase
+
+### Rationale
+
+**Why not Option 1 (reimplement):**
+- ❌ Duplicates work already done better elsewhere
+- ❌ Our prose cannot self-trigger the way skills do
+- ❌ Ongoing maintenance cost for non-differentiating content
+
+**Why not Option 2 (vendor):**
+- ❌ Vendored copies drift from upstream and silently go stale
+- ❌ We would inherit maintenance of code we did not write
+- ❌ Duplicate skill names collide if the user also installs the plugin
+
+**Why Option 3:**
+- ✅ Upstream fixes and new skills arrive without our involvement
+- ✅ Clear ownership boundary: their process, our sequencing, our style
+- ✅ kirby-build shrinks to what is actually ours
+- ✅ MIT license permits either path, so the choice is purely maintenance
+
+### Consequences
+
+1. **Hard prerequisite:** kirby-build does not function without the superpowers
+   plugin installed. Documented in README and the skill's `requires` field.
+2. **Upgrade coupling:** a renamed or removed upstream skill breaks a phase
+   reference silently. Mitigated by the upgrade policy in
+   [superpowers](tool-reference/superpowers.md) — diff the skill list on every
+   major bump.
+3. **Breaking change:** kirby-build 1.0.0 → 2.0.0. Existing users must install a
+   plugin they did not previously need. A migration table ships in the skill.
+4. **Layer discipline:** contributors must know which layer a change belongs to.
+   Process changes go upstream; sequencing changes go in kirby-build; style
+   changes go in kirby-code.
+5. **Testing shifts left:** TDD becomes the inner loop of implementation instead
+   of a phase that follows it.
+
+### Alternatives Considered
+
+See Options 1 and 2 above — both rejected on maintenance grounds, not capability.
+
+### Related Decisions
+- [ADR-004: Skills Marketplace Structure](#adr-004-skills-marketplace-structure)
+- [ADR-002: Persistent vs Delta Knowledge](#adr-002-persistent-vs-delta-knowledge)
+
+---
+
 ## Summary Table
 
 | ADR | Title | Decision | Status |
@@ -354,6 +432,7 @@ Project status, blockers, and priorities need to be current and accessible. Work
 | 003 | Memory Append-Only | Never modify, link new | ✅ Accepted |
 | 004 | Skills Marketplace | Published/Draft/Prompts | ✅ Accepted |
 | 005 | Workspace Daily Update | High turnover | ✅ Accepted |
+| 006 | Depend on Superpowers | Require plugin, don't vendor | ✅ Accepted |
 
 ---
 
@@ -380,4 +459,4 @@ Project status, blockers, and priorities need to be current and accessible. Work
 
 ---
 
-Last Updated: 2025-09-13
+Last Updated: 2026-09-20
