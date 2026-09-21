@@ -9,12 +9,12 @@ status: published
 # Kirby Build: Superpowers-Backed SDLC Workflow
 
 Kirby Build coordinates a full development cycle by delegating each phase to a
-[superpowers](../kb/tool-reference/superpowers.md) skill. Kirby Build decides
+[superpowers](../../kb/tool-reference/superpowers.md) skill. Kirby Build decides
 *which* phase runs and *when*; superpowers defines *how* each phase is executed.
 
 **Requires:**
 - `superpowers` plugin (>=6.0.0) — provides every phase skill referenced below
-- [kirby-code](kirby-code.md) — style layer applied inside every phase
+- [kirby-code](../kirby-code/SKILL.md) — style layer applied inside every phase
 
 ## Division of Responsibility
 
@@ -24,7 +24,7 @@ Three layers, no overlap. This is what keeps the integration conflict-free:
 |-------|------|--------|
 | **kirby-build** | Phase sequencing, entry/exit criteria, project gates | this skill |
 | **superpowers** | Process mechanics within each phase | `superpowers` plugin |
-| **kirby-code** | Naming, comments, error handling, syntax | [kirby-code](kirby-code.md) |
+| **kirby-code** | Naming, comments, error handling, syntax | [kirby-code](../kirby-code/SKILL.md) |
 
 When superpowers and kirby-code appear to disagree, they are answering different
 questions: superpowers governs **process**, kirby-code governs **style**. Follow
@@ -102,7 +102,7 @@ what makes Phase 3's subagent handoffs reliable.
 **Inner loop:** `superpowers:test-driven-development` — RED → GREEN → REFACTOR is
 mandatory, not advisory. No production code before a failing test.
 
-**Style:** apply [kirby-code](kirby-code.md) to every file touched — descriptive
+**Style:** apply [kirby-code](../kirby-code/SKILL.md) to every file touched — descriptive
 naming, comments that explain WHY only, focused functions, sensible defaults on
 error.
 
