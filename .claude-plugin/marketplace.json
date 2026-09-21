@@ -1,0 +1,20 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "kirby-toolkit",
+  "description": "Kirby Toolkit: superpowers-backed SDLC workflow and universal coding principles",
+  "owner": {
+    "name": "kirbisity"
+  },
+  "plugins": [
+    {
+      "name": "kirby-toolkit",
+      "description": "SDLC workflow and universal coding principles. Orchestrates the superpowers skills library for process, adds kirby-code for style.",
+      "author": {
+        "name": "kirbisity"
+      },
+      "source": "./",
+      "category": "development",
+      "homepage": "https://github.com/kirbisity/ai-toolkit"
+    }
+  ]
+}
