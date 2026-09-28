@@ -8,7 +8,8 @@ Claude Code plugin: superpowers-backed SDLC workflow plus universal coding princ
 
 ## Quickstart
 
-Two installs. Superpowers is **required** — every kirby-build phase delegates to it.
+Two installs. Superpowers is **required** by kirby-build — every one of its
+phases delegates to it. kirby-code and kirby-game-design need no plugin.
 
 ```
 /plugin install superpowers@claude-plugins-official
@@ -21,8 +22,9 @@ Confirm with `/plugin list`; both `superpowers` and `kirby-toolkit` must appear.
 ## Invoke
 
 ```
-/kirby-build      # 7-phase SDLC workflow (Align -> ... -> Ship)
-/kirby-code       # coding principles only
+/kirby-build        # 7-phase SDLC workflow (Align -> ... -> Ship)
+/kirby-code         # coding principles only
+/kirby-game-design  # the feel loop: clarify -> spec -> build -> play -> learn
 ```
 
 Or plain language — `use kirby-build to add feature X`. Skills also self-trigger
@@ -43,9 +45,10 @@ want one phase in isolation.
 
 ## What's Included
 
-### Skills (2)
+### Skills (3)
 - **kirby-code** (v1.2.0) — Universal coding principles for all languages
 - **kirby-build** (v2.0.0) — Superpowers-backed workflow: Align → Isolate → Plan → Implement → Review → Verify → Ship
+- **kirby-game-design** (v1.0.0) — The loop for games and other feel-driven work, where the test is whether it plays right: Clarify → Spec → Build → Play → Learn, gated on measuring the running thing, with a self-review that proposes its own revisions
 
 ### Dependency
 - **superpowers** (>=6.0.0) — External MIT skills library ([obra/superpowers](https://github.com/obra/superpowers)) providing the process mechanics for every kirby-build phase
@@ -96,7 +99,8 @@ ai-toolkit/
 │
 ├── skills/
 │   ├── kirby-build/SKILL.md
-│   └── kirby-code/SKILL.md
+│   ├── kirby-code/SKILL.md
+│   └── kirby-game-design/SKILL.md
 ├── kb/                    # Knowledge Base
 ├── memory/                # Long-term learning
 ├── workspace/             # Work tracking

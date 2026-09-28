@@ -13,6 +13,15 @@ Reusable Claude Code skills and workflows.
   - Phases: Align → Isolate → Plan → Implement → Review → Verify → Ship
   - **Requires** the external `superpowers` plugin (>=6.0.0) — see [kb/tool-reference/superpowers.md](../kb/tool-reference/superpowers.md)
 
+- **[kirby-game-design](kirby-game-design/SKILL.md)** (v1.0.0)
+  - Iterative loop for games and other feel-driven work, where "does it feel
+    right?" is the real test
+  - Loop: Clarify → Concept to Spec → Spec to Build → Play → Learn
+  - Measurement is the gate: measure before and after, in the running thing
+  - Keeps a [cycle journal](../memory/learned-patterns/game-design-log.md) and
+    runs an unprompted self-review that proposes its own revisions
+  - Needs no plugin; composes with kirby-build when the change is large
+
 ## Using Skills
 
 Reference in Claude Code:
@@ -20,6 +29,7 @@ Reference in Claude Code:
 ```
 Use skill kirby-code for coding conventions
 Use skill kirby-build for workflow coordination
+Use skill kirby-game-design for game mechanics, balance, and feel
 ```
 
 Or read directly:
@@ -27,6 +37,7 @@ Or read directly:
 ```
 See skills/kirby-code/SKILL.md
 See skills/kirby-build/SKILL.md
+See skills/kirby-game-design/SKILL.md
 ```
 
 ## Adding Skills
@@ -51,4 +62,4 @@ Update this README with the new skill.
 
 ---
 
-Last Updated: 2026-09-20
+Last Updated: 2026-09-27
