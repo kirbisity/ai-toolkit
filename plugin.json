@@ -1,11 +1,10 @@
 {
   "id": "kirby-toolkit",
   "name": "Kirby Toolkit",
-  "version": "2.0.0",
-  "description": "AI SDLC toolkit: universal coding principles plus a superpowers-backed multi-agent workflow",
+  "version": "2.1.0",
+  "description": "AI SDLC toolkit: universal coding principles, a superpowers-backed multi-agent workflow, and an iterative loop for feel-driven design",
   "author": "Team",
   "license": "MIT",
-
   "dependencies": {
     "plugins": [
       {
@@ -13,12 +12,13 @@
         "version": ">=6.0.0",
         "source": "https://github.com/obra/superpowers",
         "install": "/plugin install superpowers@claude-plugins-official",
-        "required_by": ["kirby-build"],
+        "required_by": [
+          "kirby-build"
+        ],
         "reason": "Provides the phase skills kirby-build orchestrates (TDD, planning, review, verification)"
       }
     ]
   },
-
   "skills": [
     {
       "id": "kirby-code",
@@ -26,19 +26,51 @@
       "version": "1.2.0",
       "path": "skills/kirby-code/SKILL.md",
       "description": "Universal coding principles for all languages and frameworks",
-      "tags": ["coding", "standards", "principles", "universal"]
+      "tags": [
+        "coding",
+        "standards",
+        "principles",
+        "universal"
+      ]
     },
     {
       "id": "kirby-build",
       "name": "Kirby Build",
       "version": "2.0.0",
       "path": "skills/kirby-build/SKILL.md",
-      "description": "Superpowers-backed SDLC workflow: Align → Isolate → Plan → Implement → Review → Verify → Ship",
-      "tags": ["workflow", "sdlc", "agents", "automation", "superpowers", "tdd"],
-      "requires": ["kirby-code", "superpowers"]
+      "description": "Superpowers-backed SDLC workflow: Align \u2192 Isolate \u2192 Plan \u2192 Implement \u2192 Review \u2192 Verify \u2192 Ship",
+      "tags": [
+        "workflow",
+        "sdlc",
+        "agents",
+        "automation",
+        "superpowers",
+        "tdd"
+      ],
+      "requires": [
+        "kirby-code",
+        "superpowers"
+      ]
+    },
+    {
+      "id": "kirby-game-design",
+      "name": "Kirby Game Design",
+      "version": "1.0.0",
+      "path": "skills/kirby-game-design/SKILL.md",
+      "description": "Iterative loop for games and other feel-driven software: clarify, spec, build, play, measure, learn \u2014 with a self-review pass that proposes its own revisions",
+      "tags": [
+        "game-design",
+        "iteration",
+        "balance",
+        "playtesting",
+        "measurement",
+        "self-improving"
+      ],
+      "requires": [
+        "kirby-code"
+      ]
     }
   ],
-
   "knowledge_base": {
     "path": "kb/",
     "description": "Persistent knowledge and standards",
@@ -81,7 +113,6 @@
       }
     ]
   },
-
   "memory": {
     "path": "memory/",
     "description": "Long-term memory and learnings",
@@ -96,7 +127,7 @@
         "id": "learned-patterns",
         "name": "Learned Patterns",
         "path": "memory/learned-patterns/",
-        "description": "Patterns discovered through experience"
+        "description": "Patterns discovered through experience, and the game-design cycle log"
       },
       {
         "id": "project-context",
@@ -106,7 +137,6 @@
       }
     ]
   },
-
   "workspace": {
     "path": "workspace/",
     "description": "Current work tracking",
@@ -128,7 +158,6 @@
       }
     ]
   },
-
   "capabilities": {
     "skills": true,
     "knowledge_base": true,
@@ -136,12 +165,10 @@
     "workspace": true,
     "multi_agent": true
   },
-
   "installation": {
     "type": "clone_or_download",
     "instructions": "See INSTALL.md"
   },
-
   "documentation": {
     "readme": "README.md",
     "quick_start": "README.md",
@@ -149,13 +176,17 @@
     "structure": "STRUCTURE.md",
     "install": "INSTALL.md"
   },
-
   "requirements": {
     "claude_code_version": ">=1.0.0",
-    "features": ["skills", "knowledge_base", "memory"],
-    "plugins": ["superpowers>=6.0.0"]
+    "features": [
+      "skills",
+      "knowledge_base",
+      "memory"
+    ],
+    "plugins": [
+      "superpowers>=6.0.0"
+    ]
   },
-
   "keywords": [
     "sdlc",
     "workflow",
