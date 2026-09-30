@@ -1,7 +1,7 @@
 ---
 name: kirby-game-design
 description: Iterative loop for building and tuning games and other feel-driven software — clarify, spec, build, play, measure, learn — with a self-review pass that proposes its own revisions
-version: 1.0.0
+version: 1.1.0
 author: Team
 status: published
 ---
@@ -119,6 +119,10 @@ the most expensive thing to carry forward, and the cheapest to correct.
 | "seems not to work" | Could be a defect, a balance figure, or a perception problem. Reproduce before theorising |
 | "instead of", "revert", "that's not the intention" | Normal. Exploration proceeds by undoing — see *Build for reversal* |
 | "how hard would it be?" | A cost question. Inspect, then answer. Do not start building |
+| "too extreme", "tone it down" | A magnitude correction on something that already works. Change dials, not structure — see *Tune a family, not a number* |
+| "more natural", "more responsive" | A complaint about a *rule*, not a value. Look for the physical or intuitive model the behaviour is failing to follow |
+| "fewer, but more distinct" | Curation. Cut what overlaps before adding anything; the test is whether two entries can be told apart at a glance |
+| "no scrolling", "works on mobile and desktop" | A layout constraint, satisfied by restructuring — see *Fit the screen* |
 
 ## Phase C — Spec to build
 
@@ -147,6 +151,39 @@ line. This single decision pays for itself repeatedly.
 **Reach for a scale factor the second time you resize something.** Re-deriving
 a dozen dimensions by hand is a signal, not a chore. One factor in one place
 also keeps the proportions that were designed in.
+
+**Tune a family, not a number.** Feel comes from a handful of related
+constants — an impulse, its decay, a multiplier on each — and moving one
+alone shifts something else. Find the relation that ties them (a push's
+travel is roughly its speed over its decay) and change them together, so the
+result lands where intended rather than where the last edit happened to leave
+it. When told an effect is too strong, adjust dials only: the mechanism was
+accepted, the magnitude was not.
+
+**Prefer a model over a special case.** Behaviour that reads as unnatural is
+usually a rule that does not follow the underlying physical or intuitive
+model: a shove that teleports instead of carrying momentum, a unit that
+gives up on an order halfway. Replace the rule with the model (velocity that
+decays, an order that persists until fulfilled and then settles into a stable
+state) and the edge cases stop needing patches. Make the *end state* of every
+command explicit — what the thing does when it arrives, finishes, or is
+interrupted.
+
+**Curate variety; do not multiply it.** Ten near-duplicate variants play
+like one. Prefer a few that differ in kind — different terrain, different
+constraint, different opening decision — and delete those that a player
+could not tell apart. Where two sides are compared, give them a shared budget
+or constraint and let each fill it, so asymmetry is a design choice rather
+than an accident.
+
+**Fit the screen; do not scroll it.** A screen that must scroll to be used
+fails on the smallest device and looks unfinished on the largest. When
+content does not fit, restructure it instead of letting it overflow:
+split it into levels (home → picker), steps (a short wizard, each step one
+screenful), or pages (help that turns). Centre content so it never pushes
+its top out of reach, use grids for lists, and keep an overflow fallback only
+as a last resort. Design for touch and pointer together: targets a finger can
+hit, and no instruction that names an input the device does not have.
 
 **Build for reversal.** Exploration means mechanics get thrown away. A
 mechanic behind a variant flag, with its own config block and its own tests,
@@ -202,6 +239,30 @@ test so the fence cannot quietly fall later.
 For anything visual, **pixels decide**. Tests pass while a thing renders as a
 black slab, a smear, or nothing at all. Load it, look at it, and keep looking
 until it reads the way the spec said it should.
+
+### Measure layout, not just look at it
+
+For a layout constraint, "looks fine on my screen" proves one screen. Define
+the constraint as a number (content height ≤ viewport height, no horizontal
+overflow), then sweep **every view × every step × every state × a set of
+viewport sizes** that includes the smallest phone, a phone on its side, and a
+short desktop window. Any size the browser window cannot be resized to can be
+reached by loading the page in a same-origin frame of that size and measuring
+inside it. Paused animations in a background tab report zero-height panels —
+disable transitions for the measurement rather than reading a false overflow.
+Long content that only overflows in one state (the longest help page, the
+result screen with the most rows) is where the failures hide; enumerate the
+states rather than sampling.
+
+### Separate what you broke from what was already broken
+
+A suite with failures on entry is a baseline, not a verdict. Record the
+failing set *before* the change, and after it compare sets, not counts. Report
+new failures as yours and the rest as pre-existing — and do not "fix" a test
+that merely encodes a number the requester has since re-tuned; surface it
+and let them decide. When a change alters an interaction flow (one click
+becomes three steps), rewrite the flow test to say so and add a case for each
+new state rather than loosening the assertion.
 
 ### Make sure you are looking at what you built
 
@@ -306,6 +367,12 @@ skill carries its own reasoning.
 - **Claiming a fence held without looking at the other side of it.**
 - **A test with no failing case.** Prove it bites or delete it.
 - **Reporting only the part that worked.**
+- **Fixing overflow with a scrollbar.** It hides the layout problem.
+- **Checking one viewport.** A layout is only as good as its smallest case.
+- **Tuning one constant of a coupled set.** The others quietly undo it.
+- **Patching an unnatural behaviour case by case** instead of replacing the rule.
+- **Adding variants to add variety.**
+- **Counting failing tests instead of comparing them** to the baseline.
 
 ---
 
@@ -320,6 +387,11 @@ skill carries its own reasoning.
 - [ ] Fences verified in the running system and pinned by a test
 - [ ] Looked at it, if it renders
 - [ ] Tests assert relationships, not tuning values, and each one bites
+- [ ] Coupled tuning values moved together; magnitude requests changed dials, not structure
+- [ ] Every command and state has an explicit end state
+- [ ] UI fits without scrolling in every view/step/state at phone, landscape, and desktop sizes
+- [ ] Test failures compared against the pre-change baseline; new ones separated from old
+- [ ] Any review copy of the work (preview page, build) refreshed after the change
 - [ ] Journal entry written, including what went wrong
 - [ ] Self-review run if it is due
 
@@ -335,9 +407,21 @@ the majority of cycles, including two where the implementation was right and
 the *metric* was wrong. The variant-as-patch rule and the "twice is a rule"
 promotion rule come from the same sample.
 
+### 1.1.0
+Adds the practices from a cycle mixing tuning, behaviour and interface work:
+tune coupled values as a family, prefer a model to a special case, curate
+variety, and fit the screen by restructuring (levels, steps, pages) rather
+than scrolling. Phase D gains layout measurement across views × states ×
+viewport sizes (including framed viewports and disabling transitions in
+hidden tabs) and baseline-versus-new test-failure accounting. Evidence: one
+session in which a knockback magnitude correction was three constant edits,
+while the "no scrolling on mobile or desktop" request needed restructuring
+menus into views, a setup wizard and paged help, and per-size measurement
+found overflow in three states a single-viewport look had passed.
+
 ---
 
-**Version:** 1.0.0
+**Version:** 1.1.0
 **Status:** Stable
 **Requires:** kirby-code (style layer). Composes with kirby-build when present; needs no plugin on its own.
-**Last Updated:** 2026-09-27
+**Last Updated:** 2026-09-29
