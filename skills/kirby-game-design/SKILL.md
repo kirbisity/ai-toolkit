@@ -1,7 +1,7 @@
 ---
 name: kirby-game-design
 description: Iterative loop for building and tuning games and other feel-driven software — clarify, spec, build, play, measure, learn — with a self-review pass that proposes its own revisions
-version: 1.0.0
+version: 1.1.0
 author: Team
 status: published
 ---
@@ -50,6 +50,8 @@ own — note that the phases were run by hand.
 [D] Play ─────────── measure before and after, in the running thing
       ↓         ↘
 [E] Learn        (measurement disagrees → back to [C] with what it said)
+      ↓
+[F] Ship ─────────── get it in front of the requester, then the world
       ↓
    Journal entry
 ```
@@ -119,6 +121,10 @@ the most expensive thing to carry forward, and the cheapest to correct.
 | "seems not to work" | Could be a defect, a balance figure, or a perception problem. Reproduce before theorising |
 | "instead of", "revert", "that's not the intention" | Normal. Exploration proceeds by undoing — see *Build for reversal* |
 | "how hard would it be?" | A cost question. Inspect, then answer. Do not start building |
+| "too extreme", "tone it down" | A magnitude correction on something that already works. Change dials, not structure — see *Tune a family, not a number* |
+| "more natural", "more responsive" | A complaint about a *rule*, not a value. Look for the physical or intuitive model the behaviour is failing to follow |
+| "fewer, but more distinct" | Curation. Cut what overlaps before adding anything; the test is whether two entries can be told apart at a glance |
+| "no scrolling", "works on mobile and desktop" | A layout constraint, satisfied by restructuring — see *Fit the screen* |
 
 ## Phase C — Spec to build
 
@@ -147,6 +153,39 @@ line. This single decision pays for itself repeatedly.
 **Reach for a scale factor the second time you resize something.** Re-deriving
 a dozen dimensions by hand is a signal, not a chore. One factor in one place
 also keeps the proportions that were designed in.
+
+**Tune a family, not a number.** Feel comes from a handful of related
+constants — an impulse, its decay, a multiplier on each — and moving one
+alone shifts something else. Find the relation that ties them (a push's
+travel is roughly its speed over its decay) and change them together, so the
+result lands where intended rather than where the last edit happened to leave
+it. When told an effect is too strong, adjust dials only: the mechanism was
+accepted, the magnitude was not.
+
+**Prefer a model over a special case.** Behaviour that reads as unnatural is
+usually a rule that does not follow the underlying physical or intuitive
+model: a shove that teleports instead of carrying momentum, a unit that
+gives up on an order halfway. Replace the rule with the model (velocity that
+decays, an order that persists until fulfilled and then settles into a stable
+state) and the edge cases stop needing patches. Make the *end state* of every
+command explicit — what the thing does when it arrives, finishes, or is
+interrupted.
+
+**Curate variety; do not multiply it.** Ten near-duplicate variants play
+like one. Prefer a few that differ in kind — different terrain, different
+constraint, different opening decision — and delete those that a player
+could not tell apart. Where two sides are compared, give them a shared budget
+or constraint and let each fill it, so asymmetry is a design choice rather
+than an accident.
+
+**Fit the screen; do not scroll it.** A screen that must scroll to be used
+fails on the smallest device and looks unfinished on the largest. When
+content does not fit, restructure it instead of letting it overflow:
+split it into levels (home → picker), steps (a short wizard, each step one
+screenful), or pages (help that turns). Centre content so it never pushes
+its top out of reach, use grids for lists, and keep an overflow fallback only
+as a last resort. Design for touch and pointer together: targets a finger can
+hit, and no instruction that names an input the device does not have.
 
 **Build for reversal.** Exploration means mechanics get thrown away. A
 mechanic behind a variant flag, with its own config block and its own tests,
@@ -203,6 +242,30 @@ For anything visual, **pixels decide**. Tests pass while a thing renders as a
 black slab, a smear, or nothing at all. Load it, look at it, and keep looking
 until it reads the way the spec said it should.
 
+### Measure layout, not just look at it
+
+For a layout constraint, "looks fine on my screen" proves one screen. Define
+the constraint as a number (content height ≤ viewport height, no horizontal
+overflow), then sweep **every view × every step × every state × a set of
+viewport sizes** that includes the smallest phone, a phone on its side, and a
+short desktop window. Any size the browser window cannot be resized to can be
+reached by loading the page in a same-origin frame of that size and measuring
+inside it. Paused animations in a background tab report zero-height panels —
+disable transitions for the measurement rather than reading a false overflow.
+Long content that only overflows in one state (the longest help page, the
+result screen with the most rows) is where the failures hide; enumerate the
+states rather than sampling.
+
+### Separate what you broke from what was already broken
+
+A suite with failures on entry is a baseline, not a verdict. Record the
+failing set *before* the change, and after it compare sets, not counts. Report
+new failures as yours and the rest as pre-existing — and do not "fix" a test
+that merely encodes a number the requester has since re-tuned; surface it
+and let them decide. When a change alters an interaction flow (one click
+becomes three steps), rewrite the flow test to say so and add a case for each
+new state rather than loosening the assertion.
+
 ### Make sure you are looking at what you built
 
 Caches, hot reload, stale builds and idle background tabs all show you
@@ -247,6 +310,84 @@ One entry per cycle, appended to `memory/learned-patterns/game-design-log.md`:
 
 Honest entries only. An entry that records no difficulty is usually an entry
 written from memory rather than from the cycle.
+
+---
+
+## Phase F — Ship
+
+Feel work is judged by playing it, so **the requester must be able to play the
+current build with no effort on their part**. Shipping is two audiences, in
+order: the requester (review), then everyone else (release). Decide which
+you are doing before touching any tooling.
+
+### 1. Keep a live review copy
+
+The requester will not read a diff to judge a feel change. Give them the
+running thing, and **refresh it after every change without being asked** —
+a stale review copy makes them judge yesterday's version. Options, cheapest
+first:
+
+| Mechanism | Fits when | Watch out for |
+|-----------|-----------|---------------|
+| Local static server | You and the requester share a machine | Background services often cannot read protected folders (documents, desktop); serve from a path the service may read, or run it in the foreground |
+| Hosted single-page preview (an artifact, a paste-and-run page) | No build step; the requester is remote | The copy must be republished on every change, and only exactly the files it references |
+| Per-branch or per-PR preview deployment | A build step exists; several changes are in flight | Previews inherit the build's environment; secrets and analytics should be off |
+| Screen recording or captured frames | The result is motion and nobody can run it | Not a substitute for playing it; use for async review |
+
+Whatever the mechanism, say plainly in the reply **which version the copy
+shows** and how to reach it.
+
+### 2. Publish for real
+
+**Static hosting (GitHub Pages and equivalents).** A game with no server logic
+is a folder of files; host it as one.
+
+- Know **which branch and directory the host publishes from.** A change on a
+  feature branch is *not* live until it lands there. Say so when asked "is it
+  live?" — the answer is usually "after merge", and the review copy above is
+  how to see it before.
+- Prefer building in CI over committing build output. Keep source and
+  artefact separate, and let the workflow publish the artefact.
+- Use relative asset paths. Project sites are served from a sub-path, so
+  root-absolute URLs (`/images/x.png`) break the moment it goes live.
+- Check the live URL after deploy: load it cold, with an empty cache, and play
+  ten seconds. A green workflow proves a file was copied, not that the game
+  starts.
+- Set cache lifetimes deliberately. Long-cached scripts and assets mean
+  returning players run an old build against new data; content-hash the
+  filenames or version the query string.
+- Mind the size budget. Audio, textures and level data dominate; compress,
+  lazy-load, and fail the build when it grows past a stated limit.
+
+**Beyond a static folder.** Reach for more only when a concrete need appears:
+
+| Need | Mechanism | Principle |
+|------|-----------|-----------|
+| Every merge ships without a human step | CI/CD pipeline: test → build → deploy on the default branch | The pipeline runs the same tests you ran; deploy is gated on them |
+| Review a change before merge | Preview environment per PR, torn down on close | Previews are disposable; production is not |
+| Ship a risky change safely | Feature flag, or a staged rollout to a fraction of players | Decouple *deploying* code from *enabling* it; the flag is also the rollback |
+| Compare two tunings | A/B split with the metric chosen up front | Same discipline as Phase D: the measurement is chosen before the result exists |
+| Multiplayer or saved progress | A backend behind a versioned API | Old clients live on for a while; never break the previous version's contract in one step |
+| Players on many platforms | Package the same web build (installable web app, wrapper for stores) | One source of truth; per-platform code stays a thin shell |
+| Something went wrong live | Roll back to the previous immutable build | Keep the last good build addressable; rollback must be one step, not a rebuild |
+| Know it is healthy | Error reporting and a startup ping | A deploy is not finished until you can tell it broke |
+
+### 3. Gates before anything goes public
+
+- **Rollback is written down**, and has been exercised at least once.
+- **Saved data survives the upgrade.** If a change alters what is stored,
+  ship a migration or version the format; loading an old save must not crash.
+- **Config and secrets stay out of the client.** Anything in a shipped
+  bundle is public.
+- **Tests were run on the artefact that ships**, not only on the source tree.
+- **A health check is named** — the one observation that says it is live and
+  working — and it is checked after deploy.
+- **The requester has approved the review copy.** Publishing is an
+  irreversible-enough act that "the tests pass" is not consent.
+
+Merging, pushing and publishing affect other people. Do them when asked, or
+when a standing instruction covers them; otherwise stop at a PR and say what
+remains.
 
 ---
 
@@ -306,6 +447,17 @@ skill carries its own reasoning.
 - **Claiming a fence held without looking at the other side of it.**
 - **A test with no failing case.** Prove it bites or delete it.
 - **Reporting only the part that worked.**
+- **Fixing overflow with a scrollbar.** It hides the layout problem.
+- **Checking one viewport.** A layout is only as good as its smallest case.
+- **Tuning one constant of a coupled set.** The others quietly undo it.
+- **Patching an unnatural behaviour case by case** instead of replacing the rule.
+- **Adding variants to add variety.**
+- **Counting failing tests instead of comparing them** to the baseline.
+- **Letting the review copy go stale.** The requester judges what they see.
+- **Saying "it's live" from a green pipeline** without loading the live URL.
+- **Root-absolute asset paths** on a site served from a sub-path.
+- **Deploy with no rollback**, or a rollback nobody has tried.
+- **Building deployment machinery before there is a need** for it.
 
 ---
 
@@ -320,6 +472,13 @@ skill carries its own reasoning.
 - [ ] Fences verified in the running system and pinned by a test
 - [ ] Looked at it, if it renders
 - [ ] Tests assert relationships, not tuning values, and each one bites
+- [ ] Coupled tuning values moved together; magnitude requests changed dials, not structure
+- [ ] Every command and state has an explicit end state
+- [ ] UI fits without scrolling in every view/step/state at phone, landscape, and desktop sizes
+- [ ] Test failures compared against the pre-change baseline; new ones separated from old
+- [ ] Any review copy of the work (preview page, build) refreshed after the change
+- [ ] Review copy refreshed and the requester told which version it shows
+- [ ] If publishing: asset paths relative, live URL loaded cold, health check named, rollback written down
 - [ ] Journal entry written, including what went wrong
 - [ ] Self-review run if it is due
 
@@ -335,9 +494,26 @@ the majority of cycles, including two where the implementation was right and
 the *metric* was wrong. The variant-as-patch rule and the "twice is a rule"
 promotion rule come from the same sample.
 
+### 1.1.0
+Adds the practices from a cycle mixing tuning, behaviour and interface work:
+tune coupled values as a family, prefer a model to a special case, curate
+variety, and fit the screen by restructuring (levels, steps, pages) rather
+than scrolling. Phase D gains layout measurement across views × states ×
+viewport sizes (including framed viewports and disabling transitions in
+hidden tabs) and baseline-versus-new test-failure accounting. Evidence: one
+session in which a knockback magnitude correction was three constant edits,
+while the "no scrolling on mobile or desktop" request needed restructuring
+menus into views, a setup wizard and paged help, and per-size measurement
+found overflow in three states a single-viewport look had passed. Adds
+Phase F (Ship): a live review copy kept current, static hosting practices
+(publish branch, relative paths, cache lifetimes, size budget, cold-load
+check), a needs-driven table of heavier mechanisms (CI/CD, per-PR previews,
+feature flags, staged rollout, versioned backends, rollback), and the gates
+before anything goes public.
+
 ---
 
-**Version:** 1.0.0
+**Version:** 1.1.0
 **Status:** Stable
 **Requires:** kirby-code (style layer). Composes with kirby-build when present; needs no plugin on its own.
-**Last Updated:** 2026-09-27
+**Last Updated:** 2026-09-29
