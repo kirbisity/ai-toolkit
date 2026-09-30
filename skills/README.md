@@ -13,7 +13,7 @@ Reusable Claude Code skills and workflows.
   - Phases: Align → Isolate → Plan → Implement → Review → Verify → Ship
   - **Requires** the external `superpowers` plugin (>=6.0.0) — see [kb/tool-reference/superpowers.md](../kb/tool-reference/superpowers.md)
 
-- **[kirby-game-design](kirby-game-design/SKILL.md)** (v1.0.0)
+- **[kirby-game-design](kirby-game-design/SKILL.md)** (v1.2.0)
   - Iterative loop for games and other feel-driven work, where "does it feel
     right?" is the real test
   - Loop: Clarify → Concept to Spec → Spec to Build → Play → Learn

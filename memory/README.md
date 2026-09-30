@@ -6,7 +6,7 @@ Evolving knowledge and learnings accumulated through experience. Unlike KB (whic
 
 - **[user-profile.md](user-profile.md)** — Personal context (preferences, expertise, constraints)
 - **[feedback/](feedback/)** — Discovered preferences and approaches
-- **[project-context/](project-context/)** — Current and recent projects (see [greatwall](project-context/greatwall.md))
+- **[project-context/](project-context/)** — Current and recent projects (see [greatwall](project-context/greatwall.md), [slope-lab](project-context/slope-lab.md))
 - **[learned-patterns/](learned-patterns/)** — Patterns discovered through repeated experience
 
 ## Key Concepts
