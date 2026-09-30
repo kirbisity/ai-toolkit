@@ -1,7 +1,7 @@
 ---
 name: kirby-game-design
 description: Iterative loop for building and tuning games and other feel-driven software — clarify, spec, build, play, measure, learn — with a self-review pass that proposes its own revisions
-version: 1.1.0
+version: 1.2.0
 author: Team
 status: published
 ---
@@ -125,6 +125,9 @@ the most expensive thing to carry forward, and the cheapest to correct.
 | "more natural", "more responsive" | A complaint about a *rule*, not a value. Look for the physical or intuitive model the behaviour is failing to follow |
 | "fewer, but more distinct" | Curation. Cut what overlaps before adding anything; the test is whether two entries can be told apart at a glance |
 | "no scrolling", "works on mobile and desktop" | A layout constraint, satisfied by restructuring — see *Fit the screen* |
+| "smoother", "less sharp", "more natural-looking" (a visual) | Usually several causes at once: the shape, the colour, the resolution. Vary one at a time and look — see *Look at it* |
+| "make it easier to crash", "riskier" | A distribution to move, not a switch. Pick the crash rate you want, find the lever that moves it, and keep a safe technique — see *Find the lever* and *Give every risk a safe way* |
+| "update page" / "update PR" | Merge, deploy, and load the live site cold. Without those words, stop at a PR — see Phase F |
 
 ## Phase C — Spec to build
 
@@ -162,6 +165,23 @@ result lands where intended rather than where the last edit happened to leave
 it. When told an effect is too strong, adjust dials only: the mechanism was
 accepted, the magnitude was not.
 
+**Find the lever that moves the number.** Before turning a dial, compute or
+measure how far it can move the metric. A first lever often barely registers:
+a per-jump misjudgement of the air left moved the crash rate 0 of 203 times,
+because the rider commits only at discrete moments; rounding a ridge crease
+barely moved steepness, because the broad shape set it; capping every feature
+just under its launch speed produced bumps 12 cm tall. When a lever is weak,
+do not push it harder: replace it with the direct model (an error in where a
+rotation *stops*, a broader shape, bumps sized for the speed you want riders
+to slow to), whose effect you can calculate from its own dial.
+
+**Give every risk a safe way.** When asked to make something easier to fail,
+keep a technique the player can learn, and measure it. Moguls that punish
+arriving fast are fair only if braking early rides them clean; a hockey stop
+that catches an edge under load is fair only if stopping on even snow is still
+safe. Report the failure rate per technique (careless, cautious, expert), not
+one average.
+
 **Prefer a model over a special case.** Behaviour that reads as unnatural is
 usually a rule that does not follow the underlying physical or intuitive
 model: a shove that teleports instead of carrying momentum, a unit that
@@ -192,6 +212,12 @@ mechanic behind a variant flag, with its own config block and its own tests,
 can be removed cleanly. One woven through shared code cannot, and the cost
 lands exactly when the requester has decided they do not want it.
 
+**Express rates per second, not per step.** A loss taken every substep
+compounds with the step rate: 240 substeps a second turned a 5% drag into a
+stall on a 35° slope, and a per-step velocity rescale quartered a body's speed
+every substep. Write friction and drag as a rate per second and scale by the
+step, so changing the step cannot change the feel.
+
 **Watch for compounding.** Feel mechanics multiply. Two independent slowings
 of a half and a third leave a sixth. Worse, a change to one can silently move
 a quantity that belongs to another — slowing a traversal multiplies anything
@@ -212,6 +238,17 @@ adjacent will send you fixing things that are not broken.
 - Bad: *is the mapped position near a known point?* — it is not, when
   something is in front of it, and it should not be.
 
+**Drive every check through the input the player actually uses, the way they
+use it:** the on-screen button, pressed on the snow, tapped or held as a
+person would, not a key mid-air. Three separate fixes shipped with tests that
+pressed keys mid-air, and each missed the real defect (a button dead on the
+snow, a hold that crashed at the landing, a peak metric that hid a 4 cm
+everyday bend). **Count attempts, not opportunities:** a rate whose
+denominator includes jumps where the action never started reads as no change
+(6% to 8%) when the real change is 11% to 17%. **Judge success at a settled
+end state:** a test ride counted as clean while the skier was still flying
+past the end, and the next landing crashed. Clean means back on the snow.
+
 When numbers look wrong, **suspect the metric before the code**. Two separate
 times in the sampled cycles the implementation was already correct and the
 measurement was asking the wrong question. Confirm by tracing one case by
@@ -230,6 +267,12 @@ mechanic touches — every unit type, every camera angle, every variant, both
 sides. In the sampled cycles this exposed a cost that varied **twelve-fold**
 between unit types, which would have been invisible in any single run.
 
+For risk and skill mechanics, **sweep the player's policies**, not only the
+scenarios: hands-off, always-on, acting late, acting early. A table of
+failures per policy shows whether the risk is fair and learnable at a glance,
+and is what showed that braking late on a mogul field crashed where braking
+early did not.
+
 ### Verify the fences
 
 "Do not change the others" is a claim about the built thing, not an intention.
@@ -241,6 +284,19 @@ test so the fence cannot quietly fall later.
 For anything visual, **pixels decide**. Tests pass while a thing renders as a
 black slab, a smear, or nothing at all. Load it, look at it, and keep looking
 until it reads the way the spec said it should.
+
+- **Look at each new element on the surface it will sit on, at the zoom it is
+  seen at, in the situation players spend most time in.** Markers drawn edge-on
+  to the camera collapse to a line; colours near the ground's vanish; a
+  fully tuned editor view said nothing about the view mid-ride.
+- **A coverage or geometry test is not a look.** Tests asserted that land
+  covered the screen while flat bands showed at the bottom, and geometry
+  metrics said a range was smooth while sawtooth spikes remained. Those spikes
+  were colour boundaries, not shape. Separate the causes, render each alone,
+  and let the last look decide.
+- **Expect the first smoothing or contrast change to overshoot.** Smooth
+  normals on gentle slopes produced featureless fog until the lighting relief
+  was exaggerated; look again after each dial.
 
 ### Measure layout, not just look at it
 
@@ -273,6 +329,27 @@ yesterday's version and let you draw confident conclusions from it. When a
 result makes no sense, prove the artefact is current *before* debugging the
 logic.
 
+- **Give the game loop a manual step hook (`advance(seconds)`) from the first
+  build,** and write browser checks without timers. A hidden tab freezes the
+  frame clock and throttles timers, and tests mock it awkwardly.
+- **A background tab is not a benchmark.** Timings read in a hidden tab were
+  ten to twenty times slower than the same code run headlessly. Measure cost
+  headlessly, and use the browser for looks and behaviour.
+- **Reload modules past the cache** (`fetch(url, {cache: 'reload'})` for each,
+  then reload) before judging a change, including on the live site.
+- **After a scripted multi-file edit, run the tests and `git diff --stat`
+  before believing it.** A stray comma left a file empty, a shell word-split
+  left `0.06 0.4,` in a config, and a replace made a function call itself.
+
+### Measure cost where the frame pays it
+
+A change that multiplies an inner loop is measured in the same change. Doubling
+a mesh made each redraw three times dearer, and a gradient per triangle cost
+three times a flat fill. Cache anything anchored to the world (heights,
+colours), choose the rendering primitive by measured cost (a small software
+rasteriser beat 4,400 canvas gradients), and keep a per-frame budget in the
+spec.
+
 ### Expect the first attempt to be wrong
 
 This is the normal case, not a failure. The obvious approach frequently works
@@ -291,6 +368,12 @@ would otherwise reach for.
 - **Prove the test bites.** Undo the fix, watch it fail, restore it. A test
   that passes with the fix removed is worse than no test, because it is
   believed.
+- **Assert the scenario happened before asserting its outcome:** the takeoff
+  before the landing, the speed at the dip (not at the start), the crest launch
+  before its outcome. Tests passed without their scenario ever occurring: a
+  jump test whose skier never left the ground and "flew" for 20 s, a braking
+  test whose brake bled the speed off before the dip, and a limit test that
+  passed under the limit because the ramp-up shed speed first.
 - **Rewrite tests that describe replaced behaviour.** Do not delete them. The
   intent usually survives the mechanic.
 - **Cover the fences.** One test per "do not change X" claim.
@@ -336,6 +419,13 @@ first:
 
 Whatever the mechanism, say plainly in the reply **which version the copy
 shows** and how to reach it.
+
+**Stopping at a PR is the default, and it is an undo.** Work stopped at a
+pull request can be reverted by closing it (keep the branch). The requester's
+words decide how far it goes: "update page" or "update PR" means merge, wait
+for the deploy, and load the live site cold and press the real controls;
+without those words, stop at the PR and say what remains. Merging publishes to
+the public.
 
 ### 2. Publish for real
 
@@ -458,6 +548,14 @@ skill carries its own reasoning.
 - **Root-absolute asset paths** on a site served from a sub-path.
 - **Deploy with no rollback**, or a rollback nobody has tried.
 - **Building deployment machinery before there is a need** for it.
+- **A metric whose denominator includes cases where the action never
+  happened.**
+- **Turning a dial harder after it has shown it cannot move the metric.**
+- **A per-step loss in a simulation whose step rate can change.**
+- **Making something fail more without measuring the safe technique.**
+- **Timing in a background browser tab, or judging a look from the editor
+  view instead of the play view.**
+- **Declaring a generated or ridden test clean while it is still in the air.**
 
 ---
 
@@ -479,6 +577,10 @@ skill carries its own reasoning.
 - [ ] Any review copy of the work (preview page, build) refreshed after the change
 - [ ] Review copy refreshed and the requester told which version it shows
 - [ ] If publishing: asset paths relative, live URL loaded cold, health check named, rollback written down
+- [ ] Checks driven through the player's real input; rates count attempts, not opportunities
+- [ ] Each test asserts its scenario happened; risk mechanics swept by player policy
+- [ ] Cost measured headlessly, not in a background tab; world-anchored results cached
+- [ ] Shipped only as far as the requester's words said (PR, or merge and deploy)
 - [ ] Journal entry written, including what went wrong
 - [ ] Self-review run if it is due
 
@@ -511,9 +613,25 @@ check), a needs-driven table of heavier mechanisms (CI/CD, per-PR previews,
 feature flags, staged rollout, versioned backends, rollback), and the gates
 before anything goes public.
 
+### 1.2.0
+Accepted from the second self-review (22 cycles since the first, nearly all on
+one physics-driven game; see the Reviews section of the design log), after
+proposals A–D had waited for approval since the first. Adds: a manual step hook and headless timing
+(A); looking at new visuals on their real surface, zoom and situation (B);
+asserting that a test's scenario happened (C), now with three more tests that
+passed without it; driving checks through the player's real input (D), now
+with the attempts-not-opportunities denominator and settled end states. New
+from repeated evidence: find the lever that moves the number (three cycles
+where the first lever did nothing); give every risk a safe technique and sweep
+player policies (hockey stop, mogul fields); per-second rates instead of
+per-step losses (two ragdoll cycles); measure cost where the frame pays it
+(three rendering changes); coverage tests are not a look (two visual cycles);
+scripted edits need a diff check (three incidents); and stopping at a PR as the
+default with the requester's words deciding how far to ship.
+
 ---
 
-**Version:** 1.1.0
+**Version:** 1.2.0
 **Status:** Stable
 **Requires:** kirby-code (style layer). Composes with kirby-build when present; needs no plugin on its own.
-**Last Updated:** 2026-09-29
+**Last Updated:** 2026-09-30
