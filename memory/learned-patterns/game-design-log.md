@@ -42,7 +42,12 @@ whether that revision was accepted.
 
 ## Entries
 
-_None yet._
+## 2026-09-30 — Menu restructure, debug tools, economy pressure, routed dissolve
+- **Asked:** debug options + game speed; Start -> level picker with Open Field set apart and faction avatars; then "+1/-1" income figures, per-unit upkeep rising with distance (routed free), corruption from season 8 at 0.9/year, attacker spawns slightly rarer, routed units dissolve and fade in 5 s
+- **Built:** step-accumulator speed (no engine change), session-only debug object, level-picker views, upkeep/corruption as config-driven getters on the game, sampled floating figures drawn on the overlay, per-figure scatter + alpha for routed companies
+- **Measured:** every layout at 320x568 through desktop with zero scroll; economy and dissolve rules by unit tests; floaters and fade by screenshot at a held mid-fade state
+- **Went wrong:** upkeep measured from the unit's own home, which equals its spawn, so far units cost nothing (caught by the distance test); frame-loop change starved boot tests until the clock was mocked; the "start battle" dock survived into siege levels because cleanup lived only on the battle exit path
+- **Cost:** medium; layout verification across sizes dominated
 
 ---
 
