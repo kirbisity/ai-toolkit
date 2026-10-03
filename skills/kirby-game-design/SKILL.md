@@ -1,7 +1,7 @@
 ---
 name: kirby-game-design
 description: Iterative loop for building and tuning games and other feel-driven software — clarify, spec, build, play, measure, learn — with a self-review pass that proposes its own revisions
-version: 1.2.0
+version: 1.3.0
 author: Team
 status: published
 ---
@@ -73,6 +73,10 @@ laziness.
 - The request names a magnitude with no baseline ("much bigger")
 - Scope is unstated and the blast radius is wide (one variant, or all of them?)
 - An answer would commit to something hard to undo
+- A reference has nothing to refer to ("pick the first one" when nothing was
+  numbered). Ask once, briefly, listing the readings you can see, and do
+  nothing irreversible until it is answered: the cheapest wrong guess here
+  undoes the previous request.
 
 **Do not ask when:**
 - A sensible default exists — pick it, name it, and say you picked it
@@ -127,6 +131,11 @@ the most expensive thing to carry forward, and the cheapest to correct.
 | "no scrolling", "works on mobile and desktop" | A layout constraint, satisfied by restructuring — see *Fit the screen* |
 | "smoother", "less sharp", "more natural-looking" (a visual) | Usually several causes at once: the shape, the colour, the resolution. Vary one at a time and look — see *Look at it* |
 | "make it easier to crash", "riskier" | A distribution to move, not a switch. Pick the crash rate you want, find the lever that moves it, and keep a safe technique — see *Find the lever* and *Give every risk a safe way* |
+| "show me a few options", "some smooth, some blocky" | A sheet of distinct directions, each rendered, side by side, labelled — see *Offer directions as a sheet* |
+| "none of them, based on the last one" | Normal. Keep that option's structure and change the one axis named; do not start over |
+| "N to M times in a lifetime", "most should…" | A distribution target, not a probability. See *Hit counts with schedules* |
+| "rate each from 1 to 5", "make X the hardest" | A measured rating, not an opinion. See *Calibrate ratings by simulation* |
+| A long list of changes, or more arriving while you work | Stage it: start slow measurement first in the background, build the rest meanwhile, fold late additions into the same branch, and report every item, done or not |
 | "update page" / "update PR" | Merge, deploy, and load the live site cold. Without those words, stop at a PR — see Phase F |
 
 ## Phase C — Spec to build
@@ -202,10 +211,37 @@ than an accident.
 fails on the smallest device and looks unfinished on the largest. When
 content does not fit, restructure it instead of letting it overflow:
 split it into levels (home → picker), steps (a short wizard, each step one
-screenful), or pages (help that turns). Centre content so it never pushes
-its top out of reach, use grids for lists, and keep an overflow fallback only
+screenful), or pages (help that turns). Reserve the space of the largest state:
+panels that swap in one place (tabs, steps) share one cell sized by the
+tallest, so switching never changes the layout around them. Centre content so
+it never pushes its top out of reach, use grids for lists, and keep an overflow fallback only
 as a last resort. Design for touch and pointer together: targets a finger can
 hit, and no instruction that names an input the device does not have.
+
+**Offer directions as a sheet, not a description.** When the requester asks
+to choose, render every option in the same scene at the same size, label each,
+and put them on one sheet. Make the options differ in kind (smooth, faceted,
+blocky), not in degree. Keep the chosen one as the default behind a style key
+and the others selectable: the next request is often "based on that one, but…",
+and a rejected direction sometimes returns.
+
+**Hit counts with schedules, not dice.** "Four to eight times in a lifetime"
+is a target on the count. Independent per-period rolls at the right average
+still give some runs one and others eleven. Draw the count first, inside the
+range, then place the occurrences by the hazard (more of them where they are
+likelier). Rare things that "may or may not happen" can stay as rolls.
+
+**Keep generated data generated.** When a tool measures something the product
+displays (ratings, fits, tables), let the tool write the data file, with a
+header saying how it was made and not to edit it by hand. Where a value must
+also be copied by hand (a label on a card), add a test that the copy agrees
+with the generated data, so the two cannot drift apart silently.
+
+**Placeholders in the real shape.** When the requester will supply assets
+later (music, art, copy), create them now under their final names, in a valid
+format (a second of silence, a flat image), with a short README mapping each
+file to where it is used. The wiring is then built and tested today, and the
+swap is a file copy. Check the packaging includes the new folder.
 
 **Build for reversal.** Exploration means mechanics get thrown away. A
 mechanic behind a variant flag, with its own config block and its own tests,
@@ -272,6 +308,63 @@ scenarios: hands-off, always-on, acting late, acting early. A table of
 failures per policy shows whether the risk is fair and learnable at a glance,
 and is what showed that braking late on a mogul field crashed where braking
 early did not.
+
+### Calibrate ratings by simulation
+
+A difficulty, a rating, a "best fit" or a "most likely to" shown to players is
+a claim about outcomes; measure it rather than assigning it.
+
+- **Play it with bots that play like people.** A few policies (careful,
+  greedy, careless) that read only what a player can see. Force each
+  alternative path in turn (each branch, each specialisation) as well as
+  letting the bot choose, so the rating can say which path suits.
+- **Measure what is rated, not the noise.** Switch off randomness that is
+  unrelated to the thing being rated (accidents, windfalls) for the rating
+  runs, and say so; the product keeps it.
+- **Fold the results into one index with its weights in config**, then cut
+  the index into bands. A rating is then a number with a formula, and a band
+  edge is a dial.
+- **Tune the cases nearest a band edge with the smallest change**, and
+  re-simulate only what changed. A large change to fix a near-miss moves the
+  others.
+- **Ratings go stale.** Any systemic change (a new era, a new rule that
+  touches everyone) silently invalidates every rating; re-run the full sweep
+  and regenerate the data in the same change.
+- **Test the ordering, not the numbers**: easier bands outperform harder
+  ones, the card matches the generated data, each named entity sits in its
+  named band.
+
+### Run the long measurements in the background
+
+A sweep that takes half an hour should not block the work. Split it into one
+process per entity, run them in parallel, and build something else meanwhile.
+Wait on a condition (no matching processes left, the output files complete),
+never on chained sleeps; and make sure the wait does not match its own command
+line, or it never ends. Read the results only when every file is whole.
+
+### A new thing must survive every layer
+
+A feature can be built, tested and still invisible. Trace each new thing to
+the furthest layer it must reach:
+
+- **A new option through every wrapper.** A helper that destructures its
+  options drops the new one silently; the model never turned because the
+  wrapper never passed the angle on.
+- **A new trigger through every mode.** Fast-forward, autopilot and skip modes
+  take shortcuts; decide for each new event whether it plays in each mode, and
+  check it there. A once-per-run moment silenced by the fast mode is never
+  seen, because that is the mode players use to reach it.
+- **A new file through the packaging.** A new folder is not shipped until
+  the deploy copies it; request each new file from the live URL and expect a
+  200.
+
+### Exaggerate to judge what is too small to see
+
+When the normal view cannot settle a question (which way a small figure
+faces, whether a seam closes), render the case large and annotated: four
+figures with arrows for four headings, one prop filling the frame, a contact
+sheet of every shot at the same moment. Decide there, then check the normal
+view once.
 
 ### Verify the fences
 
@@ -340,13 +433,19 @@ logic.
 - **After a scripted multi-file edit, run the tests and `git diff --stat`
   before believing it.** A stray comma left a file empty, a shell word-split
   left `0.06 0.4,` in a config, and a replace made a function call itself.
+  Make scripted edits assert that each anchor exists before replacing it, so
+  a missing target fails loudly instead of silently changing nothing; and
+  prefer a tool with the same behaviour on every platform over in-place
+  stream edits whose flags differ between systems.
 
 ### Measure cost where the frame pays it
 
 A change that multiplies an inner loop is measured in the same change. Doubling
 a mesh made each redraw three times dearer, and a gradient per triangle cost
 three times a flat fill. Cache anything anchored to the world (heights,
-colours), choose the rendering primitive by measured cost (a small software
+colours), draw background instances at a lower level of detail than the one
+the player is looking at (five full-detail copies cost more than the rest of
+the scene together), choose the rendering primitive by measured cost (a small software
 rasteriser beat 4,400 canvas gradients), and keep a per-frame budget in the
 spec.
 
@@ -556,6 +655,15 @@ skill carries its own reasoning.
 - **Timing in a background browser tab, or judging a look from the editor
   view instead of the play view.**
 - **Declaring a generated or ridden test clean while it is still in the air.**
+- **Assigning a rating by feel** when it can be measured, or keeping ratings
+  across a systemic change that invalidated them.
+- **Rolling dice per period for a per-lifetime count target.**
+- **Describing options in prose** when the requester asked to choose.
+- **Guessing what an unnumbered "the first one" refers to.**
+- **A new option dropped by a wrapper, a new event silenced by a fast mode,
+  a new folder left out of the deploy.**
+- **Waiting with chained sleeps**, or with a wait loop that matches itself.
+- **Hand-copied values with no test against the data they were copied from.**
 
 ---
 
@@ -580,6 +688,10 @@ skill carries its own reasoning.
 - [ ] Checks driven through the player's real input; rates count attempts, not opportunities
 - [ ] Each test asserts its scenario happened; risk mechanics swept by player policy
 - [ ] Cost measured headlessly, not in a background tab; world-anchored results cached
+- [ ] Ratings and fits measured by simulation, regenerated after systemic changes, cards tested against the data
+- [ ] Each new option, event and file traced to its furthest layer: wrappers, every mode, the live URL
+- [ ] Options for a choice rendered side by side; the choice kept as the default, the rest selectable
+- [ ] Long measurements run in parallel in the background, waited on by condition
 - [ ] Shipped only as far as the requester's words said (PR, or merge and deploy)
 - [ ] Journal entry written, including what went wrong
 - [ ] Self-review run if it is due
@@ -629,9 +741,28 @@ per-step losses (two ragdoll cycles); measure cost where the frame pays it
 scripted edits need a diff check (three incidents); and stopping at a PR as the
 default with the requester's words deciding how far to ship.
 
+### 1.3.0
+From a long run of cycles on a simulation-heavy game with characters,
+industries and life events, where nearly every request named an outcome
+("most should reach this by forty", "four to eight times in a life", "rate
+each from one to five") rather than a mechanism. Adds calibration by
+simulation (policy bots, forced alternative paths, noise switched off for the
+rating runs, a weighted index cut into bands, near-edge tuning, regeneration
+after systemic changes); counts scheduled rather than rolled; generated data
+with tests on hand-copied values; placeholders in the real shape; offering
+directions as a rendered sheet (three rounds of "show me options", one "none
+of them, based on the last one"); reserving the space of the largest state;
+background measurement waited on by condition (one wait loop that matched
+itself and never ended); and "a new thing must survive every layer", from
+three features that were built and tested but invisible: an angle dropped by a
+wrapper, a once-per-run scene skipped by the fast mode players use to reach
+it, and a new asset folder the deploy did not copy. Also: ask once when a
+reference has no antecedent, assert anchors in scripted edits, and draw
+background instances at lower detail (a scene's frame time fell by two thirds).
+
 ---
 
-**Version:** 1.2.0
+**Version:** 1.3.0
 **Status:** Stable
 **Requires:** kirby-code (style layer). Composes with kirby-build when present; needs no plugin on its own.
-**Last Updated:** 2026-09-30
+**Last Updated:** 2026-10-02
