@@ -48,7 +48,7 @@ want one phase in isolation.
 ### Skills (3)
 - **kirby-code** (v1.2.0) — Universal coding principles for all languages
 - **kirby-build** (v2.0.0) — Superpowers-backed workflow: Align → Isolate → Plan → Implement → Review → Verify → Ship
-- **kirby-game-design** (v1.0.0) — The loop for games and other feel-driven work, where the test is whether it plays right: Clarify → Spec → Build → Play → Learn, gated on measuring the running thing, with a self-review that proposes its own revisions
+- **kirby-game-design** (v1.3.0) — The loop for games and other feel-driven work, where the test is whether it plays right: Clarify → Spec → Build → Play → Learn, gated on measuring the running thing, with a self-review that proposes its own revisions
 
 ### Dependency
 - **superpowers** (>=6.0.0) — External MIT skills library ([obra/superpowers](https://github.com/obra/superpowers)) providing the process mechanics for every kirby-build phase
