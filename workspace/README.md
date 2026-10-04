@@ -9,6 +9,7 @@ Active work, blockers, and current focus. This section has high turnover and is 
 - **[priorities.md](priorities.md)** — What the team is focusing on
 - **[rfcs/](rfcs/)** — Proposals under discussion, not yet decided:
   - [Game portfolio: distribution and online features](rfcs/2026-10-04-game-portfolio-distribution-and-online.md) (draft, 2026-10-04)
+  - [Game portfolio: marketing decision framework](rfcs/2026-10-04-game-marketing-framework.md) (draft, 2026-10-04)
 
 ## Usage
 
