@@ -7,6 +7,8 @@ Active work, blockers, and current focus. This section has high turnover and is 
 - **[current-projects.md](current-projects.md)** — What's being worked on right now
 - **[blockers.md](blockers.md)** — Known issues and blockers
 - **[priorities.md](priorities.md)** — What the team is focusing on
+- **[rfcs/](rfcs/)** — Proposals under discussion, not yet decided:
+  - [Game portfolio: distribution and online features](rfcs/2026-10-04-game-portfolio-distribution-and-online.md) (draft, 2026-10-04)
 
 ## Usage
 
