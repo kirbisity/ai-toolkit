@@ -1,7 +1,7 @@
 {
   "name": "ai-toolkit",
-  "description": "SDLC workflow and universal coding principles. Orchestrates the superpowers skills library for process, adds at-code for style.",
-  "version": "3.2.0",
+  "description": "Spec-driven SDLC (at-sdlc) routed across skill libraries, a private knowledge base kept protected and indexed (at-search, at-sleep), a feel loop for games, and universal coding principles.",
+  "version": "3.3.0",
   "author": {
     "name": "kirbisity"
   },
