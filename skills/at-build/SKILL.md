@@ -1,20 +1,20 @@
 ---
-name: kirby-build
-description: SDLC workflow that orchestrates the superpowers skills library, with kirby-code as the style layer
+name: at-build
+description: SDLC workflow that orchestrates the superpowers skills library, with at-code as the style layer
 version: 2.0.0
 author: Team
 status: published
 ---
 
-# Kirby Build: Superpowers-Backed SDLC Workflow
+# AT Build: Superpowers-Backed SDLC Workflow
 
-Kirby Build coordinates a full development cycle by delegating each phase to a
-[superpowers](../../kb/tool-reference/superpowers.md) skill. Kirby Build decides
+AT Build coordinates a full development cycle by delegating each phase to a
+[superpowers](../../kb/tool-reference/superpowers.md) skill. AT Build decides
 *which* phase runs and *when*; superpowers defines *how* each phase is executed.
 
 **Requires:**
 - `superpowers` plugin (>=6.0.0) — provides every phase skill referenced below
-- [kirby-code](../kirby-code/SKILL.md) — style layer applied inside every phase
+- [at-code](../at-code/SKILL.md) — style layer applied inside every phase
 
 ## Division of Responsibility
 
@@ -22,12 +22,12 @@ Three layers, no overlap. This is what keeps the integration conflict-free:
 
 | Layer | Owns | Source |
 |-------|------|--------|
-| **kirby-build** | Phase sequencing, entry/exit criteria, project gates | this skill |
+| **at-build** | Phase sequencing, entry/exit criteria, project gates | this skill |
 | **superpowers** | Process mechanics within each phase | `superpowers` plugin |
-| **kirby-code** | Naming, comments, error handling, syntax | [kirby-code](../kirby-code/SKILL.md) |
+| **at-code** | Naming, comments, error handling, syntax | [at-code](../at-code/SKILL.md) |
 
-When superpowers and kirby-code appear to disagree, they are answering different
-questions: superpowers governs **process**, kirby-code governs **style**. Follow
+When superpowers and at-code appear to disagree, they are answering different
+questions: superpowers governs **process**, at-code governs **style**. Follow
 both. If a genuine conflict surfaces, superpowers wins on process and the
 conflict is recorded in `memory/learned-patterns/`.
 
@@ -102,7 +102,7 @@ what makes Phase 3's subagent handoffs reliable.
 **Inner loop:** `superpowers:test-driven-development` — RED → GREEN → REFACTOR is
 mandatory, not advisory. No production code before a failing test.
 
-**Style:** apply [kirby-code](../kirby-code/SKILL.md) to every file touched — descriptive
+**Style:** apply [at-code](../at-code/SKILL.md) to every file touched — descriptive
 naming, comments that explain WHY only, focused functions, sensible defaults on
 error.
 
@@ -117,7 +117,7 @@ error.
 **Skills:** `superpowers:requesting-code-review`, then
 `superpowers:receiving-code-review`
 
-Review validates the diff against the Phase 2 plan and the kirby-code checklist.
+Review validates the diff against the Phase 2 plan and the at-code checklist.
 Critical findings block progress and return to Phase 3.
 
 **Exit criteria:** No unresolved critical findings.
@@ -141,7 +141,7 @@ without a command output or observed behavior do not clear this gate.
 
 Merge, PR, or cleanup decision, plus worktree teardown.
 
-**Safety gates** (kirby-build additions, retained from v1):
+**Safety gates** (at-build additions, retained from v1):
 - Backward compatibility confirmed
 - Rollback plan written down
 - Post-deploy health check identified
@@ -215,5 +215,5 @@ that follows implementation to a loop that drives it.
 
 **Version:** 2.0.0
 **Status:** Stable
-**Requires:** superpowers >=6.0.0, kirby-code >=1.2.0
+**Requires:** superpowers >=6.0.0, at-code >=1.2.0
 **Last Updated:** 2026-09-20

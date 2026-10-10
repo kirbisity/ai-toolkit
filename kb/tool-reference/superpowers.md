@@ -1,6 +1,6 @@
 ---
 name: superpowers
-description: Reference for the superpowers skills library that backs the kirby-build workflow
+description: Reference for the superpowers skills library that backs the at-build workflow
 metadata:
   type: kb
   version: 1.0.0
@@ -9,20 +9,20 @@ metadata:
 # Superpowers
 
 External skills library and development methodology by Jesse Vincent, used as the
-process engine behind [kirby-build](../../skills/kirby-build/SKILL.md).
+process engine behind [at-build](../../skills/at-build/SKILL.md).
 
 - **Repository:** https://github.com/obra/superpowers
 - **License:** MIT
-- **Version in use:** 6.4.1 (kirby-build requires >=6.0.0)
+- **Version in use:** 6.4.1 (at-build requires >=6.0.0)
 
 ## Why We Use It
 
-kirby-build v1 described its phases in prose — each agent's process was a
+at-build v1 described its phases in prose — each agent's process was a
 paragraph of guidance. That works as a template but gives agents nothing
 executable, so process quality varied run to run.
 
 Superpowers supplies tested, self-triggering skills for exactly those phases.
-Adopting it lets kirby-build stop re-deriving process mechanics and focus on what
+Adopting it lets at-build stop re-deriving process mechanics and focus on what
 is genuinely ours: phase sequencing and project-specific gates.
 
 ## Installation
@@ -41,14 +41,14 @@ see ADR-006 in [decision-log](../decision-log.md).
 /plugin install superpowers@superpowers-marketplace
 ```
 
-Verify with `/plugin list` — `superpowers` must appear before kirby-build's
+Verify with `/plugin list` — `superpowers` must appear before at-build's
 phases can run.
 
 ## Skills Provided
 
-15 skills. The 10 kirby-build depends on:
+15 skills. The 10 at-build depends on:
 
-| Skill | Purpose | kirby-build phase |
+| Skill | Purpose | at-build phase |
 |-------|---------|-------------------|
 | `brainstorming` | Socratic spec refinement | 0 Align |
 | `using-git-worktrees` | Isolated branch workspaces | 1 Isolate |
@@ -63,7 +63,7 @@ phases can run.
 | `finishing-a-development-branch` | Merge / PR / cleanup | 6 Ship |
 | `systematic-debugging` | 4-phase root cause analysis | any (escape hatch) |
 
-Available but not wired into kirby-build:
+Available but not wired into at-build:
 
 | Skill | Purpose |
 |-------|---------|
@@ -71,11 +71,11 @@ Available but not wired into kirby-build:
 | `writing-skills` | Authoring new skills |
 | `diagnosing-superpowers` | Session troubleshooting, scrubbed bug export |
 
-## Relationship to kirby-code
+## Relationship to at-code
 
-Superpowers governs **process**; [kirby-code](../../skills/kirby-code/SKILL.md) governs
+Superpowers governs **process**; [at-code](../../skills/at-code/SKILL.md) governs
 **style**. They operate on different axes and both apply inside every phase.
-Superpowers says "write a failing test first"; kirby-code says "name it
+Superpowers says "write a failing test first"; at-code says "name it
 descriptively and skip the comment restating it."
 
 Process conflicts resolve in favor of superpowers. Record any real conflict in
@@ -86,10 +86,10 @@ Process conflicts resolve in favor of superpowers. Record any real conflict in
 Superpowers versions independently of this toolkit. On a major version bump:
 
 1. Diff the skill list against the table above
-2. Update kirby-build's phase mapping for renamed or removed skills
-3. Bump the `requires` floor in `.claude-plugin/plugin.json` and `skills/kirby-build/SKILL.md`
+2. Update at-build's phase mapping for renamed or removed skills
+3. Bump the `requires` floor in `.claude-plugin/plugin.json` and `skills/at-build/SKILL.md`
 
-A renamed superpowers skill breaks kirby-build silently — the phase reference
+A renamed superpowers skill breaks at-build silently — the phase reference
 simply will not resolve — so the skill-list diff is the load-bearing step.
 
 ## Telemetry
@@ -99,5 +99,5 @@ Superpowers loads a logo asset for version counting. Disable with
 
 ## Related
 
-- [kirby-build](../../skills/kirby-build/SKILL.md) — the workflow that consumes these skills
+- [at-build](../../skills/at-build/SKILL.md) — the workflow that consumes these skills
 - [decision-log](../decision-log.md) — ADR-006 records the dependency decision

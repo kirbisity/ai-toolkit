@@ -61,7 +61,7 @@ KB content follows semantic versioning:
 
 ### Tool Reference
 - [Superpowers (v1.0.0)](tool-reference/superpowers.md) ✅
-  - External skills library backing the kirby-build workflow
+  - External skills library backing the at-build workflow
   - Skill inventory, install commands, phase mapping, upgrade policy
 
 ### Architectural Patterns

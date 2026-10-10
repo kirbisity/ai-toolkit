@@ -1,12 +1,12 @@
 ---
-name: kirby-code
+name: at-code
 description: Universal coding conventions emphasizing clarity, minimal comments, reusability, and simple syntax
 version: 1.2.0
 author: Team
 status: published
 ---
 
-# Kirby Code: Universal Coding Principles
+# AT Code: Universal Coding Principles
 
 Pragmatic coding conventions applicable across languages and projects. Focus on clarity, consistency, and maintainability.
 

@@ -11,7 +11,7 @@ metadata:
 Vanilla-ES-module browser game (`kirbisity/greatwall`, no build step): build
 walls to hold a castle against raiders across siege levels, or fight the
 **Open Field** battle mode (budget-limited armies, placement phase, then fight).
-Built with [kirby-game-design](../../skills/kirby-game-design/SKILL.md) cycles;
+Built with [at-game-design](../../skills/at-game-design/SKILL.md) cycles;
 the skill itself was extended from this project's workflow (toolkit PRs #3, #4).
 
 ## Game at a glance
@@ -67,7 +67,7 @@ the skill itself was extended from this project's workflow (toolkit PRs #3, #4).
    maps replacing many similar ones; units keep obeying until they arrive, then hold; natural knockback.
 2. Unit-size badge; unit stats hand-tuned by the owner, then merged into one PR and the Pages site shown.
 3. Knockback toned down; UI reworked into multi-level menus with no scrolling.
-4. Toolkit: kirby-game-design skill written from this workflow (generic, no project names), extended with
+4. Toolkit: at-game-design skill written from this workflow (generic, no project names), extended with
    tuning families, curated variety, fit-the-screen UI and a ship/deploy phase (Pages and beyond).
 5. Debug settings, game speed, Start -> level picker, Open Field as a special entry, avatar level cards.
 6. Economy pressure (money figures, unit upkeep, corruption), rarer raiders, routed dissolve, battle-UI leak fix.

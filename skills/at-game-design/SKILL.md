@@ -1,12 +1,12 @@
 ---
-name: kirby-game-design
+name: at-game-design
 description: Iterative loop for building and tuning games and other feel-driven software — clarify, spec, build, play, measure, learn — with a self-review pass that proposes its own revisions
 version: 1.3.0
 author: Team
 status: published
 ---
 
-# Kirby Game Design: The Feel Loop
+# AT Game Design: The Feel Loop
 
 Games are not specified, they are **converged on**. A request like "make it
 feel heavier" has no acceptance criterion until something has been built,
@@ -19,17 +19,17 @@ where *"does it feel right?"* is the real test and the requester will know it
 when they see it.
 
 **Do not use it for** work with a decidable answer: a parser, a migration, an
-API contract. Those want [kirby-build](../kirby-build/SKILL.md).
+API contract. Those want [at-build](../at-build/SKILL.md).
 
 ## Where it sits
 
 | Layer | Owns |
 |-------|------|
-| **kirby-game-design** | The concept→spec→build→play→learn loop, and evidence about feel |
-| **kirby-build** | Phase sequencing and engineering gates, when the change is large enough to want them |
-| **kirby-code** | Naming, comments, structure in every file touched |
+| **at-game-design** | The concept→spec→build→play→learn loop, and evidence about feel |
+| **at-build** | Phase sequencing and engineering gates, when the change is large enough to want them |
+| **at-code** | Naming, comments, structure in every file touched |
 
-This skill is **self-contained**: it needs no plugin. Where kirby-build is
+This skill is **self-contained**: it needs no plugin. Where at-build is
 available and the change is substantial, run this loop *inside* its Implement
 phase rather than alongside it. Where it is not, this loop is enough on its
 own — note that the phases were run by hand.
@@ -764,5 +764,5 @@ background instances at lower detail (a scene's frame time fell by two thirds).
 
 **Version:** 1.3.0
 **Status:** Stable
-**Requires:** kirby-code (style layer). Composes with kirby-build when present; needs no plugin on its own.
+**Requires:** at-code (style layer). Composes with at-build when present; needs no plugin on its own.
 **Last Updated:** 2026-10-02
