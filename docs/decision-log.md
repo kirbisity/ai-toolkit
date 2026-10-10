@@ -490,6 +490,46 @@ hard to search.
 
 ---
 
+## ADR-009: at-sdlc as the Single SDLC Entry Point, Routed Across Skill Libraries
+
+**Date:** 2026-10-10
+**Status:** ACCEPTED (narrows ADR-006: superpowers is the default executor, not a hard requirement)
+**Author:** Team
+
+### Context
+at-build (the superpowers-backed 7-phase workflow) and at-sdlc (spec-driven,
+with memory) overlapped. Other skill libraries, such as mattpocock-skills,
+cover the same phases and some that superpowers does not.
+
+### Decision
+- **at-sdlc 1.0.0 is the SDLC entry point.**
+  - **Input:** the project's `intent.md` plus the user's prompts. When intent has
+    gaps, it recommends filling them in. If the user declines, it asks one
+    targeted question per gap and records the answers in `intent.md`.
+  - **Phases:** Align → Spec → Isolate → Plan → Implement → Review → Verify →
+    Ship → Close out. It absorbs at-build's gates.
+  - **Review:** fresh, non-fork agents challenge assumptions (on the spec before
+    approval, and on the diff) and review the code. Findings are settled by evidence.
+- **at-build 3.0.0** keeps a one-off loop for work that leaves no decision to
+  remember, and escalates to at-sdlc when it does.
+- **Routing:** each phase has a default skill (superpowers) and alternates with
+  trigger conditions. A row in the KB's `knowledge/general/skill-routing.md`
+  overrides the matching row. A missing skill means using an installed
+  alternate, else running the phase by hand. The skill recommends plugins and
+  never installs them.
+- **Forks:** only when routing is not enough. A fork goes in
+  `skills/at-<name>/` with an `UPSTREAM.md`, and must have a permissive licence.
+  Forks are listed in `docs/forks.md`.
+
+### Consequences
+- One place decides process. Libraries can be swapped per phase without
+  rewriting the workflow.
+- Nothing breaks when a library is missing; the cost is a slower, manual phase.
+- Fresh-agent review costs extra tokens per change. That's the price of a
+  review that doesn't share the author's blind spots.
+
+---
+
 ## Summary Table
 
 | ADR | Title | Decision | Status |
@@ -502,6 +542,7 @@ hard to search.
 | 006 | Depend on Superpowers | Require plugin, don't vendor | ✅ Accepted |
 | 007 | Private KB Split | Knowledge + working memory in ai-toolkit-kb | ✅ Accepted |
 | 008 | KB Protection + Index | SCHEMA + kb.py, plugin hooks, pre-commit, CI; at-search/sdlc/sleep | ✅ Accepted |
+| 009 | at-sdlc Entry Point + Routing | Single SDLC, routed phases, fresh-agent review; at-build slimmed | ✅ Accepted |
 
 ---
 
