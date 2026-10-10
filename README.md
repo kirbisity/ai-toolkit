@@ -8,8 +8,8 @@ Claude Code plugin: superpowers-backed SDLC workflow plus universal coding princ
 
 ## Quickstart
 
-Two installs. Superpowers is **required** by kirby-build — every one of its
-phases delegates to it. kirby-code and kirby-game-design need no plugin.
+Two installs. Superpowers is **required** by at-build — every one of its
+phases delegates to it. at-code and at-game-design need no plugin.
 
 ```
 /plugin install superpowers@claude-plugins-official
@@ -22,12 +22,12 @@ Confirm with `/plugin list`; both `superpowers` and `kirby-toolkit` must appear.
 ## Invoke
 
 ```
-/kirby-build        # 7-phase SDLC workflow (Align -> ... -> Ship)
-/kirby-code         # coding principles only
-/kirby-game-design  # the feel loop: clarify -> spec -> build -> play -> learn
+/at-build        # 7-phase SDLC workflow (Align -> ... -> Ship)
+/at-code         # coding principles only
+/at-game-design  # the feel loop: clarify -> spec -> build -> play -> learn
 ```
 
-Or plain language — `use kirby-build to add feature X`. Skills also self-trigger
+Or plain language — `use at-build to add feature X`. Skills also self-trigger
 when a request matches their description.
 
 Superpowers skills are callable directly, namespaced `superpowers:<skill>`:
@@ -38,7 +38,7 @@ Superpowers skills are callable directly, namespaced `superpowers:<skill>`:
 /superpowers:systematic-debugging
 ```
 
-kirby-build sequences these for you, so reach for them individually only when you
+at-build sequences these for you, so reach for them individually only when you
 want one phase in isolation.
 
 ---
@@ -46,12 +46,12 @@ want one phase in isolation.
 ## What's Included
 
 ### Skills (3)
-- **kirby-code** (v1.2.0) — Universal coding principles for all languages
-- **kirby-build** (v2.0.0) — Superpowers-backed workflow: Align → Isolate → Plan → Implement → Review → Verify → Ship
-- **kirby-game-design** (v1.3.0) — The loop for games and other feel-driven work, where the test is whether it plays right: Clarify → Spec → Build → Play → Learn, gated on measuring the running thing, with a self-review that proposes its own revisions
+- **at-code** (v1.2.0) — Universal coding principles for all languages
+- **at-build** (v2.0.0) — Superpowers-backed workflow: Align → Isolate → Plan → Implement → Review → Verify → Ship
+- **at-game-design** (v1.3.0) — The loop for games and other feel-driven work, where the test is whether it plays right: Clarify → Spec → Build → Play → Learn, gated on measuring the running thing, with a self-review that proposes its own revisions
 
 ### Dependency
-- **superpowers** (>=6.0.0) — External MIT skills library ([obra/superpowers](https://github.com/obra/superpowers)) providing the process mechanics for every kirby-build phase
+- **superpowers** (>=6.0.0) — External MIT skills library ([obra/superpowers](https://github.com/obra/superpowers)) providing the process mechanics for every at-build phase
 
 ### Knowledge Base
 - Coding standards
@@ -98,9 +98,9 @@ ai-toolkit/
 ├── LICENSE                # MIT
 │
 ├── skills/
-│   ├── kirby-build/SKILL.md
-│   ├── kirby-code/SKILL.md
-│   └── kirby-game-design/SKILL.md
+│   ├── at-build/SKILL.md
+│   ├── at-code/SKILL.md
+│   └── at-game-design/SKILL.md
 ├── kb/                    # Knowledge Base
 ├── memory/                # Long-term learning
 ├── workspace/             # Work tracking
@@ -118,11 +118,11 @@ Three layers, each owning one thing:
 
 | Layer | Owns | Source |
 |-------|------|--------|
-| **kirby-build** | Which phase runs, and when | this repo |
+| **at-build** | Which phase runs, and when | this repo |
 | **superpowers** | How each phase is executed | external plugin |
-| **kirby-code** | Naming, comments, error handling, syntax | this repo |
+| **at-code** | Naming, comments, error handling, syntax | this repo |
 
-Superpowers governs **process**, kirby-code governs **style**. Both apply inside
+Superpowers governs **process**, at-code governs **style**. Both apply inside
 every phase, so they never compete.
 
 ### Phase → Skill Mapping
@@ -211,7 +211,7 @@ Editing a `SKILL.md` then takes effect on the next session start.
 **Skills not loading?**
 Check: `~/.claude/plugins/kirby-toolkit/skills/` exists
 
-**kirby-build phase references not resolving?**
+**at-build phase references not resolving?**
 Check: `/plugin list` shows `superpowers`. Every phase delegates to it.
 
 **KB not accessible?**
@@ -240,7 +240,7 @@ MIT — See LICENSE file
 
 ---
 
-**Ready?** Start with `Use skill kirby-code`
+**Ready?** Start with `Use skill at-code`
 
 Questions? See `.local_output/docs/` for detailed guides.
 
