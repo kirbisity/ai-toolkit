@@ -1,11 +1,3 @@
-# Local Output Directory
-# Contains personal notes, setup docs, templates - not for version control
-.local_output/
-
-# Personal Memory
-# User-specific context should not be committed
-memory/user-profile.md
-
 # Environment & IDE
 .env
 .env.local

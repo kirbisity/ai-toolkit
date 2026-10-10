@@ -1,7 +1,7 @@
 ---
 name: at-build
 description: SDLC workflow that orchestrates the superpowers skills library, with at-code as the style layer
-version: 2.0.0
+version: 2.0.1
 author: Team
 status: published
 ---
@@ -9,7 +9,7 @@ status: published
 # AT Build: Superpowers-Backed SDLC Workflow
 
 AT Build coordinates a full development cycle by delegating each phase to a
-[superpowers](../../kb/tool-reference/superpowers.md) skill. AT Build decides
+[superpowers](../../docs/superpowers.md) skill. AT Build decides
 *which* phase runs and *when*; superpowers defines *how* each phase is executed.
 
 **Requires:**
@@ -29,7 +29,7 @@ Three layers, no overlap. This is what keeps the integration conflict-free:
 When superpowers and at-code appear to disagree, they are answering different
 questions: superpowers governs **process**, at-code governs **style**. Follow
 both. If a genuine conflict surfaces, superpowers wins on process and the
-conflict is recorded in `memory/learned-patterns/`.
+conflict is recorded in `working-memory/general/logs/` under the AT memory root.
 
 ## Workflow Overview
 
@@ -213,7 +213,7 @@ that follows implementation to a loop that drives it.
 
 ---
 
-**Version:** 2.0.0
+**Version:** 2.0.1
 **Status:** Stable
 **Requires:** superpowers >=6.0.0, at-code >=1.2.0
 **Last Updated:** 2026-09-20

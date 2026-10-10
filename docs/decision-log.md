@@ -358,7 +358,7 @@ guidance. Each phase told an agent what to care about but gave it no executable
 process, so output quality varied between runs — particularly around testing
 discipline and what counted as "done."
 
-The [superpowers](tool-reference/superpowers.md) library (MIT, obra/superpowers)
+The [superpowers](superpowers.md) library (MIT, obra/superpowers)
 provides 15 tested, self-triggering skills covering exactly these phases, plus
 three at-build lacked entirely: brainstorming, worktree isolation, and
 planning.
@@ -403,7 +403,7 @@ layer that sequences superpowers skills.
    plugin installed. Documented in README and the skill's `requires` field.
 2. **Upgrade coupling:** a renamed or removed upstream skill breaks a phase
    reference silently. Mitigated by the upgrade policy in
-   [superpowers](tool-reference/superpowers.md) — diff the skill list on every
+   [superpowers](superpowers.md) — diff the skill list on every
    major bump.
 3. **Breaking change:** at-build 1.0.0 → 2.0.0. Existing users must install a
    plugin they did not previously need. A migration table ships in the skill.
@@ -423,16 +423,49 @@ See Options 1 and 2 above — both rejected on maintenance grounds, not capabili
 
 ---
 
+## ADR-007: Split Knowledge and Working Memory into a Private Repo
+
+**Date:** 2026-10-10
+**Status:** ACCEPTED (supersedes ADR-001 and ADR-005)
+**Author:** Team
+
+### Context
+The toolkit is a public plugin, so everything in it is published and copied into
+the plugin cache of anyone who installs it. It also held personal knowledge:
+project context, design logs, portfolio RFCs and coding preferences. Upcoming
+skills (`at-sdlc` writing working memory as work proceeds, `at-sleep` distilling
+it into knowledge) need a home that is private and organised by project.
+
+### Decision
+Two repos:
+- **ai-toolkit** (public plugin): `.claude-plugin/`, `skills/`, `agents/`, `docs/`.
+- **ai-toolkit-kb** (private): a leveled layout.
+  - `knowledge/general/` and `knowledge/projects/<p>/{intent.md,business-logic/,architecture/}`
+  - `working-memory/general/{specs,plans,logs}/` and `working-memory/projects/<p>/{specs,plans}/`
+
+Skills locate the private repo through the **AT memory root**: the
+`AT memory root:` line in `~/.claude/CLAUDE.md`, else a sibling folder
+`ai-toolkit-kb`, else they ask.
+
+### Consequences
+- The plugin carries no personal data; installing it is safe for anyone.
+- Every project uses the same template, so skills can rely on fixed paths.
+- Moving files from working memory into knowledge is deferred to `at-sleep`.
+- History of moved files stays in this repo's git log; the new repo starts fresh.
+
+---
+
 ## Summary Table
 
 | ADR | Title | Decision | Status |
 |-----|-------|----------|--------|
-| 001 | Monolithic Repository | Use single repo | ✅ Accepted |
+| 001 | Monolithic Repository | Use single repo | ⛔ Superseded by 007 |
 | 002 | Persistent vs Delta | Separate KB/Memory | ✅ Accepted |
 | 003 | Memory Append-Only | Never modify, link new | ✅ Accepted |
 | 004 | Skills Marketplace | Published/Draft/Prompts | ✅ Accepted |
-| 005 | Workspace Daily Update | High turnover | ✅ Accepted |
+| 005 | Workspace Daily Update | High turnover | ⛔ Superseded by 007 |
 | 006 | Depend on Superpowers | Require plugin, don't vendor | ✅ Accepted |
+| 007 | Private KB Split | Knowledge + working memory in ai-toolkit-kb | ✅ Accepted |
 
 ---
 
@@ -459,4 +492,4 @@ See Options 1 and 2 above — both rejected on maintenance grounds, not capabili
 
 ---
 
-Last Updated: 2026-09-20
+Last Updated: 2026-10-10
