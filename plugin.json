@@ -13,18 +13,18 @@
         "source": "https://github.com/obra/superpowers",
         "install": "/plugin install superpowers@claude-plugins-official",
         "required_by": [
-          "kirby-build"
+          "at-build"
         ],
-        "reason": "Provides the phase skills kirby-build orchestrates (TDD, planning, review, verification)"
+        "reason": "Provides the phase skills at-build orchestrates (TDD, planning, review, verification)"
       }
     ]
   },
   "skills": [
     {
-      "id": "kirby-code",
-      "name": "Kirby Code",
+      "id": "at-code",
+      "name": "AT Code",
       "version": "1.2.0",
-      "path": "skills/kirby-code/SKILL.md",
+      "path": "skills/at-code/SKILL.md",
       "description": "Universal coding principles for all languages and frameworks",
       "tags": [
         "coding",
@@ -34,10 +34,10 @@
       ]
     },
     {
-      "id": "kirby-build",
-      "name": "Kirby Build",
+      "id": "at-build",
+      "name": "AT Build",
       "version": "2.0.0",
-      "path": "skills/kirby-build/SKILL.md",
+      "path": "skills/at-build/SKILL.md",
       "description": "Superpowers-backed SDLC workflow: Align \u2192 Isolate \u2192 Plan \u2192 Implement \u2192 Review \u2192 Verify \u2192 Ship",
       "tags": [
         "workflow",
@@ -48,15 +48,15 @@
         "tdd"
       ],
       "requires": [
-        "kirby-code",
+        "at-code",
         "superpowers"
       ]
     },
     {
-      "id": "kirby-game-design",
-      "name": "Kirby Game Design",
+      "id": "at-game-design",
+      "name": "AT Game Design",
       "version": "1.3.0",
-      "path": "skills/kirby-game-design/SKILL.md",
+      "path": "skills/at-game-design/SKILL.md",
       "description": "Iterative loop for games and other feel-driven software: clarify, spec, build, play, measure, learn \u2014 with a self-review pass that proposes its own revisions",
       "tags": [
         "game-design",
@@ -67,7 +67,7 @@
         "self-improving"
       ],
       "requires": [
-        "kirby-code"
+        "at-code"
       ]
     }
   ],

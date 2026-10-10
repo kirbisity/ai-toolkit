@@ -1,6 +1,6 @@
 ---
 name: game-design-log
-description: One entry per design cycle run under kirby-game-design, and the input to its self-review
+description: One entry per design cycle run under at-game-design, and the input to its self-review
 metadata:
   type: learned-patterns
   updated: 2026-09-30
@@ -8,7 +8,7 @@ metadata:
 
 # Game Design Log
 
-The journal [kirby-game-design](../../skills/kirby-game-design/SKILL.md) writes
+The journal [at-game-design](../../skills/at-game-design/SKILL.md) writes
 to, and reads back when it reviews itself.
 
 One entry per cycle. Honest entries only — an entry recording no difficulty is
@@ -148,7 +148,7 @@ whether that revision was accepted.
 - **Went wrong:** faster spin alone makes random releases crash more (more headings pass per second), so dials could not meet the request; the first spotting variant settled to the nearest landable heading including backwards, which on big air crashed (69%); an airtime estimate from height above the snow was defeated by landing hills that track the flight (the snow is always close below); settling only to forward headings, allowed to unwind, is what worked. Five stunt tests described the replaced behaviour and were rewritten, not loosened.
 - **Cost:** medium; finding what the crashes actually were dominated — a breakdown by release time settled it in one run
 
-## 2026-09-30 — Slope Lab: 3D skier model driven by pose and ragdoll; longer Joyride (via kirby-build)
+## 2026-09-30 — Slope Lab: 3D skier model driven by pose and ragdoll; longer Joyride (via at-build)
 - **Asked:** "also update the skier body to be truly 3d models. That should work with ragdoll. Also make the joyrun even longer"
 - **Built:** Greatwall's structure recipe for a body: one 3D skeleton (both sides), primitives wound outward from their own centres, Lambert light, screen-winding cull, far-to-near paint; placed by pitch then heading so a spin turns the model itself; the ragdoll gained left and right limbs so the same mesh tumbles; Joyride 12–15 features from a higher start. Tests first for each task (RED observed); superpowers phases run by hand.
 - **Measured:** 200 seeds 463–1,065 m (median 704; before 160–384); ride frame 0.86 → 1.37 ms; each model rule bites; spin frames at 0/90/180 and a crash sequence looked right
@@ -169,9 +169,9 @@ whether that revision was accepted.
 - **Went wrong:** the first lean fed raw change-in-speed, so gravity's pull sat the skier back 35° all down the in-run: a body does not feel gravity, only friction, drag and braking (a rule, now tested); a clamp meant for pose limits capped spring velocity; a per-frame velocity rescale quartered ragdoll speed every substep; a 3 cm contact lift made joints buzz; my text-replace moved the pose code into skierPose and made it call itself (the renderer had no node test; now it has one); the sleep test did not bite until it asserted sleep directly, and a speed metric that read substep motion ×60 hid the buzzing
 - **Cost:** medium-large; ragdoll settling dominated
 
-## 2026-09-30 — Slope Lab: 3D mountain range and brighter HDR sky (via kirby-build)
+## 2026-09-30 — Slope Lab: 3D mountain range and brighter HDR sky (via at-build)
 - **Asked:** "make the graphics update. So the background mountains become 3d models. Similar to what we build in greatwall. Also the sky need to have a slightly more "hdr" look and having a brighter feeling.. update the github page as well"
-- **Built:** Greatwall's recipe (height field, Lambert light in bands, material bands by height and slope, painter's order) as a backdrop with its own pinhole camera, a world-anchored grid, blue aerial haze, and an offscreen cache slid by a middle depth's parallax until ridges would drift 3 px; the sky became a deeper zenith, overexposed horizon and layered sun bloom. Tests were written first (RED on the missing module). The kirby-build phases were run by hand because the superpowers plugin is absent.
+- **Built:** Greatwall's recipe (height field, Lambert light in bands, material bands by height and slope, painter's order) as a backdrop with its own pinhole camera, a world-anchored grid, blue aerial haze, and an offscreen cache slid by a middle depth's parallax until ridges would drift 3 px; the sky became a deeper zenith, overexposed horizon and layered sun bloom. Tests were written first (RED on the missing module). The at-build phases were run by hand because the superpowers plugin is absent.
 - **Measured:** frame cost baseline edit 2.3 / ride 0.8 ms; uncached mesh 5.3 / 3.9 ms; cached 2.2 / 0.95 ms. Coverage at 8 sizes × both zoom extremes; each backdrop rule shown to bite; layout sweep 180 clean; live cold-load healthy after two deploys (spins, graphics)
 - **Went wrong:** the first HDR pass washed the valley white and the white course lanes lost contrast (fixed with a blue-shaded valley and blue rather than white haze); the forest band was large and murky; near ridges were coarse 80 px facets; the uncached mesh tripled ride frame cost; a stale "Hold Flip" welcome toast from the previous cycle was only noticed in a screenshot
 - **Cost:** medium; looking and re-tuning the palette against the course dominated, then the cache
@@ -249,23 +249,23 @@ Grouped by what went wrong, not by feature:
 | First magnitude wrong, corrected by the owner ("too extreme") | Open Field depth | Once. Already covered by *Tune a family*. |
 | A test that passed with its mechanism removed | Slope Lab conversion | Once, and *Prove the test bites* is what caught it. Evidence the rule earns its place. |
 
-**Proposal A (applied in kirby-game-design 1.2.0) — add to Phase D, *Make sure you are looking at what you built*:**
+**Proposal A (applied in at-game-design 1.2.0) — add to Phase D, *Make sure you are looking at what you built*:**
 > Give the game loop a manual step hook (`advance(seconds)`) from the first build, and write
 > browser checks without timers. Tests, headless tuning and background-tab inspection then never
 > depend on the browser's frame clock, which stops in hidden tabs and is mocked awkwardly in tests.
 
-**Proposal B (applied in kirby-game-design 1.2.0) — add to Phase D, *Look at it*:**
+**Proposal B (applied in at-game-design 1.2.0) — add to Phase D, *Look at it*:**
 > Look at every new visual element on the surface it will sit on, at the zoom it is seen at.
 > Markers drawn in a plane facing away from the camera collapse to a line, and colours near the
 > ground's vanish; both passed every test.
 
-**Proposal C (applied in kirby-game-design 1.2.0) — add to Phase E, *Prove the test bites* (added after the Joyride entry):**
+**Proposal C (applied in at-game-design 1.2.0) — add to Phase E, *Prove the test bites* (added after the Joyride entry):**
 > Before asserting an outcome, assert that the scenario happened: the takeoff before the
 > landing, the crest launch before its speed. Two Slope Lab tests passed without their scenario
 > ever occurring (a crest test covered by a different mechanism; a jump test whose skier never
 > left the ground and "flew" for 20 s).
 
-**Proposal D (applied in kirby-game-design 1.2.0) — add to Phase D, *Choose the metric that reflects what the player feels* (three entries):**
+**Proposal D (applied in at-game-design 1.2.0) — add to Phase D, *Choose the metric that reflects what the player feels* (three entries):**
 > Drive checks through the input the player actually uses, the way they use it: the on-screen
 > button, on the snow, held or tapped as a person would. Three Slope Lab fixes shipped with tests
 > that pressed keys mid-air (spin crashes when held through the landing; buttons dead on the snow;
@@ -273,7 +273,7 @@ Grouped by what went wrong, not by feature:
 
 **Deletions considered:** none. Five entries is too few to call any rule unused.
 
-### 2026-09-30 — second review (22 entries since the first), accepted and applied as kirby-game-design 1.2.0
+### 2026-09-30 — second review (22 entries since the first), accepted and applied as at-game-design 1.2.0
 
 The owner asked for the process to be fed back into the skill after a long single-game session (24 cycles, mostly
 one-line requests with mid-turn additions). Grouped by what went wrong:

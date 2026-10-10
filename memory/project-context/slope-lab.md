@@ -13,7 +13,7 @@ skateboarding simulator into a **skiing game with the same principle: math and p
 gameplay**. Design a run from equations (`y = f(x)`) and sketches, then watch a bead-on-wire skier ride it;
 or ride **Joyride**, a new random slope every time. Semi-3D (2.5D) rendering, works on phone and desktop.
 Live at https://kirbisity.github.io/slope-lab/ (push to `main` deploys). Built with
-[kirby-game-design](../../skills/kirby-game-design/SKILL.md) cycles; the skill's 1.2.0 revision came from this
+[at-game-design](../../skills/at-game-design/SKILL.md) cycles; the skill's 1.2.0 revision came from this
 project's journal (see [game-design-log](../learned-patterns/game-design-log.md)).
 
 ## Game at a glance

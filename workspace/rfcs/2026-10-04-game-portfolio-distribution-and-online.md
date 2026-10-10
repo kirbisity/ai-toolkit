@@ -10,7 +10,7 @@ metadata:
 # RFC: Distribution and online features for the game portfolio
 
 **Status:** Draft for discussion. Nothing here is decided.
-**Scope:** four browser games built with [kirby-game-design](../../skills/kirby-game-design/SKILL.md):
+**Scope:** four browser games built with [at-game-design](../../skills/at-game-design/SKILL.md):
 
 - Gladiator (`kirbisity/boxer-simulator`);
 - Greatwall (`kirbisity/greatwall`);
@@ -400,7 +400,7 @@ already; the work is the store, a runner script, a leaderboard page and a replay
 | **Replays and clip links** (a short link to seed + rosters + camera) | Storage | Low–medium | **The best growth lever:** a shareable clip of a fight brings players for free |
 | **Ghosts** (race another player's run) | Storage | Low | Slope Lab: compete against friends' best runs |
 | **Spectating and betting with play money** | Storage + live or async | Medium | Deadliest Warrior bets; Discord watch parties |
-| **Telemetry for balance** (anonymous outcomes from real games) | Storage | Low | The balance tools today run bots; real outcomes calibrate them ([kirby-game-design](../../skills/kirby-game-design/SKILL.md), "Calibrate ratings by simulation") |
+| **Telemetry for balance** (anonymous outcomes from real games) | Storage | Low | The balance tools today run bots; real outcomes calibrate them ([at-game-design](../../skills/at-game-design/SKILL.md), "Calibrate ratings by simulation") |
 | **A profile across games** (one identity, achievements across all four) | Identity | Medium | Players of one game find the others |
 | **Community curation** (likes, featured builds, remixes) | Storage + moderation | Medium | Content without writing it; needs moderation in Option B |
 
