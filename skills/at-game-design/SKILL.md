@@ -1,7 +1,7 @@
 ---
 name: at-game-design
 description: Iterative loop for building and tuning games and other feel-driven software — clarify, spec, build, play, measure, learn — with a self-review pass that proposes its own revisions
-version: 1.3.1
+version: 1.3.2
 author: Team
 status: published
 ---
@@ -479,6 +479,9 @@ would otherwise reach for.
 
 ### The journal
 
+Read `<root>/SCHEMA.md` before writing. Write with Write or Edit, never shell
+redirects, so the hooks can guard and stamp it.
+
 One entry per cycle, appended to `working-memory/general/logs/game-design-log.md` under
 the **AT memory root** (the path on the `AT memory root:` line in `~/.claude/CLAUDE.md`; otherwise a sibling folder `ai-toolkit-kb` next to the project; otherwise ask):
 
@@ -766,9 +769,13 @@ background instances at lower detail (a scene's frame time fell by two thirds).
 The journal moved to the private AT memory root
 (`working-memory/general/logs/game-design-log.md`), out of the public toolkit.
 
+
+### 1.3.2
+Read the KB's SCHEMA.md before writing the journal; write only with Write or Edit.
+
 ---
 
-**Version:** 1.3.1
+**Version:** 1.3.2
 **Status:** Stable
 **Requires:** at-code (style layer). Composes with at-build when present; needs no plugin on its own.
 **Last Updated:** 2026-10-10
