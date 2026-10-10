@@ -1,7 +1,7 @@
 ---
 name: at-sleep
 description: Consolidate the knowledge base — distill shipped work from working memory into knowledge after fact-checking each claim against the project's source of truth, then condense existing knowledge by merging duplicates and dropping what is superseded. Use when asked to sleep, consolidate, distill or tidy the knowledge base.
-version: 0.1.0
+version: 0.1.1
 author: Team
 status: draft
 ---
@@ -21,7 +21,8 @@ second and keeps the second lean.
    `~/.claude/CLAUDE.md`, otherwise a sibling `ai-toolkit-kb`, otherwise ask.
 2. Read `<root>/SCHEMA.md` and `<root>/INDEX.md`, and the last entry of
    `working-memory/general/logs/sleep-log.md` if it exists.
-3. Make sure the KB's git tree is clean. If it isn't, stop and ask.
+3. Run `git -C <root> pull --ff-only`, and make sure the tree is clean. If
+   either fails, stop and ask.
 
 Write only with Write or Edit, so the hooks see every change.
 
@@ -94,11 +95,12 @@ Afterwards:
 1. Append an entry to `working-memory/general/logs/sleep-log.md`: the date, what
    was distilled, merged and deleted, and the contradictions found.
 2. Run `python3 system/kb.py lint` and fix any errors.
-3. Commit locally: `sleep: <date> — <short summary>`. Push only when the user asks.
+3. Commit and push: `sleep: <date> — <short summary>`. If the push is rejected,
+   run `pull --rebase` and push again.
 
 ---
 
-**Version:** 0.1.0
+**Version:** 0.1.1
 **Status:** Draft
 **Requires:** an AT memory root; access to the project repos for fact-checking
 **Last Updated:** 2026-10-10

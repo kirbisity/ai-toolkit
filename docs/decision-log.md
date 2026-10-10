@@ -530,6 +530,34 @@ cover the same phases and some that superpowers does not.
 
 ---
 
+## ADR-010: One Home for Specs, and a KB That Stays Pushed
+
+**Date:** 2026-10-10
+**Status:** ACCEPTED
+**Author:** Team
+
+### Context
+Superpowers' `brainstorming` and `writing-plans` save to the project repo's
+`docs/superpowers/` by default, so at-sdlc specs could end up split between the
+repo and the KB. KB commits were also left local, which risks losing memory or
+splitting it across machines.
+
+### Decision
+- **Spec location:** a user preference in `~/.claude/CLAUDE.md` names the KB as
+  the spec and plan location, which superpowers honors. As a backstop,
+  `kb_hook.py pre` denies `docs/superpowers/{specs,plans}/` writes in any repo
+  whose folder name is a SCHEMA project, and names the KB path to use instead.
+- **Sync:** at-sdlc and at-sleep `pull --ff-only` before working and push after
+  committing. A SessionStart hook adds a note when the KB has uncommitted or
+  unpushed work. It runs local git commands only, no fetch, so session start
+  stays fast.
+
+### Consequences
+- Untracked projects keep superpowers' default behaviour.
+- Pushing goes straight to the private KB's `main`, and CI checks every push.
+
+---
+
 ## Summary Table
 
 | ADR | Title | Decision | Status |
@@ -543,6 +571,7 @@ cover the same phases and some that superpowers does not.
 | 007 | Private KB Split | Knowledge + working memory in ai-toolkit-kb | ✅ Accepted |
 | 008 | KB Protection + Index | SCHEMA + kb.py, plugin hooks, pre-commit, CI; at-search/sdlc/sleep | ✅ Accepted |
 | 009 | at-sdlc Entry Point + Routing | Single SDLC, routed phases, fresh-agent review; at-build slimmed | ✅ Accepted |
+| 010 | Spec Home + KB Sync | Redirect superpowers specs to KB; pull/push; session status | ✅ Accepted |
 
 ---
 
