@@ -9,14 +9,16 @@ Reusable Claude Code skills and workflows.
   - Naming, comments, documentation, error handling, reusability
   - Language detail in [coding-standards/](at-code/coding-standards/README.md)
 
-- **[at-build](at-build/SKILL.md)** (v2.0.1)
-  - Superpowers-backed SDLC workflow
-  - Phases: Align → Isolate → Plan → Implement → Review → Verify → Ship
-  - **Requires** the external `superpowers` plugin (>=6.0.0) — see [docs/superpowers.md](../docs/superpowers.md)
+- **[at-build](at-build/SKILL.md)** (v3.0.0)
+  - One-off loop: Isolate → Test first → Change → Verify → Ship
+  - No spec, no KB writes; escalates to at-sdlc when a decision appears
 
-- **[at-sdlc](at-sdlc/SKILL.md)** (v0.1.0, draft)
-  - Spec-driven development: spec → plan → build → keep current → verify → close out
-  - Specs and plans live in the AT memory root's `working-memory/`; docs updated at the end
+- **[at-sdlc](at-sdlc/SKILL.md)** (v1.0.0) — the SDLC entry point
+  - Input: the project's `intent.md` plus your prompts
+  - Align → Spec → Isolate → Plan → Implement → Review → Verify → Ship → Close out
+  - Phases routed to `superpowers` by default (see [docs/superpowers.md](../docs/superpowers.md)),
+    with alternates from other plugins; manual fallback when absent
+  - Review by fresh agents that challenge assumptions; specs and plans kept current in the KB
 
 - **[at-search](at-search/SKILL.md)** (v1.0.0)
   - Read-only lookup in the knowledge base: L1 INDEX → L2 files → L3 full text
@@ -33,7 +35,7 @@ Reusable Claude Code skills and workflows.
   - Measurement is the gate: measure before and after, in the running thing
   - Keeps a cycle journal (`working-memory/general/logs/game-design-log.md` in the AT memory root) and
     runs an unprompted self-review that proposes its own revisions
-  - Needs no plugin; composes with at-build when the change is large
+  - Needs no plugin; composes with at-sdlc when the change is large
 
 ## AT Memory Root
 
@@ -58,7 +60,8 @@ Reference in Claude Code:
 
 ```
 Use skill at-code for coding conventions
-Use skill at-build for workflow coordination
+Use skill at-sdlc for a feature or change worth remembering
+Use skill at-build for a one-off task
 Use skill at-game-design for game mechanics, balance, and feel
 ```
 
@@ -66,6 +69,7 @@ Or read directly:
 
 ```
 See skills/at-code/SKILL.md
+See skills/at-sdlc/SKILL.md
 See skills/at-build/SKILL.md
 See skills/at-game-design/SKILL.md
 ```

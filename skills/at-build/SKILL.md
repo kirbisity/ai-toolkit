@@ -1,219 +1,56 @@
 ---
 name: at-build
-description: SDLC workflow that orchestrates the superpowers skills library, with at-code as the style layer
-version: 2.0.1
+description: Short build loop for one-off tasks that leave no decision worth remembering — a local bug fix, config, docs, a script. Isolate, test-first, verify, ship. No spec, no knowledge-base writes. Anything bigger goes to at-sdlc.
+version: 3.0.0
 author: Team
 status: published
 ---
 
-# AT Build: Superpowers-Backed SDLC Workflow
+# AT Build: The One-Off Loop
 
-AT Build coordinates a full development cycle by delegating each phase to a
-[superpowers](../../docs/superpowers.md) skill. AT Build decides
-*which* phase runs and *when*; superpowers defines *how* each phase is executed.
+The fast path for small, self-contained work. The full process, with specs,
+memory, fresh-agent review and doc close-out, is
+[at-sdlc](../at-sdlc/SKILL.md). at-build keeps only the disciplines that pay
+off even on a five-minute change.
 
-**Requires:**
-- `superpowers` plugin (>=6.0.0) — provides every phase skill referenced below
-- [at-code](../at-code/SKILL.md) — style layer applied inside every phase
+## Use it when
 
-## Division of Responsibility
+- The task creates **no decision worth remembering**: a local bug fix, config,
+  docs, a one-off script, or a dependency bump.
+- **Escalate to at-sdlc** as soon as that stops being true: a new behaviour,
+  a design choice, a rule changes, or the fix reveals a deeper problem. Hand
+  over what you have (branch, failing test, findings) as the spec's Inputs.
 
-Three layers, no overlap. This is what keeps the integration conflict-free:
+## The loop
 
-| Layer | Owns | Source |
-|-------|------|--------|
-| **at-build** | Phase sequencing, entry/exit criteria, project gates | this skill |
-| **superpowers** | Process mechanics within each phase | `superpowers` plugin |
-| **at-code** | Naming, comments, error handling, syntax | [at-code](../at-code/SKILL.md) |
+| Step | Skill (default) | Exit criteria |
+|------|-----------------|---------------|
+| 1 Isolate | `superpowers:using-git-worktrees` (or a plain branch for a trivial change) | Off `main` |
+| 2 Test first | `superpowers:test-driven-development` | A failing test reproduces the bug or pins the new behaviour (docs and config excepted) |
+| 3 Change | apply [at-code](../at-code/SKILL.md) | The test passes and the full suite is green |
+| 4 Verify | `superpowers:verification-before-completion` | Evidence (command output or observed behaviour), not "should work" |
+| 5 Ship | `superpowers:finishing-a-development-branch` | PR opened or merged, branch cleaned up |
 
-When superpowers and at-code appear to disagree, they are answering different
-questions: superpowers governs **process**, at-code governs **style**. Follow
-both. If a genuine conflict surfaces, superpowers wins on process and the
-conflict is recorded in `working-memory/general/logs/` under the AT memory root.
+If you get stuck, use `superpowers:systematic-debugging`. Without superpowers,
+run each step by hand against its exit criteria.
 
-## Workflow Overview
+## Not here
 
-```
-Request
-    ↓
-[0] Align      → skill: superpowers:brainstorming
-    ↓
-[1] Isolate    → skill: superpowers:using-git-worktrees
-    ↓
-[2] Plan       → skill: superpowers:writing-plans
-    ↓
-[3] Implement  → skill: superpowers:subagent-driven-development
-                        or superpowers:executing-plans
-                 (inner loop: superpowers:test-driven-development)
-    ↓
-[4] Review     → skill: superpowers:requesting-code-review
-                        then superpowers:receiving-code-review
-    ↓
-[5] Verify     → skill: superpowers:verification-before-completion
-    ↓
-[6] Ship       → skill: superpowers:finishing-a-development-branch
-    ↓
-Complete
-```
-
-Stuck at any phase → `superpowers:systematic-debugging`.
+- No spec or plan file, and nothing written to the AT memory root.
+- No fresh-agent review. If the change is risky enough to want one, it belongs
+  in at-sdlc.
 
 ---
 
-## Phase 0: Align
+## Migrating from v2
 
-**Skill:** `superpowers:brainstorming`
-
-Refine the request into a specification before any code exists. Do not skip this
-for anything larger than a one-line fix — an unrefined spec is the most expensive
-defect to carry forward.
-
-**Exit criteria:** Written spec the requester agrees with.
+v2 was the full 7-phase workflow. Those phases now live in at-sdlc 1.0.0, which
+adds intent-driven specs, living memory, routing to other skills, fresh-agent
+review and close-out. at-build 3.0.0 keeps the short loop.
 
 ---
 
-## Phase 1: Isolate
-
-**Skill:** `superpowers:using-git-worktrees`
-
-Create an isolated worktree on a new branch. Keeps `main` clean and lets Phase 3
-run parallel agents without collisions.
-
-**Exit criteria:** Worktree created, branch named after the work.
-
----
-
-## Phase 2: Plan
-
-**Skill:** `superpowers:writing-plans`
-
-Decompose the spec into bite-sized tasks (2–5 minutes each). Task granularity is
-what makes Phase 3's subagent handoffs reliable.
-
-**Exit criteria:** Written plan, each task independently verifiable.
-
----
-
-## Phase 3: Implement
-
-**Skill:** `superpowers:subagent-driven-development` (default) or
-`superpowers:executing-plans` (small, single-session changes)
-
-**Inner loop:** `superpowers:test-driven-development` — RED → GREEN → REFACTOR is
-mandatory, not advisory. No production code before a failing test.
-
-**Style:** apply [at-code](../at-code/SKILL.md) to every file touched — descriptive
-naming, comments that explain WHY only, focused functions, sensible defaults on
-error.
-
-**Scaling out:** independent task tracks → `superpowers:dispatching-parallel-agents`.
-
-**Exit criteria:** All plan tasks complete, full test suite green.
-
----
-
-## Phase 4: Review
-
-**Skills:** `superpowers:requesting-code-review`, then
-`superpowers:receiving-code-review`
-
-Review validates the diff against the Phase 2 plan and the at-code checklist.
-Critical findings block progress and return to Phase 3.
-
-**Exit criteria:** No unresolved critical findings.
-
----
-
-## Phase 5: Verify
-
-**Skill:** `superpowers:verification-before-completion`
-
-Prove the change works with evidence, rather than asserting it. Claims of success
-without a command output or observed behavior do not clear this gate.
-
-**Exit criteria:** Evidence recorded for each spec requirement.
-
----
-
-## Phase 6: Ship
-
-**Skill:** `superpowers:finishing-a-development-branch`
-
-Merge, PR, or cleanup decision, plus worktree teardown.
-
-**Safety gates** (at-build additions, retained from v1):
-- Backward compatibility confirmed
-- Rollback plan written down
-- Post-deploy health check identified
-
-**Exit criteria:** Branch merged or PR opened, worktree removed.
-
----
-
-## Skill Reference
-
-Every superpowers skill this workflow depends on:
-
-| Phase | superpowers skill |
-|-------|-------------------|
-| 0 Align | `brainstorming` |
-| 1 Isolate | `using-git-worktrees` |
-| 2 Plan | `writing-plans` |
-| 3 Implement | `subagent-driven-development`, `executing-plans`, `test-driven-development`, `dispatching-parallel-agents` |
-| 4 Review | `requesting-code-review`, `receiving-code-review` |
-| 5 Verify | `verification-before-completion` |
-| 6 Ship | `finishing-a-development-branch` |
-| any | `systematic-debugging` |
-
-Unused but available from the plugin: `using-superpowers` (bootstrap),
-`writing-skills` (authoring), `diagnosing-superpowers` (troubleshooting).
-
----
-
-## Phase Selection
-
-Not every request needs all seven phases.
-
-| Change type | Phases |
-|-------------|--------|
-| Feature | 0 → 6 (all) |
-| Bug fix | `systematic-debugging` → 1 → 3 → 4 → 5 → 6 |
-| Refactor | 1 → 2 → 3 → 4 → 5 → 6 |
-| Docs only | 1 → 3 → 6 |
-| Config change | 0 → 1 → 3 → 5 → 6 |
-
-Skipping a phase is a decision to record, not a shortcut to take silently.
-
----
-
-## Migrating from v1
-
-v1 defined four self-contained agents (Code, Review, Test, Deploy). Those phases
-still exist, now backed by superpowers skills instead of prose descriptions:
-
-| v1 phase | v2 equivalent |
-|----------|---------------|
-| Code Agent | Phase 3 Implement |
-| Review Agent | Phase 4 Review |
-| Test Agent | Phase 3 inner loop + Phase 5 Verify |
-| Deploy Agent | Phase 6 Ship |
-
-New in v2: Phases 0 (Align), 1 (Isolate), 2 (Plan). Testing moved from a phase
-that follows implementation to a loop that drives it.
-
----
-
-## Best Practices
-
-1. **Small changes** — one feature or fix per workflow run
-2. **Spec first** — Phase 0 is the cheapest place to change your mind
-3. **Tests drive code** — never the reverse
-4. **Evidence over assertion** — Phase 5 exists because "it should work" is not a result
-5. **Record skipped phases** — note what was skipped and why
-
----
-
-**Version:** 2.0.1
+**Version:** 3.0.0
 **Status:** Stable
-**Requires:** superpowers >=6.0.0, at-code >=1.2.0
-**Last Updated:** 2026-09-20
+**Requires:** [at-code](../at-code/SKILL.md); `superpowers` (default, with a manual fallback)
+**Last Updated:** 2026-10-10

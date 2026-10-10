@@ -2,14 +2,14 @@
 
 Claude Code plugin: superpowers-backed SDLC workflow plus universal coding principles.
 
-**v3.1.0** | **MIT License**
+**v3.2.0** | **MIT License**
 
 ---
 
 ## Quickstart
 
-Two installs. Superpowers is **required** by at-build — every one of its
-phases delegates to it. at-code and at-game-design need no plugin.
+Two installs. Superpowers is the default executor for at-sdlc and at-build —
+without it their phases run by hand. at-code and at-game-design need no plugin.
 
 ```
 /plugin install superpowers@claude-plugins-official
@@ -22,15 +22,15 @@ Confirm with `/plugin list`; both `superpowers` and `ai-toolkit` must appear.
 ## Invoke
 
 ```
-/at-build        # 7-phase SDLC workflow (Align -> ... -> Ship)
+/at-sdlc         # the SDLC: intent + prompts -> spec -> build -> review -> ship -> docs
+/at-build        # one-off loop: isolate -> test first -> verify -> ship
 /at-code         # coding principles only
 /at-game-design  # the feel loop: clarify -> spec -> build -> play -> learn
-/at-sdlc         # spec-driven dev; specs/plans kept in the KB, docs updated at the end
 /at-search       # find it in the KB: index -> files -> full text
 /at-sleep        # distill working memory into knowledge, condense knowledge
 ```
 
-Or plain language — `use at-build to add feature X`. Skills also self-trigger
+Or plain language — `use at-sdlc to add feature X`. Skills also self-trigger
 when a request matches their description.
 
 Superpowers skills are callable directly, namespaced `superpowers:<skill>`:
@@ -41,7 +41,7 @@ Superpowers skills are callable directly, namespaced `superpowers:<skill>`:
 /superpowers:systematic-debugging
 ```
 
-at-build sequences these for you, so reach for them individually only when you
+at-sdlc routes these for you, so reach for them individually only when you
 want one phase in isolation.
 
 ---
@@ -50,14 +50,14 @@ want one phase in isolation.
 
 ### Skills (6)
 - **at-code** (v1.2.0) — Universal coding principles for all languages
-- **at-build** (v2.0.1) — Superpowers-backed workflow: Align → Isolate → Plan → Implement → Review → Verify → Ship
-- **at-sdlc** (v0.1.0, draft) — Spec-driven development with specs and plans kept current in the KB
+- **at-build** (v3.0.0) — One-off loop for tasks that leave no decision to remember
+- **at-sdlc** (v1.0.0) — The SDLC entry point: intent-driven spec, routed phases (superpowers by default), fresh-agent review, docs close-out
 - **at-search** (v1.0.0) — Read-only KB lookup that escalates from the index to full text
 - **at-sleep** (v0.1.0, draft) — Fact-checks and distills working memory into knowledge, then condenses knowledge
 - **at-game-design** (v1.3.2) — The loop for games and other feel-driven work, where the test is whether it plays right: Clarify → Spec → Build → Play → Learn, gated on measuring the running thing, with a self-review that proposes its own revisions
 
 ### Dependency
-- **superpowers** (>=6.0.0) — External MIT skills library ([obra/superpowers](https://github.com/obra/superpowers)) providing the process mechanics for every at-build phase
+- **superpowers** (>=6.0.0) — External MIT skills library ([obra/superpowers](https://github.com/obra/superpowers)) the default executor for at-sdlc's phases
 
 ### Hooks
 - `hooks/hooks.json` — guards writes to the AT memory root against its `SCHEMA.md`, then stamps, lints and re-indexes. Inert for every other path.
@@ -122,25 +122,19 @@ Three layers, each owning one thing:
 
 | Layer | Owns | Source |
 |-------|------|--------|
-| **at-build** | Which phase runs, and when | this repo |
+| **at-sdlc** | Which phase runs, when, and which skill runs it | this repo |
 | **superpowers** | How each phase is executed | external plugin |
 | **at-code** | Naming, comments, error handling, syntax | this repo |
 
 Superpowers governs **process**, at-code governs **style**. Both apply inside
 every phase, so they never compete.
 
-### Phase → Skill Mapping
+### Phase → Skill Routing
 
-| Phase | superpowers skill |
-|-------|-------------------|
-| 0 Align | `brainstorming` |
-| 1 Isolate | `using-git-worktrees` |
-| 2 Plan | `writing-plans` |
-| 3 Implement | `subagent-driven-development` / `executing-plans` + `test-driven-development` |
-| 4 Review | `requesting-code-review` → `receiving-code-review` |
-| 5 Verify | `verification-before-completion` |
-| 6 Ship | `finishing-a-development-branch` |
-| stuck? | `systematic-debugging` |
+See the Routing table in [skills/at-sdlc/SKILL.md](skills/at-sdlc/SKILL.md): superpowers by
+default, alternates (e.g. mattpocock-skills) by condition, personal overrides in
+the KB's `knowledge/general/skill-routing.md`. Forked skills are listed in
+[docs/forks.md](docs/forks.md).
 
 Result: consistent process from an upstream library, consistent style from ours.
 
@@ -168,6 +162,7 @@ Editing a `SKILL.md` then takes effect on the next session start.
 | Coding standards | `skills/at-code/coding-standards/` |
 | Superpowers dependency | `docs/superpowers.md` |
 | Design decisions | `docs/decision-log.md` |
+| Forked skills | `docs/forks.md` |
 
 ---
 
@@ -198,8 +193,8 @@ Editing a `SKILL.md` then takes effect on the next session start.
 **Skills not loading?**
 Check: `~/.claude/plugins/ai-toolkit/skills/` exists
 
-**at-build phase references not resolving?**
-Check: `/plugin list` shows `superpowers`. Every phase delegates to it.
+**at-sdlc phase skills not resolving?**
+Check: `/plugin list` shows `superpowers` (and any alternate you named). Missing skills fall back to running the phase by hand.
 
 **Skills can't find logs, specs or plans?**
 Check: `~/.claude/CLAUDE.md` has the `AT memory root:` line, or `ai-toolkit-kb`
@@ -228,4 +223,4 @@ MIT — See LICENSE file
 
 ---
 
-[GitHub](https://github.com/kirbisity/ai-toolkit) | [License](LICENSE) | v3.1.0
+[GitHub](https://github.com/kirbisity/ai-toolkit) | [License](LICENSE) | v3.2.0
