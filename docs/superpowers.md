@@ -1,6 +1,6 @@
 ---
 name: superpowers
-description: Reference for the superpowers skills library that backs the at-build workflow
+description: Reference for the superpowers skills library that backs the at-sdlc workflow
 metadata:
   type: kb
   version: 1.0.0
@@ -9,11 +9,11 @@ metadata:
 # Superpowers
 
 External skills library and development methodology by Jesse Vincent, used as the
-process engine behind [at-build](../skills/at-build/SKILL.md).
+default process engine behind [at-sdlc](../skills/at-sdlc/SKILL.md).
 
 - **Repository:** https://github.com/obra/superpowers
 - **License:** MIT
-- **Version in use:** 6.4.1 (at-build requires >=6.0.0)
+- **Version in use:** 6.4.1 (at-sdlc and at-build expect >=6.0.0)
 
 ## Why We Use It
 
@@ -41,29 +41,33 @@ see ADR-006 in [decision-log](decision-log.md).
 /plugin install superpowers@superpowers-marketplace
 ```
 
-Verify with `/plugin list` — `superpowers` must appear before at-build's
-phases can run.
+Verify with `/plugin list` — `superpowers` must appear before at-sdlc's
+phases run through it (without it they run by hand).
 
 ## Skills Provided
 
-15 skills. The 10 at-build depends on:
+15 skills. The ones at-sdlc routes to:
 
-| Skill | Purpose | at-build phase |
-|-------|---------|-------------------|
-| `brainstorming` | Socratic spec refinement | 0 Align |
-| `using-git-worktrees` | Isolated branch workspaces | 1 Isolate |
-| `writing-plans` | Decompose into 2–5 min tasks | 2 Plan |
-| `subagent-driven-development` | Fresh agent per task, two-stage review | 3 Implement |
-| `executing-plans` | Inline execution, final review | 3 Implement |
-| `test-driven-development` | RED → GREEN → REFACTOR | 3 inner loop |
-| `dispatching-parallel-agents` | Concurrent task tracks | 3 scale-out |
-| `requesting-code-review` | Structured review request | 4 Review |
-| `receiving-code-review` | Triage and act on findings | 4 Review |
-| `verification-before-completion` | Evidence before "done" | 5 Verify |
-| `finishing-a-development-branch` | Merge / PR / cleanup | 6 Ship |
+| Skill | Purpose | at-sdlc phase |
+|-------|---------|---------------|
+| `brainstorming` | Socratic spec refinement | 1 Align |
+| `using-git-worktrees` | Isolated branch workspaces | 3 Isolate |
+| `writing-plans` | Decompose into 2–5 min tasks | 4 Plan |
+| `subagent-driven-development` | Fresh agent per task, two-stage review | 5 Implement |
+| `executing-plans` | Inline execution, final review | 5 Implement |
+| `test-driven-development` | RED → GREEN → REFACTOR | 5 inner loop |
+| `dispatching-parallel-agents` | Concurrent task tracks | 5 scale-out |
+| `requesting-code-review` | Structured review request | 6 Review |
+| `receiving-code-review` | Triage and act on findings | 6 Review |
+| `verification-before-completion` | Evidence before "done" | 7 Verify |
+| `finishing-a-development-branch` | Merge / PR / cleanup | 8 Ship |
 | `systematic-debugging` | 4-phase root cause analysis | any (escape hatch) |
 
-Available but not wired into at-build:
+at-sdlc routes each phase to these by default, with alternates from other
+plugins (see its Routing table). at-build 3.0.0 uses the worktree, TDD, verify,
+ship and debugging skills only.
+
+Available but not routed:
 
 | Skill | Purpose |
 |-------|---------|
@@ -86,10 +90,10 @@ Process conflicts resolve in favor of superpowers. Record any real conflict in
 Superpowers versions independently of this toolkit. On a major version bump:
 
 1. Diff the skill list against the table above
-2. Update at-build's phase mapping for renamed or removed skills
-3. Bump the `requires` floor in `.claude-plugin/plugin.json` and `skills/at-build/SKILL.md`
+2. Update at-sdlc's routing table for renamed or removed skills
+3. Bump the `requires` floor in `.claude-plugin/plugin.json` and `skills/at-sdlc/SKILL.md`
 
-A renamed superpowers skill breaks at-build silently — the phase reference
+A renamed superpowers skill breaks at-sdlc silently — the phase reference
 simply will not resolve — so the skill-list diff is the load-bearing step.
 
 ## Telemetry
@@ -99,5 +103,6 @@ Superpowers loads a logo asset for version counting. Disable with
 
 ## Related
 
-- [at-build](../skills/at-build/SKILL.md) — the workflow that consumes these skills
+- [at-sdlc](../skills/at-sdlc/SKILL.md) — the workflow that routes to these skills
+- [at-build](../skills/at-build/SKILL.md) — the one-off loop
 - [decision-log](decision-log.md) — ADR-006 records the dependency decision

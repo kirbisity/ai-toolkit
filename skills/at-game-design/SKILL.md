@@ -1,7 +1,7 @@
 ---
 name: at-game-design
 description: Iterative loop for building and tuning games and other feel-driven software — clarify, spec, build, play, measure, learn — with a self-review pass that proposes its own revisions
-version: 1.3.2
+version: 1.3.3
 author: Team
 status: published
 ---
@@ -19,17 +19,17 @@ where *"does it feel right?"* is the real test and the requester will know it
 when they see it.
 
 **Do not use it for** work with a decidable answer: a parser, a migration, an
-API contract. Those want [at-build](../at-build/SKILL.md).
+API contract. Those want [at-sdlc](../at-sdlc/SKILL.md).
 
 ## Where it sits
 
 | Layer | Owns |
 |-------|------|
 | **at-game-design** | The concept→spec→build→play→learn loop, and evidence about feel |
-| **at-build** | Phase sequencing and engineering gates, when the change is large enough to want them |
+| **at-sdlc** | Spec, phases, review and close-out, when the change is large enough to want them |
 | **at-code** | Naming, comments, structure in every file touched |
 
-This skill is **self-contained**: it needs no plugin. Where at-build is
+This skill is **self-contained**: it needs no plugin. Where at-sdlc is
 available and the change is substantial, run this loop *inside* its Implement
 phase rather than alongside it. Where it is not, this loop is enough on its
 own — note that the phases were run by hand.
@@ -773,9 +773,13 @@ The journal moved to the private AT memory root
 ### 1.3.2
 Read the KB's SCHEMA.md before writing the journal; write only with Write or Edit.
 
+
+### 1.3.3
+Composes with at-sdlc, which replaced at-build as the full workflow.
+
 ---
 
-**Version:** 1.3.2
+**Version:** 1.3.3
 **Status:** Stable
-**Requires:** at-code (style layer). Composes with at-build when present; needs no plugin on its own.
+**Requires:** at-code (style layer). Composes with at-sdlc when present; needs no plugin on its own.
 **Last Updated:** 2026-10-10
