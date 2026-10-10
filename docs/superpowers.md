@@ -9,7 +9,7 @@ metadata:
 # Superpowers
 
 External skills library and development methodology by Jesse Vincent, used as the
-process engine behind [at-build](../../skills/at-build/SKILL.md).
+process engine behind [at-build](../skills/at-build/SKILL.md).
 
 - **Repository:** https://github.com/obra/superpowers
 - **License:** MIT
@@ -28,7 +28,7 @@ is genuinely ours: phase sequencing and project-specific gates.
 ## Installation
 
 Superpowers is a separate plugin and is **not vendored** into this repository —
-see ADR-006 in [decision-log](../decision-log.md).
+see ADR-006 in [decision-log](decision-log.md).
 
 ```bash
 # Official plugin marketplace
@@ -73,13 +73,13 @@ Available but not wired into at-build:
 
 ## Relationship to at-code
 
-Superpowers governs **process**; [at-code](../../skills/at-code/SKILL.md) governs
+Superpowers governs **process**; [at-code](../skills/at-code/SKILL.md) governs
 **style**. They operate on different axes and both apply inside every phase.
 Superpowers says "write a failing test first"; at-code says "name it
 descriptively and skip the comment restating it."
 
 Process conflicts resolve in favor of superpowers. Record any real conflict in
-`memory/learned-patterns/` so the boundary can be refined.
+`working-memory/general/logs/` under the AT memory root so the boundary can be refined.
 
 ## Upgrade Policy
 
@@ -99,5 +99,5 @@ Superpowers loads a logo asset for version counting. Disable with
 
 ## Related
 
-- [at-build](../../skills/at-build/SKILL.md) — the workflow that consumes these skills
-- [decision-log](../decision-log.md) — ADR-006 records the dependency decision
+- [at-build](../skills/at-build/SKILL.md) — the workflow that consumes these skills
+- [decision-log](decision-log.md) — ADR-006 records the dependency decision

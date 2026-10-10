@@ -94,7 +94,7 @@ author: Team
 ## Using Standards in Reviews
 
 In code review, reference these standards:
-- "See kb/coding-standards/python.md section on naming"
+- "See skills/at-code/coding-standards/python.md section on naming"
 - "Review against coding-standards/#error-handling"
 - Link to specific patterns for feedback
 
@@ -114,7 +114,7 @@ When updating:
 ## Migration Path
 
 When a language-specific pattern is discovered:
-1. Record in `memory/learned-patterns/`
+1. Record in `working-memory/general/logs/` under the AT memory root
 2. When stable, add to coding-standards
 3. Reference in both locations
 
