@@ -2,7 +2,7 @@
 
 Claude Code plugin: superpowers-backed SDLC workflow plus universal coding principles.
 
-**v2.0.0** | **MIT License**
+**v3.0.0** | **MIT License**
 
 ---
 
@@ -47,28 +47,24 @@ want one phase in isolation.
 
 ### Skills (3)
 - **at-code** (v1.2.0) — Universal coding principles for all languages
-- **at-build** (v2.0.0) — Superpowers-backed workflow: Align → Isolate → Plan → Implement → Review → Verify → Ship
-- **at-game-design** (v1.3.0) — The loop for games and other feel-driven work, where the test is whether it plays right: Clarify → Spec → Build → Play → Learn, gated on measuring the running thing, with a self-review that proposes its own revisions
+- **at-build** (v2.0.1) — Superpowers-backed workflow: Align → Isolate → Plan → Implement → Review → Verify → Ship
+- **at-game-design** (v1.3.1) — The loop for games and other feel-driven work, where the test is whether it plays right: Clarify → Spec → Build → Play → Learn, gated on measuring the running thing, with a self-review that proposes its own revisions
 
 ### Dependency
 - **superpowers** (>=6.0.0) — External MIT skills library ([obra/superpowers](https://github.com/obra/superpowers)) providing the process mechanics for every at-build phase
 
-### Knowledge Base
-- Coding standards
-- Architectural patterns  
-- Tool reference
-- Frameworks
-- Decision log (6 ADRs)
+### Agents
+- `agents/` — placeholder for plugin subagents, added as needed
 
-### Memory System
-- Feedback & preferences
-- Learned patterns
-- Project context
+### Private Knowledge (separate repo)
+Knowledge and working memory live in the private **ai-toolkit-kb** repo, not here.
+Point the skills at it with one line in `~/.claude/CLAUDE.md`:
 
-### Workspace
-- Current projects
-- Blockers
-- Priorities
+```
+AT memory root: ~/Documents/unix_workspace/ai-toolkit-kb
+```
+
+Without it, skills look for a sibling folder named `ai-toolkit-kb`, then ask.
 
 ---
 
@@ -89,22 +85,19 @@ want one phase in isolation.
 ## Directory Structure
 
 ```
-ai-toolkit/
-├── .claude-plugin/
-│   ├── plugin.json        # Claude Code plugin manifest
-│   └── marketplace.json   # lets this repo be added as a marketplace
-├── plugin.json            # internal manifest (KB/memory/workspace registry)
-├── README.md              # this file
-├── LICENSE                # MIT
-│
-├── skills/
-│   ├── at-build/SKILL.md
-│   ├── at-code/SKILL.md
-│   └── at-game-design/SKILL.md
-├── kb/                    # Knowledge Base
-├── memory/                # Long-term learning
-├── workspace/             # Work tracking
-└── .local_output/         # Local docs (not tracked)
+ai-toolkit/                         ai-toolkit-kb/ (private)
+├── .claude-plugin/                 ├── knowledge/
+│   ├── plugin.json                 │   ├── general/
+│   └── marketplace.json            │   └── projects/<p>/
+├── skills/                         │       ├── intent.md
+│   ├── at-build/SKILL.md           │       ├── business-logic/
+│   ├── at-code/SKILL.md            │       └── architecture/
+│   │   └── coding-standards/       └── working-memory/
+│   └── at-game-design/SKILL.md         ├── general/{specs,plans,logs}/
+├── agents/                             └── projects/<p>/{specs,plans}/
+├── docs/                           # decision-log, superpowers reference
+├── README.md
+└── LICENSE
 ```
 
 Skills are auto-discovered from `skills/<name>/SKILL.md` — adding one needs no
@@ -160,27 +153,10 @@ Editing a `SKILL.md` then takes effect on the next session start.
 | Need | See |
 |------|-----|
 | Installation | Quickstart above |
-| Architecture | `.local_output/docs/ARCHITECTURE.md` |
-| Full structure | `.local_output/docs/STRUCTURE.md` |
-| Quick reference | `.local_output/docs/QUICK-REFERENCE.md` |
-| Full index | `.local_output/docs/INDEX.md` |
-| Superpowers dependency | `kb/tool-reference/superpowers.md` |
-| KB help | `kb/README.md` |
-| Memory guide | `memory/README.md` |
 | Skills guide | `skills/README.md` |
-
----
-
-## Key Concepts
-
-**Persistent Knowledge (KB):** Rarely changes. Stable reference.
-
-**Delta Knowledge (Memory):** Grows over time. Append-only.
-
-**Memory Tiers:**
-- Session: Claude Code context
-- Short-term: workspace/
-- Long-term: memory/ + kb/
+| Coding standards | `skills/at-code/coding-standards/` |
+| Superpowers dependency | `docs/superpowers.md` |
+| Design decisions | `docs/decision-log.md` |
 
 ---
 
@@ -214,23 +190,19 @@ Check: `~/.claude/plugins/ai-toolkit/skills/` exists
 **at-build phase references not resolving?**
 Check: `/plugin list` shows `superpowers`. Every phase delegates to it.
 
-**KB not accessible?**
-Check: `kb/` directory and file permissions
-
-**Memory issues?**
-Check: `.gitignore` excludes `.local_output/`
-
-Full troubleshooting: `.local_output/docs/INSTALL.md`
+**Skills can't find logs, specs or plans?**
+Check: `~/.claude/CLAUDE.md` has the `AT memory root:` line, or `ai-toolkit-kb`
+is cloned next to your project.
 
 ---
 
 ## Contributing
 
-**Add skills:** Create in `skills/[name].md`
+**Add skills:** Create `skills/<name>/SKILL.md`
 
-**Add KB content:** Create in `kb/[section]/[topic].md`
+**Add agents:** Create `agents/<name>.md`
 
-**Record learning:** Add to `memory/learned-patterns/[name].md`
+**Record knowledge:** In ai-toolkit-kb, never in this repo
 
 ---
 
@@ -242,8 +214,7 @@ MIT — See LICENSE file
 
 **Ready?** Start with `Use skill at-code`
 
-Questions? See `.local_output/docs/` for detailed guides.
 
 ---
 
-[GitHub](https://github.com/kirbisity/ai-toolkit) | [License](LICENSE) | v2.0.0
+[GitHub](https://github.com/kirbisity/ai-toolkit) | [License](LICENSE) | v3.0.0
