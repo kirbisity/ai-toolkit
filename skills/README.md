@@ -7,20 +7,32 @@ Reusable Claude Code skills and workflows.
 - **[at-code](at-code/SKILL.md)** (v1.2.0)
   - Universal coding principles for all languages
   - Naming, comments, documentation, error handling, reusability
+  - Language detail in [coding-standards/](at-code/coding-standards/README.md)
 
-- **[at-build](at-build/SKILL.md)** (v2.0.0)
+- **[at-build](at-build/SKILL.md)** (v2.0.1)
   - Superpowers-backed SDLC workflow
   - Phases: Align → Isolate → Plan → Implement → Review → Verify → Ship
-  - **Requires** the external `superpowers` plugin (>=6.0.0) — see [kb/tool-reference/superpowers.md](../kb/tool-reference/superpowers.md)
+  - **Requires** the external `superpowers` plugin (>=6.0.0) — see [docs/superpowers.md](../docs/superpowers.md)
 
-- **[at-game-design](at-game-design/SKILL.md)** (v1.2.0)
+- **[at-game-design](at-game-design/SKILL.md)** (v1.3.1)
   - Iterative loop for games and other feel-driven work, where "does it feel
     right?" is the real test
   - Loop: Clarify → Concept to Spec → Spec to Build → Play → Learn
   - Measurement is the gate: measure before and after, in the running thing
-  - Keeps a [cycle journal](../memory/learned-patterns/game-design-log.md) and
+  - Keeps a cycle journal (`working-memory/general/logs/game-design-log.md` in the AT memory root) and
     runs an unprompted self-review that proposes its own revisions
   - Needs no plugin; composes with at-build when the change is large
+
+## AT Memory Root
+
+Skills write logs, specs and plans to a private repo kept outside this plugin
+(`ai-toolkit-kb`). They find it from one line in `~/.claude/CLAUDE.md`:
+
+```
+AT memory root: ~/Documents/unix_workspace/ai-toolkit-kb
+```
+
+Without that line they use a sibling folder named `ai-toolkit-kb`, and otherwise ask.
 
 ## Using Skills
 
@@ -62,4 +74,4 @@ Update this README with the new skill.
 
 ---
 
-Last Updated: 2026-09-27
+Last Updated: 2026-10-10
