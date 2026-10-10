@@ -1,7 +1,7 @@
 ---
 name: at-sdlc
 description: The SDLC entry point — spec-driven development from a project's intent.md and the user's prompts, with specs and plans kept current in the AT memory root, phases run through superpowers (or a routed alternate), fresh-agent review, and docs updated at the end. Use for any feature or change worth remembering; one-off tasks go to at-build.
-version: 1.0.0
+version: 1.1.0
 author: Team
 status: published
 ---
@@ -29,6 +29,8 @@ fallback.
 
 1. **Resolve the AT memory root:** the `AT memory root:` line in
    `~/.claude/CLAUDE.md`, otherwise a sibling `ai-toolkit-kb`, otherwise ask.
+   **Sync it:** run `git -C <root> pull --ff-only`. If that fails, or the tree has
+   uncommitted changes from another session, stop and ask.
 2. Read `<root>/SCHEMA.md`, `<root>/INDEX.md` and
    `<root>/knowledge/general/skill-routing.md` (personal overrides, if any).
 3. **Identify the project `<p>`.** It must be in SCHEMA `projects`. If it isn't,
@@ -40,6 +42,11 @@ fallback.
 
 Write KB files only with Write or Edit. The plugin hooks guard paths and stamp
 `updated`; shell redirects bypass them.
+
+**Specs and plans never go in the project repo.** Superpowers saves to
+`docs/superpowers/` by default. The user's `~/.claude/CLAUDE.md` overrides that,
+and a hook denies those writes for tracked projects and names the KB path to use.
+When calling `brainstorming` or `writing-plans`, give them the KB path.
 
 ## Inputs
 
@@ -168,8 +175,9 @@ These are noted in the PR.
 3. **For at-sleep:** list durable facts, i.e. rules for `business-logic/`,
    structure for `architecture/`, and any change to intent. Do not distill
    them here; at-sleep fact-checks and moves them.
-4. **Commit the KB** locally (`sdlc(<p>): <slug> — <status>`). Push only when
-   the user asks.
+4. **Commit and push the KB** (`sdlc(<p>): <slug> — <status>`). If the push is
+   rejected, run `pull --rebase` and push again. Memory that isn't pushed can be
+   lost or split across machines.
 
 ---
 
@@ -219,7 +227,7 @@ the licence (MIT, Apache-2.0 or BSD only) and what changed. List each fork in
 
 ---
 
-**Version:** 1.0.0
+**Version:** 1.1.0
 **Status:** Stable
 **Requires:** an AT memory root, [at-code](../at-code/SKILL.md); `superpowers` (default executor, with a manual fallback)
 **Last Updated:** 2026-10-10
