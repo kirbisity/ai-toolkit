@@ -14,7 +14,19 @@ Reusable Claude Code skills and workflows.
   - Phases: Align → Isolate → Plan → Implement → Review → Verify → Ship
   - **Requires** the external `superpowers` plugin (>=6.0.0) — see [docs/superpowers.md](../docs/superpowers.md)
 
-- **[at-game-design](at-game-design/SKILL.md)** (v1.3.1)
+- **[at-sdlc](at-sdlc/SKILL.md)** (v0.1.0, draft)
+  - Spec-driven development: spec → plan → build → keep current → verify → close out
+  - Specs and plans live in the AT memory root's `working-memory/`; docs updated at the end
+
+- **[at-search](at-search/SKILL.md)** (v1.0.0)
+  - Read-only lookup in the knowledge base: L1 INDEX → L2 files → L3 full text
+  - Escalates only as far as the question needs; "deep" starts at L3
+
+- **[at-sleep](at-sleep/SKILL.md)** (v0.1.0, draft)
+  - Distills shipped working memory into knowledge after fact-checking each claim
+  - Condenses existing knowledge: merge duplicates, drop superseded facts, tighten
+
+- **[at-game-design](at-game-design/SKILL.md)** (v1.3.2)
   - Iterative loop for games and other feel-driven work, where "does it feel
     right?" is the real test
   - Loop: Clarify → Concept to Spec → Spec to Build → Play → Learn
@@ -33,6 +45,12 @@ AT memory root: ~/Documents/unix_workspace/ai-toolkit-kb
 ```
 
 Without that line they use a sibling folder named `ai-toolkit-kb`, and otherwise ask.
+
+Every skill that writes there reads `<root>/SCHEMA.md` first and writes only
+with Write or Edit. The plugin's hooks (`hooks/hooks.json`) then deny paths
+SCHEMA does not allow and, after each write, stamp `updated`, lint the file and
+refresh `INDEX.md`. Shell redirects bypass the hooks; the KB's pre-commit hook
+and CI catch those.
 
 ## Using Skills
 

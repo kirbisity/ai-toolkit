@@ -455,6 +455,41 @@ Skills locate the private repo through the **AT memory root**: the
 
 ---
 
+## ADR-008: Protect and Index the Knowledge Base
+
+**Date:** 2026-10-10
+**Status:** ACCEPTED
+**Author:** Team
+
+### Context
+The KB is written from many sessions (each project's own), by skills and by
+hand. Without enforcement its layout drifts, and without an index it gets
+hard to search.
+
+### Decision
+- **Rules live in the KB:** `SCHEMA.md` has prose plus a JSON block, and
+  `system/kb.py` enforces it: structure, frontmatter (`description`, `updated`,
+  `tags`), links and secrets. It also generates a root `INDEX.md` and one per project.
+- **Four layers:**
+  1. Plugin hooks here guard writes and run post-write lint and re-indexing.
+     They are plugin hooks rather than KB-local ones because writes come from
+     other projects' sessions.
+  2. The KB's pre-commit hook lints and refreshes indexes.
+  3. KB CI runs tests and lint, and fails on a stale index.
+  4. Skills read SCHEMA before writing.
+- **Tags** come from a controlled list; an unknown tag is a warning, not an error.
+- **New skills:** `at-search` (read-only, L1 index → L2 files → L3 full text),
+  `at-sdlc` (spec-driven, artifacts in working memory), and `at-sleep`
+  (fact-check, distill, condense). The last two are drafts.
+
+### Consequences
+- The hooks are inert outside the KB and fail open, so a hook bug can't block
+  unrelated work. Pre-commit and CI are the hard stop.
+- Shell redirects bypass the Claude hooks. Skills are told to use Write and Edit.
+- Adding a project is deliberate: it goes into SCHEMA first.
+
+---
+
 ## Summary Table
 
 | ADR | Title | Decision | Status |
@@ -466,6 +501,7 @@ Skills locate the private repo through the **AT memory root**: the
 | 005 | Workspace Daily Update | High turnover | ⛔ Superseded by 007 |
 | 006 | Depend on Superpowers | Require plugin, don't vendor | ✅ Accepted |
 | 007 | Private KB Split | Knowledge + working memory in ai-toolkit-kb | ✅ Accepted |
+| 008 | KB Protection + Index | SCHEMA + kb.py, plugin hooks, pre-commit, CI; at-search/sdlc/sleep | ✅ Accepted |
 
 ---
 
