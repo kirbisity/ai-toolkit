@@ -2,7 +2,7 @@
 
 Claude Code plugin: superpowers-backed SDLC workflow plus universal coding principles.
 
-**v3.0.0** | **MIT License**
+**v3.1.0** | **MIT License**
 
 ---
 
@@ -25,6 +25,9 @@ Confirm with `/plugin list`; both `superpowers` and `ai-toolkit` must appear.
 /at-build        # 7-phase SDLC workflow (Align -> ... -> Ship)
 /at-code         # coding principles only
 /at-game-design  # the feel loop: clarify -> spec -> build -> play -> learn
+/at-sdlc         # spec-driven dev; specs/plans kept in the KB, docs updated at the end
+/at-search       # find it in the KB: index -> files -> full text
+/at-sleep        # distill working memory into knowledge, condense knowledge
 ```
 
 Or plain language — `use at-build to add feature X`. Skills also self-trigger
@@ -45,13 +48,19 @@ want one phase in isolation.
 
 ## What's Included
 
-### Skills (3)
+### Skills (6)
 - **at-code** (v1.2.0) — Universal coding principles for all languages
 - **at-build** (v2.0.1) — Superpowers-backed workflow: Align → Isolate → Plan → Implement → Review → Verify → Ship
-- **at-game-design** (v1.3.1) — The loop for games and other feel-driven work, where the test is whether it plays right: Clarify → Spec → Build → Play → Learn, gated on measuring the running thing, with a self-review that proposes its own revisions
+- **at-sdlc** (v0.1.0, draft) — Spec-driven development with specs and plans kept current in the KB
+- **at-search** (v1.0.0) — Read-only KB lookup that escalates from the index to full text
+- **at-sleep** (v0.1.0, draft) — Fact-checks and distills working memory into knowledge, then condenses knowledge
+- **at-game-design** (v1.3.2) — The loop for games and other feel-driven work, where the test is whether it plays right: Clarify → Spec → Build → Play → Learn, gated on measuring the running thing, with a self-review that proposes its own revisions
 
 ### Dependency
 - **superpowers** (>=6.0.0) — External MIT skills library ([obra/superpowers](https://github.com/obra/superpowers)) providing the process mechanics for every at-build phase
+
+### Hooks
+- `hooks/hooks.json` — guards writes to the AT memory root against its `SCHEMA.md`, then stamps, lints and re-indexes. Inert for every other path.
 
 ### Agents
 - `agents/` — placeholder for plugin subagents, added as needed
@@ -85,19 +94,21 @@ Without it, skills look for a sibling folder named `ai-toolkit-kb`, then ask.
 ## Directory Structure
 
 ```
-ai-toolkit/                         ai-toolkit-kb/ (private)
-├── .claude-plugin/                 ├── knowledge/
-│   ├── plugin.json                 │   ├── general/
-│   └── marketplace.json            │   └── projects/<p>/
-├── skills/                         │       ├── intent.md
-│   ├── at-build/SKILL.md           │       ├── business-logic/
-│   ├── at-code/SKILL.md            │       └── architecture/
-│   │   └── coding-standards/       └── working-memory/
-│   └── at-game-design/SKILL.md         ├── general/{specs,plans,logs}/
-├── agents/                             └── projects/<p>/{specs,plans}/
-├── docs/                           # decision-log, superpowers reference
+ai-toolkit/  (this repo, public)
+├── .claude-plugin/        plugin.json, marketplace.json
+├── skills/                at-build, at-code (+ coding-standards/), at-game-design,
+│                          at-sdlc, at-search, at-sleep
+├── hooks/                 KB guard + post-write (inert outside the KB)
+├── agents/                placeholder
+├── docs/                  decision-log, superpowers reference
 ├── README.md
 └── LICENSE
+
+ai-toolkit-kb/  (private, the AT memory root)
+├── SCHEMA.md  INDEX.md    rules; generated index
+├── knowledge/             general/, projects/<p>/{intent.md, business-logic/, architecture/}
+├── working-memory/        general/{specs,plans,logs}/, projects/<p>/{specs,plans}/
+└── system/                kb.py (lint, index, guard) + tests
 ```
 
 Skills are auto-discovered from `skills/<name>/SKILL.md` — adding one needs no
@@ -217,4 +228,4 @@ MIT — See LICENSE file
 
 ---
 
-[GitHub](https://github.com/kirbisity/ai-toolkit) | [License](LICENSE) | v3.0.0
+[GitHub](https://github.com/kirbisity/ai-toolkit) | [License](LICENSE) | v3.1.0
