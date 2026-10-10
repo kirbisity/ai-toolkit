@@ -1,4 +1,4 @@
-# Kirby Toolkit
+# AI Toolkit
 
 Claude Code plugin: superpowers-backed SDLC workflow plus universal coding principles.
 
@@ -14,10 +14,10 @@ phases delegates to it. at-code and at-game-design need no plugin.
 ```
 /plugin install superpowers@claude-plugins-official
 /plugin marketplace add kirbisity/ai-toolkit
-/plugin install kirby-toolkit@kirby-toolkit
+/plugin install ai-toolkit@ai-toolkit
 ```
 
-Confirm with `/plugin list`; both `superpowers` and `kirby-toolkit` must appear.
+Confirm with `/plugin list`; both `superpowers` and `ai-toolkit` must appear.
 
 ## Invoke
 
@@ -148,7 +148,7 @@ To run uncommitted changes, add your clone as a marketplace instead of the GitHu
 
 ```
 /plugin marketplace add /path/to/ai-toolkit
-/plugin install kirby-toolkit@kirby-toolkit
+/plugin install ai-toolkit@ai-toolkit
 ```
 
 Editing a `SKILL.md` then takes effect on the next session start.
@@ -209,7 +209,7 @@ Editing a `SKILL.md` then takes effect on the next session start.
 ## Troubleshooting
 
 **Skills not loading?**
-Check: `~/.claude/plugins/kirby-toolkit/skills/` exists
+Check: `~/.claude/plugins/ai-toolkit/skills/` exists
 
 **at-build phase references not resolving?**
 Check: `/plugin list` shows `superpowers`. Every phase delegates to it.
