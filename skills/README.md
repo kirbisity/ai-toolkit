@@ -13,7 +13,7 @@ Reusable Claude Code skills and workflows.
   - One-off loop: Isolate → Test first → Change → Verify → Ship
   - No spec, no KB writes; escalates to at-sdlc when a decision appears
 
-- **[at-sdlc](at-sdlc/SKILL.md)** (v1.0.0) — the SDLC entry point
+- **[at-sdlc](at-sdlc/SKILL.md)** (v1.1.0) — the SDLC entry point
   - Input: the project's `intent.md` plus your prompts
   - Align → Spec → Isolate → Plan → Implement → Review → Verify → Ship → Close out
   - Phases routed to `superpowers` by default (see [docs/superpowers.md](../docs/superpowers.md)),
@@ -24,11 +24,11 @@ Reusable Claude Code skills and workflows.
   - Read-only lookup in the knowledge base: L1 INDEX → L2 files → L3 full text
   - Escalates only as far as the question needs; "deep" starts at L3
 
-- **[at-sleep](at-sleep/SKILL.md)** (v0.1.0, draft)
+- **[at-sleep](at-sleep/SKILL.md)** (v0.1.1, draft)
   - Distills shipped working memory into knowledge after fact-checking each claim
   - Condenses existing knowledge: merge duplicates, drop superseded facts, tighten
 
-- **[at-game-design](at-game-design/SKILL.md)** (v1.3.2)
+- **[at-game-design](at-game-design/SKILL.md)** (v1.3.4)
   - Iterative loop for games and other feel-driven work, where "does it feel
     right?" is the real test
   - Loop: Clarify → Concept to Spec → Spec to Build → Play → Learn
@@ -51,7 +51,9 @@ Without that line they use a sibling folder named `ai-toolkit-kb`, and otherwise
 Every skill that writes there reads `<root>/SCHEMA.md` first and writes only
 with Write or Edit. The plugin's hooks (`hooks/hooks.json`) then deny paths
 SCHEMA does not allow and, after each write, stamp `updated`, lint the file and
-refresh `INDEX.md`. Shell redirects bypass the hooks; the KB's pre-commit hook
+refresh `INDEX.md`. Superpowers specs and plans for tracked projects are
+redirected from `docs/superpowers/` into the KB, and a session-start note flags
+unpushed KB work. Shell redirects bypass the hooks; the KB's pre-commit hook
 and CI catch those.
 
 ## Using Skills

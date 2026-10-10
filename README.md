@@ -2,7 +2,7 @@
 
 Claude Code plugin: superpowers-backed SDLC workflow plus universal coding principles.
 
-**v3.2.0** | **MIT License**
+**v3.3.0** | **MIT License**
 
 ---
 
@@ -51,16 +51,20 @@ want one phase in isolation.
 ### Skills (6)
 - **at-code** (v1.2.0) — Universal coding principles for all languages
 - **at-build** (v3.0.0) — One-off loop for tasks that leave no decision to remember
-- **at-sdlc** (v1.0.0) — The SDLC entry point: intent-driven spec, routed phases (superpowers by default), fresh-agent review, docs close-out
+- **at-sdlc** (v1.1.0) — The SDLC entry point: intent-driven spec, routed phases (superpowers by default), fresh-agent review, docs close-out
 - **at-search** (v1.0.0) — Read-only KB lookup that escalates from the index to full text
-- **at-sleep** (v0.1.0, draft) — Fact-checks and distills working memory into knowledge, then condenses knowledge
+- **at-sleep** (v0.1.1, draft) — Fact-checks and distills working memory into knowledge, then condenses knowledge
 - **at-game-design** (v1.3.2) — The loop for games and other feel-driven work, where the test is whether it plays right: Clarify → Spec → Build → Play → Learn, gated on measuring the running thing, with a self-review that proposes its own revisions
 
 ### Dependency
 - **superpowers** (>=6.0.0) — External MIT skills library ([obra/superpowers](https://github.com/obra/superpowers)) the default executor for at-sdlc's phases
 
 ### Hooks
-- `hooks/hooks.json` — guards writes to the AT memory root against its `SCHEMA.md`, then stamps, lints and re-indexes. Inert for every other path.
+- `hooks/hooks.json`:
+  - **Before each write:** guards writes to the AT memory root against its `SCHEMA.md`, and redirects superpowers specs and plans for KB-tracked projects from `docs/superpowers/` into the KB.
+  - **After each write:** stamps `updated`, lints the file and re-indexes.
+  - **At session start:** flags uncommitted or unpushed KB work.
+  - Inert for every other path. Tests: `python3 -m unittest discover -s hooks/tests`.
 
 ### Agents
 - `agents/` — placeholder for plugin subagents, added as needed
@@ -223,4 +227,4 @@ MIT — See LICENSE file
 
 ---
 
-[GitHub](https://github.com/kirbisity/ai-toolkit) | [License](LICENSE) | v3.2.0
+[GitHub](https://github.com/kirbisity/ai-toolkit) | [License](LICENSE) | v3.3.0
