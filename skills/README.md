@@ -28,6 +28,10 @@ Reusable Claude Code skills and workflows.
   - Distills shipped working memory into knowledge after fact-checking each claim
   - Condenses existing knowledge: merge duplicates, drop superseded facts, tighten
 
+- **[at-real-world-low-risk-execution](at-real-world-low-risk-execution/SKILL.md)** (v1.0.0) — **non-coding**
+  - Carries real-world tasks (applications, filings, signatures, mailings) to verified completion
+  - Done stages kept separate, backward scheduling, evidence grades, gap triage, stop rules
+
 - **[at-game-design](at-game-design/SKILL.md)** (v1.3.4)
   - Iterative loop for games and other feel-driven work, where "does it feel
     right?" is the real test

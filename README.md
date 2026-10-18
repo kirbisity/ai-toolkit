@@ -2,7 +2,7 @@
 
 Claude Code plugin: superpowers-backed SDLC workflow plus universal coding principles.
 
-**v3.3.0** | **MIT License**
+**v3.4.0** | **MIT License**
 
 ---
 
@@ -28,6 +28,7 @@ Confirm with `/plugin list`; both `superpowers` and `ai-toolkit` must appear.
 /at-game-design  # the feel loop: clarify -> spec -> build -> play -> learn
 /at-search       # find it in the KB: index -> files -> full text
 /at-sleep        # distill working memory into knowledge, condense knowledge
+/at-real-world-low-risk-execution  # non-coding: deadlines, documents, third parties, handoffs
 ```
 
 Or plain language — `use at-sdlc to add feature X`. Skills also self-trigger
@@ -48,13 +49,14 @@ want one phase in isolation.
 
 ## What's Included
 
-### Skills (6)
+### Skills (7)
 - **at-code** (v1.2.0) — Universal coding principles for all languages
 - **at-build** (v3.0.0) — One-off loop for tasks that leave no decision to remember
 - **at-sdlc** (v1.1.0) — The SDLC entry point: intent-driven spec, routed phases (superpowers by default), fresh-agent review, docs close-out
 - **at-search** (v1.0.0) — Read-only KB lookup that escalates from the index to full text
 - **at-sleep** (v0.1.1, draft) — Fact-checks and distills working memory into knowledge, then condenses knowledge
-- **at-game-design** (v1.3.2) — The loop for games and other feel-driven work, where the test is whether it plays right: Clarify → Spec → Build → Play → Learn, gated on measuring the running thing, with a self-review that proposes its own revisions
+- **at-real-world-low-risk-execution** (v1.0.0) — Non-coding: carries deadline-bound real-world tasks (applications, filings, signatures, mailings) through people, institutions and documents to verified completion
+- **at-game-design** (v1.3.4) — The loop for games and other feel-driven work, where the test is whether it plays right: Clarify → Spec → Build → Play → Learn, gated on measuring the running thing, with a self-review that proposes its own revisions
 
 ### Dependency
 - **superpowers** (>=6.0.0) — External MIT skills library ([obra/superpowers](https://github.com/obra/superpowers)) the default executor for at-sdlc's phases
@@ -101,7 +103,8 @@ Without it, skills look for a sibling folder named `ai-toolkit-kb`, then ask.
 ai-toolkit/  (this repo, public)
 ├── .claude-plugin/        plugin.json, marketplace.json
 ├── skills/                at-build, at-code (+ coding-standards/), at-game-design,
-│                          at-sdlc, at-search, at-sleep
+│                          at-sdlc, at-search, at-sleep,
+│                          at-real-world-low-risk-execution (non-coding)
 ├── hooks/                 KB guard + post-write (inert outside the KB)
 ├── agents/                placeholder
 ├── docs/                  decision-log, superpowers reference
@@ -227,4 +230,4 @@ MIT — See LICENSE file
 
 ---
 
-[GitHub](https://github.com/kirbisity/ai-toolkit) | [License](LICENSE) | v3.3.0
+[GitHub](https://github.com/kirbisity/ai-toolkit) | [License](LICENSE) | v3.4.0
