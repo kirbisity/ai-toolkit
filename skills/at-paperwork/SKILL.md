@@ -23,6 +23,7 @@ cost, minimizing omission, delay, rework and irreversible error.
 - Confirm with **evidence**, and let deadlines drive the pace.
 - Professionals judge; you keep ownership of execution.
 - Check until it's enough, then **stop**.
+- Decide ambiguity by **debate**: an independent challenger reaches its own conclusion, then attacks yours.
 
 ## Done stages
 
@@ -82,6 +83,44 @@ nothing new has appeared, it's settled.
   need no re-searching.
 - **Corrections:** state what changed, why, and the effect on next steps.
 - **Hold the bar:** keep the same standard under pressure or a wish for reassurance.
+
+## Debate on ambiguity
+
+Real-world rules have **wiggle room**: officers, firms and offices apply
+discretion, and written requirements leave gaps. Before you call a judgment,
+spawn an independent **challenger**.
+
+**When to debate:**
+- interpreting a requirement
+- deciding whether a gap blocks a stage, or can wait
+- relying on an exception or a verbal OK
+- the step just before an irreversible action
+- calling a stage "ready"
+
+Clear-cut items need no debate.
+
+1. **Brief the challenger with facts only:** a fresh subagent, not a fork. Give
+   it the goal, the deadline, the requirement text with its sources, the
+   materials and their state, and the question. Leave your conclusion out, so
+   it reaches its own.
+2. **Independent pass:** it returns a conclusion, the evidence grade behind each
+   claim, its top risks and a recommendation.
+3. **Challenge pass:** then show it your conclusion, and have it attack the
+   weakest assumption and argue the best case for the other path.
+4. **Reconcile:**
+   - **Agreement on solid evidence:** proceed.
+   - **Disagreement:** name the **crux**. Is it a fact, an interpretation, or risk appetite?
+     - **Fact:** settle it with the source text or the actual file.
+     - **Interpretation:** ask the gatekeeper or professional, when that's cheap.
+     - **Genuine discretion:** lay out the options with their odds, cost and reversibility.
+
+   Neither confidence nor a majority vote settles it. Default to the option
+   that survives the strictest plausible reading, unless being strict costs
+   more than the risk it removes.
+5. **Report:** both conclusions in a line each, the crux, your recommendation,
+   and what the user decides.
+
+Without a subagent tool, give the user the fact-only brief to run in a separate session.
 
 ## Check the real deliverable
 
@@ -151,6 +190,7 @@ Answer the question first. Then, briefly:
 1. The current done stage.
 2. Up to 3 actions for today, and why.
 3. Blockers, items to come later, and confirmed N/A items.
+   When a debate ran, add its crux and the recommendation.
 4. Who owns what, and when to follow up.
 5. What can stop being checked.
 
@@ -158,6 +198,6 @@ Expand only for a deep review, and add a reminder only for a new, specific risk.
 
 **Kick-off:** from the goal, deadline, requirements, materials and work done so
 far, name the external dependency that must start earliest and the riskiest
-unverified assumption. Then complete the authorized steps that are possible now.
+unverified assumption. Debate that judgment. Then complete the authorized steps that are possible now.
 If information is missing, advance the parts it doesn't affect, and ask only
 questions that change the path.
