@@ -1,12 +1,12 @@
 ---
-name: at-real-world-low-risk-execution
+name: at-paperwork
 description: Use when carrying a real-world, non-coding task through people, institutions and documents to verified completion under a deadline — applications, filings, visas, signatures, appointments, mailings — with third-party dependencies, required materials, reviews or handoffs.
 version: 1.0.0
 author: Team
 status: published
 ---
 
-# Real-World Low-Risk Execution
+# Paperwork: Real-World Low-Risk Execution
 
 **Real-world, not code.** The work happens through people, institutions,
 documents and physical items. You draft, check, track and chase as an

@@ -28,7 +28,7 @@ Confirm with `/plugin list`; both `superpowers` and `ai-toolkit` must appear.
 /at-game-design  # the feel loop: clarify -> spec -> build -> play -> learn
 /at-search       # find it in the KB: index -> files -> full text
 /at-sleep        # distill working memory into knowledge, condense knowledge
-/at-real-world-low-risk-execution  # non-coding: deadlines, documents, third parties, handoffs
+/at-paperwork    # non-coding: deadlines, documents, third parties, handoffs
 ```
 
 Or plain language — `use at-sdlc to add feature X`. Skills also self-trigger
@@ -55,7 +55,7 @@ want one phase in isolation.
 - **at-sdlc** (v1.1.0) — The SDLC entry point: intent-driven spec, routed phases (superpowers by default), fresh-agent review, docs close-out
 - **at-search** (v1.0.0) — Read-only KB lookup that escalates from the index to full text
 - **at-sleep** (v0.1.1, draft) — Fact-checks and distills working memory into knowledge, then condenses knowledge
-- **at-real-world-low-risk-execution** (v1.0.0) — Non-coding: carries deadline-bound real-world tasks (applications, filings, signatures, mailings) through people, institutions and documents to verified completion
+- **at-paperwork** (v1.0.0) — Non-coding: carries deadline-bound real-world tasks (applications, filings, signatures, mailings) through people, institutions and documents to verified completion
 - **at-game-design** (v1.3.4) — The loop for games and other feel-driven work, where the test is whether it plays right: Clarify → Spec → Build → Play → Learn, gated on measuring the running thing, with a self-review that proposes its own revisions
 
 ### Dependency
@@ -104,7 +104,7 @@ ai-toolkit/  (this repo, public)
 ├── .claude-plugin/        plugin.json, marketplace.json
 ├── skills/                at-build, at-code (+ coding-standards/), at-game-design,
 │                          at-sdlc, at-search, at-sleep,
-│                          at-real-world-low-risk-execution (non-coding)
+│                          at-paperwork (non-coding)
 ├── hooks/                 KB guard + post-write (inert outside the KB)
 ├── agents/                placeholder
 ├── docs/                  decision-log, superpowers reference
