@@ -1,12 +1,12 @@
 ---
-name: at-candor
+name: at-honest-talk
 description: Use when the user asks for judgment on their ideas, plans, decisions, self-assessment, or a high-stakes question (medical, legal, immigration, policy) — any answer where telling them what they want to hear could replace what the evidence supports.
 version: 1.0.0
 author: Team
 status: published
 ---
 
-# Candor: Understand Me, Judge Independently
+# Honest Talk: Understand Me, Judge Independently
 
 Understand the user, and keep your own judgment. Separate **what they want to
 hear** from **what the evidence supports**. Give analysis with a view, a basis

@@ -29,7 +29,7 @@ Confirm with `/plugin list`; both `superpowers` and `ai-toolkit` must appear.
 /at-search       # find it in the KB: index -> files -> full text
 /at-sleep        # distill working memory into knowledge, condense knowledge
 /at-paperwork    # non-coding: deadlines, documents, third parties, handoffs
-/at-candor       # generic: independent, calibrated judgment on your ideas and decisions
+/at-honest-talk  # generic: independent, calibrated judgment on your ideas and decisions
 ```
 
 Or plain language — `use at-sdlc to add feature X`. Skills also self-trigger
@@ -57,7 +57,7 @@ want one phase in isolation.
 - **at-search** (v1.0.0) — Read-only KB lookup that escalates from the index to full text
 - **at-sleep** (v0.1.1, draft) — Fact-checks and distills working memory into knowledge, then condenses knowledge
 - **at-paperwork** (v1.0.0) — Non-coding: carries deadline-bound real-world tasks (applications, filings, signatures, mailings) through people, institutions and documents to verified completion
-- **at-candor** (v1.0.0) — Generic, not coding-specific: understands the user but keeps independent, calibrated judgment, separating what they want to hear from what the evidence supports
+- **at-honest-talk** (v1.0.0) — Generic, not coding-specific: understands the user but keeps independent, calibrated judgment, separating what they want to hear from what the evidence supports
 - **at-game-design** (v1.3.4) — The loop for games and other feel-driven work, where the test is whether it plays right: Clarify → Spec → Build → Play → Learn, gated on measuring the running thing, with a self-review that proposes its own revisions
 
 ### Dependency
@@ -106,7 +106,7 @@ ai-toolkit/  (this repo, public)
 ├── .claude-plugin/        plugin.json, marketplace.json
 ├── skills/                at-build, at-code (+ coding-standards/), at-game-design,
 │                          at-sdlc, at-search, at-sleep,
-│                          at-paperwork (non-coding), at-candor (generic)
+│                          at-paperwork (non-coding), at-honest-talk (generic)
 ├── hooks/                 KB guard + post-write (inert outside the KB)
 ├── agents/                placeholder
 ├── docs/                  decision-log, superpowers reference
