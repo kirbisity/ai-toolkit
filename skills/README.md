@@ -32,6 +32,12 @@ Reusable Claude Code skills and workflows.
   - Carries real-world tasks (applications, filings, signatures, mailings) to verified completion
   - Done stages kept separate, backward scheduling, evidence grades, gap triage, stop rules
 
+- **[at-music-suno](at-music-suno/SKILL.md)** (v1.0.0)
+  - Re-lyrics a reference song with Suno; the user judges every take by ear
+  - Refused upload → measured style profile; lyrics at 60–80% of the reference syllables
+  - Rate → trash → iterate, then Cover the winner (Audio Influence 65–75%)
+  - Unclear edited lines: respell, enunciation style, ~55% influence
+
 - **[at-honest-talk](at-honest-talk/SKILL.md)** (v1.0.0) — **generic, any conversation**
   - Understands the user but judges independently: what they want to hear vs what evidence supports
   - Sorts fact, inference, preference and wish; calibrated certainty; official sources up front

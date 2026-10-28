@@ -1,6 +1,6 @@
 {
   "name": "ai-toolkit",
-  "description": "Spec-driven SDLC (at-sdlc) routed across skill libraries, a private knowledge base kept protected and indexed (at-search, at-sleep), a feel loop for games, a real-world (non-coding) execution method for deadline-bound tasks, an independent-judgment stance for any conversation, and universal coding principles.",
+  "description": "Spec-driven SDLC (at-sdlc) routed across skill libraries, a private knowledge base kept protected and indexed (at-search, at-sleep), a feel loop for games, a real-world (non-coding) execution method for deadline-bound tasks, a Suno workflow for re-lyricing a reference song, an independent-judgment stance for any conversation, and universal coding principles.",
   "version": "3.7.0",
   "author": {
     "name": "kirbisity"
@@ -8,5 +8,5 @@
   "homepage": "https://github.com/kirbisity/ai-toolkit",
   "repository": "https://github.com/kirbisity/ai-toolkit",
   "license": "MIT",
-  "keywords": ["sdlc", "workflow", "coding-standards", "superpowers", "tdd", "multi-agent"]
+  "keywords": ["sdlc", "workflow", "coding-standards", "superpowers", "tdd", "multi-agent", "music", "suno"]
 }
