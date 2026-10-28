@@ -32,6 +32,10 @@ Reusable Claude Code skills and workflows.
   - Carries real-world tasks (applications, filings, signatures, mailings) to verified completion
   - Done stages kept separate, backward scheduling, evidence grades, gap triage, stop rules
 
+- **[at-candor](at-candor/SKILL.md)** (v1.0.0) — **generic, any conversation**
+  - Understands the user but judges independently: what they want to hear vs what evidence supports
+  - Sorts fact, inference, preference and wish; calibrated certainty; official sources up front
+
 - **[at-game-design](at-game-design/SKILL.md)** (v1.3.4)
   - Iterative loop for games and other feel-driven work, where "does it feel
     right?" is the real test

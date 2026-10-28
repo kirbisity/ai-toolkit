@@ -1,7 +1,7 @@
 {
   "name": "ai-toolkit",
-  "description": "Spec-driven SDLC (at-sdlc) routed across skill libraries, a private knowledge base kept protected and indexed (at-search, at-sleep), a feel loop for games, a real-world (non-coding) execution method for deadline-bound tasks, and universal coding principles.",
-  "version": "3.4.0",
+  "description": "Spec-driven SDLC (at-sdlc) routed across skill libraries, a private knowledge base kept protected and indexed (at-search, at-sleep), a feel loop for games, a real-world (non-coding) execution method for deadline-bound tasks, an independent-judgment stance for any conversation, and universal coding principles.",
+  "version": "3.7.0",
   "author": {
     "name": "kirbisity"
   },
