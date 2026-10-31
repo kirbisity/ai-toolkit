@@ -38,6 +38,10 @@ Reusable Claude Code skills and workflows.
   - Rate → trash → iterate, then Cover the winner (Audio Influence 65–75%)
   - Unclear edited lines: respell, enunciation style, ~55% influence
 
+- **[at-anti-defensive-bias](at-anti-defensive-bias/SKILL.md)** (v1.0.0) — **generic, any conversation**
+  - On correction or contradicting evidence: proof overrides prior context, pivot in one line, rebuild
+  - The user can be wrong too: assertions get checked, pressure alone doesn't move the answer
+
 - **[at-game-design](at-game-design/SKILL.md)** (v1.3.4)
   - Iterative loop for games and other feel-driven work, where "does it feel
     right?" is the real test
