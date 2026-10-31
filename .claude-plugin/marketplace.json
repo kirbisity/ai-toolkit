@@ -8,7 +8,7 @@
   "plugins": [
     {
       "name": "ai-toolkit",
-      "description": "Spec-driven SDLC (at-sdlc) routed across skill libraries, a private knowledge base kept protected and indexed (at-search, at-sleep), a feel loop for games, a real-world (non-coding) execution method for deadline-bound tasks, a Suno workflow for re-lyricing a reference song, an independent-judgment stance for any conversation, and universal coding principles.",
+      "description": "Spec-driven SDLC (at-sdlc) routed across skill libraries, a private knowledge base kept protected and indexed (at-search, at-sleep), a feel loop for games, a real-world (non-coding) execution method for deadline-bound tasks, a Suno workflow for re-lyricing a reference song, independent-judgment and evidence-over-continuity stances for any conversation, and universal coding principles.",
       "author": {
         "name": "kirbisity"
       },
