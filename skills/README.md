@@ -42,6 +42,10 @@ Reusable Claude Code skills and workflows.
   - On correction or contradicting evidence: proof overrides prior context, pivot in one line, rebuild
   - The user can be wrong too: assertions get checked, pressure alone doesn't move the answer
 
+- **[at-honest-talk](at-honest-talk/SKILL.md)** (v1.0.0) — **generic, any conversation**
+  - Understands the user but judges independently: what they want to hear vs what evidence supports
+  - Sorts fact, inference, preference and wish; calibrated certainty; official sources up front
+
 - **[at-game-design](at-game-design/SKILL.md)** (v1.3.4)
   - Iterative loop for games and other feel-driven work, where "does it feel
     right?" is the real test

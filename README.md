@@ -30,6 +30,7 @@ Confirm with `/plugin list`; both `superpowers` and `ai-toolkit` must appear.
 /at-sleep        # distill working memory into knowledge, condense knowledge
 /at-paperwork    # non-coding: deadlines, documents, third parties, handoffs
 /at-music-suno   # re-lyric a reference song with Suno: profile, generate, rate, cover
+/at-honest-talk  # generic: independent, calibrated judgment on your ideas and decisions
 /at-anti-defensive-bias  # generic: on correction, evidence over continuity; no rationalizing
 ```
 
@@ -51,7 +52,7 @@ want one phase in isolation.
 
 ## What's Included
 
-### Skills (9)
+### Skills (10)
 - **at-code** (v1.2.0) — Universal coding principles for all languages
 - **at-build** (v3.0.0) — One-off loop for tasks that leave no decision to remember
 - **at-sdlc** (v1.1.0) — The SDLC entry point: intent-driven spec, routed phases (superpowers by default), fresh-agent review, docs close-out
@@ -60,6 +61,7 @@ want one phase in isolation.
 - **at-paperwork** (v1.0.0) — Non-coding: carries deadline-bound real-world tasks (applications, filings, signatures, mailings) through people, institutions and documents to verified completion
 - **at-music-suno** (v1.0.0) — Re-lyrics a reference song with Suno: a measured style profile when the upload is refused, lyrics sized to the melody, a rate-and-trash loop, Cover to lock a winner, and fixes for crammed or unclear lines
 - **at-anti-defensive-bias** (v1.0.0) — Generic: when corrected or shown contradicting evidence, lets proof override prior context, admits the error in one line and rebuilds the answer, while still checking bare assertions
+- **at-honest-talk** (v1.0.0) — Generic, not coding-specific: understands the user but keeps independent, calibrated judgment, separating what they want to hear from what the evidence supports
 - **at-game-design** (v1.3.4) — The loop for games and other feel-driven work, where the test is whether it plays right: Clarify → Spec → Build → Play → Learn, gated on measuring the running thing, with a self-review that proposes its own revisions
 
 ### Dependency
@@ -109,7 +111,7 @@ ai-toolkit/  (this repo, public)
 ├── skills/                at-build, at-code (+ coding-standards/), at-game-design,
 │                          at-sdlc, at-search, at-sleep,
 │                          at-paperwork (non-coding), at-music-suno,
-│                          at-anti-defensive-bias (generic)
+│                          at-honest-talk, at-anti-defensive-bias (generic)
 ├── hooks/                 KB guard + post-write (inert outside the KB)
 ├── agents/                placeholder
 ├── docs/                  decision-log, superpowers reference
