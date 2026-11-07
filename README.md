@@ -32,6 +32,7 @@ Confirm with `/plugin list`; both `superpowers` and `ai-toolkit` must appear.
 /at-music-suno   # re-lyric a reference song with Suno: profile, generate, rate, cover
 /at-honest-talk  # generic: independent, calibrated judgment on your ideas and decisions
 /at-anti-defensive-bias  # generic: on correction, evidence over continuity; no rationalizing
+/at-philosophical-thought  # generic: take any subject (story, film, project, decision) past its surface
 ```
 
 Or plain language — `use at-sdlc to add feature X`. Skills also self-trigger
@@ -52,7 +53,7 @@ want one phase in isolation.
 
 ## What's Included
 
-### Skills (10)
+### Skills (11)
 - **at-code** (v1.2.0) — Universal coding principles for all languages
 - **at-build** (v3.0.0) — One-off loop for tasks that leave no decision to remember
 - **at-sdlc** (v1.1.0) — The SDLC entry point: intent-driven spec, routed phases (superpowers by default), fresh-agent review, docs close-out
@@ -61,6 +62,7 @@ want one phase in isolation.
 - **at-paperwork** (v1.0.0) — Non-coding: carries deadline-bound real-world tasks (applications, filings, signatures, mailings) through people, institutions and documents to verified completion
 - **at-music-suno** (v1.0.0) — Re-lyrics a reference song with Suno: a measured style profile when the upload is refused, lyrics sized to the melody, a rate-and-trash loop, Cover to lock a winner, and fixes for crammed or unclear lines
 - **at-anti-defensive-bias** (v1.0.0) — Generic: when corrected or shown contradicting evidence, lets proof override prior context, admits the error in one line and rebuilds the answer, while still checking bare assertions
+- **at-philosophical-thought** (v1.0.0) — Generic: eight moves (mechanism, ledger, scales, time, odds, the other edge, mirror, distil) that take a story, film, project or decision past its surface to what it is about and what transfers
 - **at-honest-talk** (v1.0.0) — Generic, not coding-specific: understands the user but keeps independent, calibrated judgment, separating what they want to hear from what the evidence supports
 - **at-game-design** (v1.3.4) — The loop for games and other feel-driven work, where the test is whether it plays right: Clarify → Spec → Build → Play → Learn, gated on measuring the running thing, with a self-review that proposes its own revisions
 
@@ -111,7 +113,7 @@ ai-toolkit/  (this repo, public)
 ├── skills/                at-build, at-code (+ coding-standards/), at-game-design,
 │                          at-sdlc, at-search, at-sleep,
 │                          at-paperwork (non-coding), at-music-suno,
-│                          at-honest-talk, at-anti-defensive-bias (generic)
+│                          at-honest-talk, at-anti-defensive-bias, at-philosophical-thought (generic)
 ├── hooks/                 KB guard + post-write (inert outside the KB)
 ├── agents/                placeholder
 ├── docs/                  decision-log, superpowers reference
