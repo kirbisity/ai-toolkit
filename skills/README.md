@@ -38,6 +38,10 @@ Reusable Claude Code skills and workflows.
   - Rate → trash → iterate, then Cover the winner (Audio Influence 65–75%)
   - Unclear edited lines: respell, enunciation style, ~55% influence
 
+- **[at-deepen](at-deepen/SKILL.md)** (v1.0.0) — **generic, any subject**
+  - Mechanism, ledger, scales, time, odds, the other edge, mirror, distil: one move at a time
+  - Grounded claims, no moralising, the mirror only when invited; stop when a move adds nothing
+
 - **[at-anti-defensive-bias](at-anti-defensive-bias/SKILL.md)** (v1.0.0) — **generic, any conversation**
   - On correction or contradicting evidence: proof overrides prior context, pivot in one line, rebuild
   - The user can be wrong too: assertions get checked, pressure alone doesn't move the answer
