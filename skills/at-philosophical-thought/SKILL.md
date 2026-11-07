@@ -1,12 +1,12 @@
 ---
-name: at-deepen
+name: at-philosophical-thought
 description: Use when a topic deserves more than its surface - a novel, film, game, essay, engineering project, product, decision or historical event - and the user wants to understand what it is really about, find what makes it matter, or give it weight. Not for questions with a decidable answer.
 version: 1.0.0
 author: Team
 status: published
 ---
 
-# AT Deepen: Past the Surface
+# AT Philosophical Thought: Past the Surface
 
 Most subjects are first seen at the scale they were asked about: a fight, a
 plot, a feature, a ticket. What they are *about* sits at other scales, in who
