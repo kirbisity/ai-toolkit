@@ -1,90 +1,67 @@
 ---
 name: at-prioritize
 description: Use when choosing what to work on next from a list, backlog, worksheet, tree, JIRA stories or a set of options, at work or on a personal project; or when asked "what should I do next", "rank these", "which first", or to pick between career moves, projects or tasks.
-version: 1.1.0
+version: 1.2.0
 author: Team
 status: published
 ---
 
 # Prioritize: The Smallest Step That Compounds
 
-Choose the smallest credible next step that creates real value now and
-compounds over the next 1–2 years. Then make sure it actually gets done: a
-step nobody runs has no value.
+Pick the smallest credible next step that creates value now and compounds
+over 1–2 years, then make sure it actually happens. A step nobody runs is
+worth nothing.
 
 ## Method
 
-0. **Load the user's priority profile, if there is one.** Read
-   `## Priority profile` in `<AT memory root>/knowledge/general/user-profile.md`
-   (private, gitignored; find the root as described in
-   [skills/README.md](../README.md#at-memory-root)). It lists the user's
-   strengths, what compounds for them, and their known traps. Apply each trap
-   as a check in step 6. If there's no profile, skip this step. Never copy the
-   profile into an output file or a public place.
-1. **Start from what the user gave you**: a list, worksheet, tree, stories or
-   descriptions. If they ask you to look proactively, or the context is thin,
-   check the available roadmap, project or ticket context and the knowledge
-   base before ranking. Don't invent missing facts. A missing fact goes in
-   the matrix as `?`, with what would settle it.
+0. **Profile.** If `<AT memory root>/knowledge/general/user-profile.md` has a
+   `## Priority profile` (private, gitignored; root per
+   [skills/README.md](../README.md#at-memory-root)), apply its traps as extra
+   guards. Never copy it into output files or public places.
+1. **Start from what the user gave you.** If context is thin, check the
+   roadmap, tickets and knowledge base. Never invent facts: mark a gap `?`
+   with what would settle it.
 2. **Read [references/priority-framework.md](references/priority-framework.md)**
-   and use its default priorities unless the user overrides them.
-3. **Normalize each option** into: intended outcome, likely scope, next
-   executable step, dependencies and unlocks, and evidence with confidence.
-4. **Rank.** Scores support the decision; they don't make it. Prefer work
-   that solves today's problem and makes valuable future work easier, larger
-   or more likely to succeed. Penalize terminal low-value work that
-   disappears once done. Favor enabling work, durable ownership and paths
-   that add option value.
-5. **Say what dominates.** If a mandatory deadline, a production risk, a
-   dependency or a severe cost of delay outweighs the scores, say so in one
-   line above the Pick. Don't hide it in a rating. Only evidence can
-   dominate: a threat or window you infer from hints (a layoff mood, a
-   rumored reorg) raises cost of delay but never overrides the matrix.
-6. **Run the guards** below on the Pick, plus the profile's traps.
-7. **Ask at most one preference question**, and only when its answer could
-   change the winner. Otherwise use the defaults.
+   and use its defaults unless the user overrides them.
+3. **Normalize each option:** outcome, scope, next executable step, what it
+   unlocks, and its evidence.
+4. **Rank.** Favor work that solves today's problem and makes future work
+   bigger or easier. Penalize terminal work.
+5. **Say what dominates**: a deadline, a growing risk, a blocking dependency
+   or a closing window. Only evidence can dominate.
+6. **Run the guards.**
+7. **Ask at most one question**, and only if the answer could change the Pick.
 
-## Guards (each applies when its condition holds)
+## Guards
 
-| Condition | Guard |
+Each applies only when its condition holds.
+
+| When | Then |
 |---|---|
-| The Pick's value depends on someone else's decision (ownership, scope, promotion, funding, approval, a lane or a seat) | The next step includes a **claim or ask**: the exact sentence, the named decider, the channel, a date. Add a **written record** sent within 24 hours. A plan with no claim step is incomplete. Fix it before answering. |
-| The step produces an artifact (RFC, proposal, note, deck, demo) | Give it a **send-by date**. If it isn't sent by then, send a smaller version that day. Done means sent, not polished. Polishing comes after the decider has said yes. |
-| The options look like proxies for an unstated goal (safe work standing in for the lead seat, the move, the raise) | Name the **real want** in one line and rank against it. If the user hasn't said it and it would change the winner, that is your one question. |
-| A real want exists and a decider will allocate toward it (seats, lanes, levels go to people who said they want them) | The claim **says the real want to the decider**, with a horizon ("I want to lead X by <year>; what would you need to see?"). A proxy ask that keeps the real want hidden doesn't count as the claim. If the decider asks directly, the answer is the real want, not reassurance. |
-| The user holds working proof (a prototype, a demo, data) and the decision is contested | **Show it to the deciders** with the decision on the agenda; the private written ask is the follow-up the same day. A private ask alone loses to a rival's showable demo. |
-| The Pick is likely to produce a visible win | Schedule the **cash-in** now: a written, dated ask for the next stage, sent within two weeks of the win. Ownership of the next stage isn't inherited. |
-| An option is kept open as a fallback (an opening elsewhere, a sponsor, a lifeline) | Give it a **recurring dated touch** (e.g. a quarterly coffee) and a written trigger for using it. A fallback kept by intention decays. When the threat behind it is only a hint, keep the fallback warm instead of leaving a strong position for it. |
-| A ranking rests on a remark, a rumor or a hint | Treat it as a **hint**. It can raise cost of delay, but it never makes confidence High. Allocations, decisions and written commitments are **evidence**. Label which one each fact is. |
-| The work compounds only if someone sees it (correctness, maintenance, hardening, unblocking others) | Add a **visibility step**: a short written note to the decider on what it prevents or enables. Without one, rank it as terminal work. |
-| Always | Give the Pick a **check date** and a **signal** that shows it worked (an answer, an allocation, a ship). If the signal hasn't come by the date, the fallback is named now. |
+| Someone else decides the value (approval, ownership, funding, a role) | **Ask.** Give the exact sentence, the decider, a date, and a written recap within 24h. Ask for the real goal, not a safer proxy. If the decision is contested and you have working proof, show it to every decider with the decision on the agenda. After a win, ask for the next stage within two weeks: it isn't inherited. |
+| The step produces an artifact | **Ship by a date.** If the full version isn't ready, a smaller version goes out that day. Done means sent. |
+| A fact is a remark, rumor or mood | **Hint, not evidence.** It can raise urgency, but it never sets confidence High and never dominates. |
+| The value is invisible unless someone sees it | **Make it seen** with a short note to the decider, or rank it as terminal. |
+| An option is kept as a fallback | **Keep it alive** with a recurring dated touch and a written trigger based on evidence. Until the trigger fires, the step is a touch, not a pursuit. |
+| Always | **Check by** a date, with a signal and a named fallback. |
 
 ## Output
 
-Keep it concise:
-- **Matrix:** the options ranked, with High/Medium/Low for value now,
-  compounding, cost of delay, effort and confidence. Mark facts that are hints.
-- **What dominates**, if anything (step 5).
-- **Pick:** one, clear.
-- **Immediate outcome** and **1–2 year compounding outcome.**
-- **Next easy step:**
-  - the thing to do
-  - **Claim:** the exact sentence, the decider and the date (when the guard applies)
-  - **Send by:** the date and the smaller fallback (when an artifact is involved)
-  - **Check by:** the date and the signal
+Keep it under 350 words, not counting the matrix:
+- **Matrix:** options ranked, High/Medium/Low for value now, compounding,
+  cost of delay, effort and confidence, with hints marked.
+- **What dominates**, if anything.
+- **Pick**, then its immediate and 1–2 year outcomes, one line each.
+- **Next step:** the action, plus a line for each guard that applies (Ask,
+  Ship by, Check by…). Leave out guards that don't apply.
 
-No numeric scores or percentages: the H/M/L ratings already carry the
-judgment, and anything finer is fake precision. If a guard doesn't apply,
-leave its line out instead of writing "n/a".
+Use no numbers or percentages; H/M/L is enough.
 
 ## Common mistakes
 
 | Mistake | Fix |
 |---|---|
-| "Bring it up at your next 1:1" | Give the date, the decider and the sentence, plus the written follow-up. |
-| A polished RFC "once the current work is done" | Send a one-page version by a date. The full version comes after the yes. |
-| Reading a passing remark as the deciding factor | Call it a hint, and keep looking for evidence (an allocation, a decision). |
-| Ranking invisible correctness work as high compounding | It compounds only with a visibility step. Otherwise it's terminal. |
-| Picking a role "that never requires naming the real aim" | That is the proxy trap. Say the aim to the decider in the claim. |
-| Letting a feared layoff or rumored reorg decide | Hints can't dominate. Keep the strong position and keep the fallback warm with a dated touch. |
-| Adding claim steps to work nobody else decides | The claim guard applies only when the value depends on someone else's decision. A solo backlog doesn't get one. |
+| "Raise it at the next 1:1" | Give a date, the decider, the sentence and a written recap. |
+| An ask that hides the real goal | Name the goal to the decider, with a horizon. |
+| A rumor or a single remark decides the Pick | It's a hint. Look for evidence. |
+| A claim step on work nobody else decides | Drop it. A solo backlog needs no Ask. |
