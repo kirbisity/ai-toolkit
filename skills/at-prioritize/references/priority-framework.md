@@ -32,7 +32,8 @@ does.
 
 ## What dominates the scores
 
-Any one of these overrides the matrix. Say it in one line:
+Any one of these overrides the matrix, but only when it rests on evidence (a
+hint raises cost of delay instead). Say it in one line:
 - a mandatory deadline: legal, contractual or a hard date
 - a production or safety risk that is growing
 - a dependency that blocks others
