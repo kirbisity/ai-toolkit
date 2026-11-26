@@ -50,6 +50,14 @@ Reusable Claude Code skills and workflows.
   - Understands the user but judges independently: what they want to hear vs what evidence supports
   - Sorts fact, inference, preference and wish; calibrated certainty; official sources up front
 
+- **[at-prioritize](at-prioritize/SKILL.md)** (v1.0.0) — **generic, any list of options**
+  - Picks the smallest credible next step that creates value now and compounds over 1–2 years
+  - Ranked H/M/L matrix, one Pick, immediate and 1–2 year outcomes, the next easy step
+  - Guards: a dated claim to a named decider when value depends on someone else's decision;
+    send-by dates with a smaller fallback; the real want over proxy goals; hints vs evidence;
+    visibility steps for invisible work; a check date and signal on every Pick
+  - Reads an optional private `## Priority profile` (strengths, traps) from the AT memory root
+
 - **[at-game-design](at-game-design/SKILL.md)** (v1.3.4)
   - Iterative loop for games and other feel-driven work, where "does it feel
     right?" is the real test
