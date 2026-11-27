@@ -1,17 +1,16 @@
 ---
 name: at-prioritize
 description: Use when choosing what to work on next from a list, backlog, worksheet, tree, JIRA stories or a set of options, at work or on a personal project; or when asked "what should I do next", "rank these", "which first", or to pick between career moves, projects or tasks.
-version: 1.4.0
+version: 1.5.0
 author: Team
 status: published
 ---
 
-# Prioritize: Occupy the Most Valuable Space
+# Prioritize the Most Valuable Space
 
-Aim at the most valuable space you can credibly take: the area, decision or
-ownership that matters most now and over 1–2 years. Take it before someone
-else does, and make sure the next step actually runs. The first step can be
-small; the target shouldn't be.
+Choose the most valuable space you can credibly take: the area, decision or
+ownership that matters most now and over 1–2 years. Then make sure the next
+step runs. The first step can be small; the target needn't be.
 
 ## Method
 
@@ -21,26 +20,34 @@ small; the target shouldn't be.
    guards. Never copy it anywhere.
 1. **Start from what the user gave you.** If context is thin, check the
    roadmap, tickets and knowledge base. Mark unknowns `?`; never invent facts.
-2. **Rate each option H/M/L:**
+2. **Ask yourself what each stakeholder would prefer most.** Name the people
+   who decide or are affected. Use what each one has said or written (a
+   written statement is evidence, a remark is a hint), and infer the rest
+   from their goals, marked as inferred.
+3. **Find product-level business insight** to size the impact: metrics, usage,
+   revenue or cost, incidents, OKRs, roadmap priorities, customer asks. Look in
+   the context, tickets, docs and knowledge base. Cite it, or mark it `?`.
+4. **Rate each option H/M/L:**
 
    | | High | Low |
    |---|---|---|
    | **Space** | Central, growing, others depend on it | Peripheral or shrinking |
+   | **Impact** | Moves a business metric or a stakeholder's top priority | No measurable effect |
    | **Value now** | Someone feels it today | Nice to have |
    | **Compounding** | Leaves an owned asset: a platform, interface, decision record, relationship or skill | Gone once done |
-   | **Cost of delay** | A window closes or someone else takes it | Same value later |
+   | **Cost of delay** | A window closes or the space is taken | Same value later |
    | **Effort** | Hours | Weeks, or blocked |
    | **Confidence** | Evidence: decisions, allocations, data, written commitments | Hints: remarks, rumors, mood |
 
-3. **Rank by space.** A big space you can credibly take beats a safe piece of
-   a small one. Climb the ladder: terminal task → reusable piece → owned
-   component → owned platform or decision area. Ownership comes from
-   claiming, not from finishing the stage before. Terminal work goes last
-   unless it is forced. The user can override any default.
-4. **Say what dominates:** a deadline, a growing risk, a blocking dependency
+5. **Rank by space and impact.** A large space you can credibly take beats a
+   safe piece of a small one. Prefer the option that climbs: task → reusable
+   piece → owned component → owned platform or decision area. Ownership comes
+   from claiming, not from finishing the previous stage. Terminal work goes
+   last unless forced. The user can override any default.
+6. **Say what dominates:** a deadline, a growing risk, a blocking dependency
    or a closing window. Only evidence can dominate.
-5. **Run the guards.**
-6. **Ask at most one question,** and only if the answer could change the Pick.
+7. **Run the guards.**
+8. **Ask at most one question,** and only if the answer could change the Pick.
 
 ## Guards
 
@@ -58,6 +65,8 @@ Each applies only when its condition holds.
 ## Output
 
 Keep it under 300 words, not counting the matrix:
+- **Stakeholders:** one line each: what they would prefer most, and the source.
+- **Impact:** the business insight used, cited.
 - **Matrix**, ranked, with hints marked.
 - **What dominates**, if anything.
 - **Pick**, with its immediate and 1–2 year outcomes, one line each.
