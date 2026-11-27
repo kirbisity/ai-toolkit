@@ -51,7 +51,7 @@ Reusable Claude Code skills and workflows.
   - Sorts fact, inference, preference and wish; calibrated certainty; official sources up front
 
 - **[at-prioritize](at-prioritize/SKILL.md)** (v1.0.0) — **generic, any list of options**
-  - Picks the smallest credible next step that creates value now and compounds over 1–2 years
+  - Aims at the most valuable space you can credibly take (now and over 1–2 years), claims it early, and makes the next step run
   - Ranked H/M/L matrix, one Pick, immediate and 1–2 year outcomes, the next easy step
   - Guards: a dated claim to a named decider when value depends on someone else's decision;
     send-by dates with a smaller fallback; the real want over proxy goals; hints vs evidence;
