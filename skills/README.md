@@ -50,6 +50,9 @@ Reusable Claude Code skills and workflows.
   - Understands the user but judges independently: what they want to hear vs what evidence supports
   - Sorts fact, inference, preference and wish; calibrated certainty; official sources up front
 
+- **[at-prioritize](at-prioritize/SKILL.md)** (v1.9.0) — **generic, any list of options**
+  - Picks the most valuable space over 1–2 years from stakeholder preferences, business data and a scored matrix
+  - Dated asks to named deciders, send-by and check dates; hints never move scores
 - **[at-game-design](at-game-design/SKILL.md)** (v1.3.4)
   - Iterative loop for games and other feel-driven work, where "does it feel
     right?" is the real test
