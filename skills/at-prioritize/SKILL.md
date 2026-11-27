@@ -1,7 +1,7 @@
 ---
 name: at-prioritize
 description: Use when choosing what to work on next from a list, backlog, worksheet, tree, JIRA stories or a set of options, at work or on a personal project; or when asked "what should I do next", "rank these", "which first", or to pick between career moves, projects or tasks.
-version: 1.6.0
+version: 1.7.0
 author: Team
 status: published
 ---
@@ -40,6 +40,7 @@ step runs. The first step can be small; the target needn't be.
    | **Cost of delay** | A window closes or the space is taken |
    | **Est. man-months** | A range, e.g. 0.5–1 (lower is cheaper) |
    | **Success rate** | A % range, with its basis (base rate, precedent, dependencies) |
+   | **Quadrant** | Do / Schedule / Delegate / Drop (step 6) |
    | **Confidence** | E (evidence: decisions, allocations, data, written commitments) or H (hints: remarks, rumors, mood) |
 
    Add any of these when they could change the ranking: **reversibility**,
@@ -54,10 +55,19 @@ step runs. The first step can be small; the target needn't be.
    piece → owned component → owned platform or decision area. Ownership comes
    from claiming, not from finishing the previous stage. Terminal work goes
    last unless forced. The user can override any default.
-6. **Say what dominates:** a deadline, a growing risk, a blocking dependency
+6. **Sort by Eisenhower quadrant.** Important means high space, impact or
+   alignment. Urgent means an evidenced deadline or cost of delay.
+   - **Do now:** important and urgent.
+   - **Schedule:** important, not urgent. Protect time for it, because this is
+     where the most valuable space usually is.
+   - **Delegate or shrink:** urgent, not important.
+   - **Drop:** neither.
+
+   Urgency from a hint doesn't count.
+7. **Say what dominates:** a deadline, a growing risk, a blocking dependency
    or a closing window. Only evidence can dominate.
-7. **Run the guards.**
-8. **Ask at most one question,** and only if the answer could change the Pick.
+8. **Run the guards.**
+9. **Ask at most one question,** and only if the answer could change the Pick.
 
 ## Guards
 
