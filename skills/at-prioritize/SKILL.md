@@ -1,16 +1,17 @@
 ---
 name: at-prioritize
 description: Use when choosing what to work on next from a list, backlog, worksheet, tree, JIRA stories or a set of options, at work or on a personal project; or when asked "what should I do next", "rank these", "which first", or to pick between career moves, projects or tasks.
-version: 1.2.0
+version: 1.3.0
 author: Team
 status: published
 ---
 
-# Prioritize: The Smallest Step That Compounds
+# Prioritize: Occupy the Most Valuable Space
 
-Pick the smallest credible next step that creates value now and compounds
-over 1–2 years, then make sure it actually happens. A step nobody runs is
-worth nothing.
+Aim at the most valuable space you can credibly take: the area, decision or
+ownership that matters most now and over 1–2 years. Take it before someone
+else does, then make sure the next step actually happens. Keep the target
+big even when the first step is small. A step nobody runs is worth nothing.
 
 ## Method
 
@@ -25,8 +26,10 @@ worth nothing.
    and use its defaults unless the user overrides them.
 3. **Normalize each option:** outcome, scope, next executable step, what it
    unlocks, and its evidence.
-4. **Rank.** Favor work that solves today's problem and makes future work
-   bigger or easier. Penalize terminal work.
+4. **Rank by the space each option occupies**: how central it is, how fast
+   it is growing, how much depends on it, and what it leads to. A big space
+   you can credibly take beats a safe piece of a small one, even if its first
+   step is harder. Penalize terminal work.
 5. **Say what dominates**: a deadline, a growing risk, a blocking dependency
    or a closing window. Only evidence can dominate.
 6. **Run the guards.**
@@ -48,7 +51,7 @@ Each applies only when its condition holds.
 ## Output
 
 Keep it under 350 words, not counting the matrix:
-- **Matrix:** options ranked, High/Medium/Low for value now, compounding,
+- **Matrix:** options ranked, High/Medium/Low for space, value now, compounding,
   cost of delay, effort and confidence, with hints marked.
 - **What dominates**, if anything.
 - **Pick**, then its immediate and 1–2 year outcomes, one line each.
