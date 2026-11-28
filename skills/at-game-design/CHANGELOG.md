@@ -75,3 +75,11 @@ Composes with at-sdlc, which replaced at-build as the full workflow.
 
 ### 1.3.4
 The changelog moved to CHANGELOG.md, so it's no longer loaded on every run.
+
+### 1.4.0
+Name the flaw (Phase D): name what is wrong in the craft's own vocabulary,
+gather references, and make one named change per iteration. Evidence: rework
+rounds on visual and media work traced to vague direction ("make it better",
+"too cluttered"); and Jason Liu's talk "Execution Is Free" (2026), where
+asking for "more beautiful" gave generic results until he learned the words
+for what was wrong.
