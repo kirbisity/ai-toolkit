@@ -13,6 +13,7 @@ quality drops well before the window is full: around 40% of it, or about
 100K tokens, sooner on hard tasks. A session full of corrections also teaches
 the model that it fails. **Restart from a short handoff rather than correct
 again.**
+Why: [Context is scarce](../../principles/ai-coding/context-is-scarce.md).
 
 ## Check the budget
 
