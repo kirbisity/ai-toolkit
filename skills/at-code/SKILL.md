@@ -1,7 +1,7 @@
 ---
 name: at-code
 description: Universal coding conventions emphasizing clarity, minimal comments, reusability, and simple syntax
-version: 1.2.0
+version: 1.3.0
 author: Team
 status: published
 ---
@@ -19,6 +19,8 @@ Pragmatic coding conventions applicable across languages and projects. Focus on 
 5. **Simple syntax** — Prefer readability over language features
 6. **Practical error handling** — Return sensible defaults, don't swallow errors
 7. **Focused functions** — One responsibility per function/method
+8. **Corrections become checks** — A mistake corrected twice gets a lint rule, type or test, not a comment
+9. **Deep modules** — Small interfaces with a lot behind them; test at the module boundary
 
 ## Naming
 
@@ -53,6 +55,27 @@ for active_item in active_items:
 ```
 
 Default: **No comment.** Add one only if reader wouldn't understand without it.
+A comment never defends a workaround. Fix the cause, or make it a check.
+
+## Corrections Become Checks
+
+Agents copy the patterns a codebase already has, and a comment or a line in
+CLAUDE.md is only a suggestion. When the same mistake is corrected a second
+time, make it impossible or loud instead:
+
+1. **Remove the option:** an API or folder boundary that makes the wrong thing
+   unwritable (for example, ban imports across a process boundary).
+2. **Or check it:** a lint rule, a type, or a test. Write the error message to
+   name the root cause and the right fix, because the agent reads it.
+3. **Clean up the existing cases,** so the next agent finds no example to copy.
+4. **Keep prose rules for judgement calls** that no check can decide.
+
+## Deep Modules
+
+- Prefer a few modules with small interfaces and a lot behind them over many
+  shallow ones spread across files. They are easier to test and to navigate.
+- Design the interface first, deliberately; the internals can change freely.
+- Test at the module boundary, not every small function inside it.
 
 ## Documentation
 
@@ -186,6 +209,8 @@ function: save_to_file(data, path):
 - [ ] Comments explain WHY only
 
 **Code:**
+- [ ] Repeated corrections encoded as checks
+- [ ] Tests at module boundaries
 - [ ] Simple, readable syntax
 - [ ] Functions do one thing
 - [ ] No hardcoded values
@@ -218,7 +243,7 @@ When in doubt: **Ask if a colleague would understand this without explanation.**
 
 ---
 
-**Version:** 1.2.0  
+**Version:** 1.3.0  
 **Status:** Stable  
 **Applicable to:** All languages and frameworks  
-**Last Updated:** 2025-09-13
+**Last Updated:** 2026-11-27
