@@ -31,6 +31,7 @@ Confirm with `/plugin list`; both `superpowers` and `ai-toolkit` must appear.
 /at-paperwork    # non-coding: deadlines, documents, third parties, handoffs
 /at-music-suno   # re-lyric a reference song with Suno: profile, generate, rate, cover
 /at-yt-transcript # YouTube links -> transcript, summary, speaker authority, filed by topic
+/at-blender-head  # realistic head in Blender: sculpt from a sphere or FaceBuilder from photos
 /at-honest-talk  # generic: independent, calibrated judgment on your ideas and decisions
 /at-anti-defensive-bias  # generic: on correction, evidence over continuity; no rationalizing
 /at-philosophical-thought  # generic: take any subject (story, film, project, decision) past its surface
@@ -55,7 +56,7 @@ want one phase in isolation.
 
 ## What's Included
 
-### Skills (14)
+### Skills (15)
 - **at-code** (v1.3.0) — Universal coding principles for all languages; repeated corrections become checks, deep modules
 - **at-build** (v3.1.0) — One-off loop for tasks that leave no decision to remember
 - **at-sdlc** (v1.2.0) — The SDLC entry point: intent-driven spec, research first in existing code, vertical AFK/HITL slices, routed phases (superpowers by default), fresh-agent review scaled to risk, docs close-out
@@ -70,6 +71,7 @@ want one phase in isolation.
 - **at-prioritize** (v1.9.0) — Generic: scores options on impact, alignment, affinity, cost and odds, weighs stakeholders, picks the most valuable space, and dates the ask, send and check; reads an optional private profile
 - **at-honest-talk** (v1.0.0) — Generic, not coding-specific: understands the user but keeps independent, calibrated judgment, separating what they want to hear from what the evidence supports
 - **at-yt-transcript** (v1.0.0) — Turns YouTube links into a transcript, summary and metadata filed by topic, rates each speaker's authority (builder, practitioner, educator, unclear) and bias, and skips videos already saved
+- **at-blender-head** (v1.0.0) — A realistic human head in Blender: sculpt from a sphere (big shapes first at low resolution, landmarks, Mask + Move fixes, proportion checks, ears, neck) or build a likeness from photos with KeenTools FaceBuilder (two-round pin alignment, texture)
 - **at-game-design** (v1.4.0) — The loop for games and other feel-driven work, where the test is whether it plays right: Clarify → Spec → Build → Play → Learn, gated on measuring the running thing, with a self-review that proposes its own revisions
 
 ### Dependency
