@@ -68,6 +68,11 @@ Reusable Claude Code skills and workflows.
   - Speaker authority tier (A builder → D unclear) plus bias; index ranked by tier, then views
   - Bundled `scripts/yt-summary.py`: 429 fallback, duplicate skip, `--reindex`
 
+- **[at-blender-head](at-blender-head/SKILL.md)** (v1.0.0)
+  - Sculpt: eight stages from UV sphere to character, at 0.05 then 0.0085 voxel, with brush settings and fixes
+  - FaceBuilder: photo set, rough then fine pin rounds, residuals, texture
+  - Built from two transcripts (CG Boost, KeenTools); game-ready steps out of scope
+
 - **[at-game-design](at-game-design/SKILL.md)** (v1.4.0)
   - Iterative loop for games and other feel-driven work, where "does it feel
     right?" is the real test
