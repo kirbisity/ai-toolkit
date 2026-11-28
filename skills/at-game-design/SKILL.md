@@ -404,6 +404,8 @@ anything**. "Make it better" gives generic output; a named flaw gives a fix.
 - Make one named change per iteration, then look again. If you can't name the
   flaw, ask the requester to point at the worst moment, rather than guess.
 
+Why: [Taste is vocabulary](../../principles/ai-coding/taste-is-vocabulary.md).
+
 ### Measure layout, not just look at it
 
 For a layout constraint, "looks fine on my screen" proves one screen. Define

@@ -107,6 +107,9 @@ Without it, skills look for a sibling folder named `ai-toolkit-kb`, then ask.
 
 **Syntax:** Simple over clever. Loops over complex comprehensions.
 
+For AI-coding practice (context, slices, checks, review, safety, taste), see
+[principles/](principles/README.md).
+
 ---
 
 ## Directory Structure
@@ -118,6 +121,7 @@ ai-toolkit/  (this repo, public)
 │                          at-sdlc, at-search, at-sleep, at-context-budget, at-unattended-run,
 │                          at-paperwork (non-coding), at-music-suno,
 │                          at-honest-talk, at-anti-defensive-bias, at-philosophical-thought, at-prioritize (generic)
+├── principles/            why the skills work as they do: one article per principle
 ├── hooks/                 KB guard + post-write (inert outside the KB)
 ├── agents/                placeholder
 ├── docs/                  decision-log, superpowers reference
@@ -179,6 +183,7 @@ Editing a `SKILL.md` then takes effect on the next session start.
 |------|-----|
 | Installation | Quickstart above |
 | Skills guide | `skills/README.md` |
+| Why the skills work as they do | [`principles/`](principles/README.md) |
 | Coding standards | `skills/at-code/coding-standards/` |
 | Superpowers dependency | `docs/superpowers.md` |
 | Design decisions | `docs/decision-log.md` |
