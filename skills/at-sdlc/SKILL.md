@@ -95,7 +95,7 @@ the files and line numbers involved, the flow through them, and where it is
 fragile. It reports facts, not proposals. The user reviews the snapshot before
 the spec is written, because one wrong line of research becomes many wrong
 lines of code. Trust the code and tests over older specs for how things work
-now; specs drift once shipped.
+now; specs drift once shipped. Why: [The human owns the thinking](../../principles/ai-coding/human-owns-the-thinking.md).
 
 ### 2 Spec
 
@@ -135,6 +135,7 @@ not to fix, then ask the user for approval. Set `status: approved`.
   it serves and with **AFK** (an agent can finish it alone against its checks)
   or **HITL** (it needs the user: a judgement, taste, or a step that can't be
   undone). Steps inside a slice stay 2–5 minutes each, test-first.
+  Why: [Slice vertically](../../principles/ai-coding/slice-vertically.md).
 - **Implement:** set the spec's status to `in-progress`. TDD (RED → GREEN →
   REFACTOR) is mandatory. Apply at-code to every file touched. Each slice
   starts in a fresh context (a new subagent or a cleared session) from the
@@ -167,6 +168,7 @@ parallel:
 checks and the agents' review. A product change gets one look from the user.
 Anything touching auth, money, user data, deletion, or another step that can't
 be undone gets the user's review of the diff itself.
+Why: [Review fresh, scaled to risk](../../principles/ai-coding/review-fresh-scaled-to-risk.md).
 
 Then triage with the receive route. For each finding, either fix it, push back
 with evidence, or record it under Decisions. A finding is settled by evidence,

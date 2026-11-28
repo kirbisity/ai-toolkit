@@ -13,6 +13,8 @@ care is not a safeguard**: a rule only counts if a deny rule, a sandbox, a
 hook or CI enforces it whether or not you remember it. People reviewing
 commands by hand catch few dangerous ones, and an auto-mode classifier still
 lets about one in ten through.
+Why: [Guard by reversibility](../../principles/ai-coding/guard-by-reversibility.md) and
+[Feedback loops set the ceiling](../../principles/ai-coding/feedback-loops-set-the-ceiling.md).
 
 ## 1. Sort the risks by whether they can be undone
 

@@ -70,12 +70,16 @@ time, make it impossible or loud instead:
 3. **Clean up the existing cases,** so the next agent finds no example to copy.
 4. **Keep prose rules for judgement calls** that no check can decide.
 
+Why: [Encode corrections in code](../../principles/ai-coding/encode-corrections-in-code.md).
+
 ## Deep Modules
 
 - Prefer a few modules with small interfaces and a lot behind them over many
   shallow ones spread across files. They are easier to test and to navigate.
 - Design the interface first, deliberately; the internals can change freely.
 - Test at the module boundary, not every small function inside it.
+
+Why: [The codebase is the prompt](../../principles/ai-coding/codebase-is-the-prompt.md).
 
 ## Documentation
 
