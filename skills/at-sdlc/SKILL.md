@@ -1,7 +1,7 @@
 ---
 name: at-sdlc
 description: The SDLC entry point — spec-driven development from a project's intent.md and the user's prompts, with specs and plans kept current in the AT memory root, phases run through superpowers (or a routed alternate), fresh-agent review, and docs updated at the end. Use for any feature or change worth remembering; one-off tasks go to at-build.
-version: 1.1.0
+version: 1.2.0
 author: Team
 status: published
 ---
@@ -89,6 +89,14 @@ Turn the inputs into a shared understanding of the problem: who it's for,
 the constraints, and what's in and out of scope. Ask before designing, and
 keep asking until the edges are clear.
 
+**Research first in existing code.** When the change touches code you have not
+read this session, send a fresh subagent to snapshot how that code works now:
+the files and line numbers involved, the flow through them, and where it is
+fragile. It reports facts, not proposals. The user reviews the snapshot before
+the spec is written, because one wrong line of research becomes many wrong
+lines of code. Trust the code and tests over older specs for how things work
+now; specs drift once shipped.
+
 ### 2 Spec
 
 Write the spec file:
@@ -104,6 +112,7 @@ status: draft | approved | in-progress | shipped | abandoned
 # <Title>
 
 ## Inputs          — the user's prompts (verbatim or quoted) + intent.md points relied on
+## Research        — the snapshot of how the code works now (existing code only)
 ## Problem         — what is wrong or missing, for whom
 ## Acceptance criteria — numbered, each one testable
 ## Non-goals
@@ -120,11 +129,17 @@ not to fix, then ask the user for approval. Set `status: approved`.
 ### 3 Isolate → 4 Plan → 5 Implement
 
 - **Isolate:** a worktree, so `main` stays clean and parallel agents don't collide.
-- **Plan:** tasks of 2–5 minutes each, test-first steps, and each task tagged
-  with the acceptance criterion it serves.
+- **Plan:** each task is a **vertical slice**: it crosses every layer it needs
+  and ends in something that can be run or seen, never one layer at a time.
+  Size each slice to one fresh session. Tag it with the acceptance criterion
+  it serves and with **AFK** (an agent can finish it alone against its checks)
+  or **HITL** (it needs the user: a judgement, taste, or a step that can't be
+  undone). Steps inside a slice stay 2–5 minutes each, test-first.
 - **Implement:** set the spec's status to `in-progress`. TDD (RED → GREEN →
-  REFACTOR) is mandatory. Apply at-code to every file touched. Independent
-  tracks go to parallel agents.
+  REFACTOR) is mandatory. Apply at-code to every file touched. Each slice
+  starts in a fresh context (a new subagent or a cleared session) from the
+  spec and plan, not from a long conversation. HITL slices stop for the user.
+  Independent slices go to parallel agents.
 - **Keep it current while building:** tick each task the moment it's done.
   Record any decision in the spec's **Decisions** section with its reason, and
   anything that departs from the plan in a **Deviations** section in the plan.
@@ -137,14 +152,21 @@ don't inherit the reasoning they're meant to check. Each gets only the spec,
 the plan and the diff (or just the spec, before approval). Spawn both in
 parallel:
 
-1. **Assumption challenger**:
+1. **Assumption challenger** (the spec pass):
    - What does this assume that the spec never stated?
    - What breaks if each of those assumptions is wrong?
-   - Which acceptance criteria are not actually met, or only met in the happy path?
-2. **Code reviewer**:
+   - Check each acceptance criterion against the diff: met, only met in the
+     happy path, or not met.
+2. **Code reviewer** (the standards pass). Put the standards in its brief
+   (at-code and the repo's own rules) rather than leaving it to find them:
    - Correctness and edge cases.
-   - at-code style.
+   - The standards it was given.
    - Test quality: would each test fail if the code were wrong?
+
+**Scale the user's review to the risk.** Docs and copy can ship on green
+checks and the agents' review. A product change gets one look from the user.
+Anything touching auth, money, user data, deletion, or another step that can't
+be undone gets the user's review of the diff itself.
 
 Then triage with the receive route. For each finding, either fix it, push back
 with evidence, or record it under Decisions. A finding is settled by evidence,
@@ -227,7 +249,7 @@ the licence (MIT, Apache-2.0 or BSD only) and what changed. List each fork in
 
 ---
 
-**Version:** 1.1.0
+**Version:** 1.2.0
 **Status:** Stable
 **Requires:** an AT memory root, [at-code](../at-code/SKILL.md); `superpowers` (default executor, with a manual fallback)
-**Last Updated:** 2026-10-10
+**Last Updated:** 2026-11-27

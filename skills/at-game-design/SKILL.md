@@ -1,7 +1,7 @@
 ---
 name: at-game-design
 description: Iterative loop for building and tuning games and other feel-driven software — clarify, spec, build, play, measure, learn — with a self-review pass that proposes its own revisions
-version: 1.3.4
+version: 1.4.0
 author: Team
 status: published
 ---
@@ -391,6 +391,19 @@ until it reads the way the spec said it should.
   normals on gentle slopes produced featureless fog until the lighting relief
   was exaggerated; look again after each dial.
 
+### Name the flaw
+
+When something looks or feels wrong, or the requester rejects it without
+saying why, **name the flaw in the craft's own terms before changing
+anything**. "Make it better" gives generic output; a named flaw gives a fix.
+
+- Use the field's vocabulary: spacing, value contrast, silhouette, hierarchy,
+  density; timing, easing, anticipation, weight; rhythm, dynamics, mix.
+- Gather two or three references that have the quality you want, and say
+  which property they have that this lacks.
+- Make one named change per iteration, then look again. If you can't name the
+  flaw, ask the requester to point at the worst moment, rather than guess.
+
 ### Measure layout, not just look at it
 
 For a layout constraint, "looks fine on my screen" proves one screen. Define
@@ -709,7 +722,7 @@ out of this file so it isn't loaded on every run.
 
 ---
 
-**Version:** 1.3.4
+**Version:** 1.4.0
 **Status:** Stable
 **Requires:** at-code (style layer). Composes with at-sdlc when present; needs no plugin on its own.
-**Last Updated:** 2026-10-10
+**Last Updated:** 2026-11-27

@@ -1,7 +1,7 @@
 ---
 name: at-build
 description: Short build loop for one-off tasks that leave no decision worth remembering — a local bug fix, config, docs, a script. Isolate, test-first, verify, ship. No spec, no knowledge-base writes. Anything bigger goes to at-sdlc.
-version: 3.0.0
+version: 3.1.0
 author: Team
 status: published
 ---
@@ -26,7 +26,7 @@ off even on a five-minute change.
 | Step | Skill (default) | Exit criteria |
 |------|-----------------|---------------|
 | 1 Isolate | `superpowers:using-git-worktrees` (or a plain branch for a trivial change) | Off `main` |
-| 2 Test first | `superpowers:test-driven-development` | A failing test reproduces the bug or pins the new behaviour (docs and config excepted) |
+| 2 Test first | `superpowers:test-driven-development` | A failing test reproduces the bug or pins the new behaviour. For docs and config, the pass/fail check is named instead: a command and its expected output, or what to look at |
 | 3 Change | apply [at-code](../at-code/SKILL.md) | The test passes and the full suite is green |
 | 4 Verify | `superpowers:verification-before-completion` | Evidence (command output or observed behaviour), not "should work" |
 | 5 Ship | `superpowers:finishing-a-development-branch` | PR opened or merged, branch cleaned up |
@@ -50,7 +50,7 @@ review and close-out. at-build 3.0.0 keeps the short loop.
 
 ---
 
-**Version:** 3.0.0
+**Version:** 3.1.0
 **Status:** Stable
 **Requires:** [at-code](../at-code/SKILL.md); `superpowers` (default, with a manual fallback)
-**Last Updated:** 2026-10-10
+**Last Updated:** 2026-11-27

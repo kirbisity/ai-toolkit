@@ -4,21 +4,31 @@ Reusable Claude Code skills and workflows.
 
 ## Available Skills
 
-- **[at-code](at-code/SKILL.md)** (v1.2.0)
+- **[at-code](at-code/SKILL.md)** (v1.3.0)
   - Universal coding principles for all languages
+  - A mistake corrected twice becomes a lint rule, type or test; deep modules tested at their boundary
   - Naming, comments, documentation, error handling, reusability
   - Language detail in [coding-standards/](at-code/coding-standards/README.md)
 
-- **[at-build](at-build/SKILL.md)** (v3.0.0)
+- **[at-build](at-build/SKILL.md)** (v3.1.0)
   - One-off loop: Isolate → Test first → Change → Verify → Ship
   - No spec, no KB writes; escalates to at-sdlc when a decision appears
 
-- **[at-sdlc](at-sdlc/SKILL.md)** (v1.1.0) — the SDLC entry point
+- **[at-sdlc](at-sdlc/SKILL.md)** (v1.2.0) — the SDLC entry point
   - Input: the project's `intent.md` plus your prompts
   - Align → Spec → Isolate → Plan → Implement → Review → Verify → Ship → Close out
   - Phases routed to `superpowers` by default (see [docs/superpowers.md](../docs/superpowers.md)),
     with alternates from other plugins; manual fallback when absent
-  - Review by fresh agents that challenge assumptions; specs and plans kept current in the KB
+  - Research snapshot before the spec in existing code; plans as vertical slices tagged AFK or HITL
+  - Review by fresh agents (a spec pass and a standards pass), human review scaled to risk; specs and plans kept current in the KB
+
+- **[at-context-budget](at-context-budget/SKILL.md)** (v1.0.0)
+  - For long sessions, repeated corrections, big reads and handoffs
+  - Subagents for big reads; past ~40% or after repeated corrections, a handoff file and a fresh session
+
+- **[at-unattended-run](at-unattended-run/SKILL.md)** (v1.0.0)
+  - For overnight, background, cloud or many-session work
+  - Sort risks by whether they can be undone; deny rules, sandbox or cloud; hooks that exit 2; CI; merges gated on risk
 
 - **[at-search](at-search/SKILL.md)** (v1.0.0)
   - Read-only lookup in the knowledge base: L1 INDEX → L2 files → L3 full text
@@ -53,7 +63,7 @@ Reusable Claude Code skills and workflows.
 - **[at-prioritize](at-prioritize/SKILL.md)** (v1.9.0) — **generic, any list of options**
   - Picks the most valuable space over 1–2 years from stakeholder preferences, business data and a scored matrix
   - Dated asks to named deciders, send-by and check dates; hints never move scores
-- **[at-game-design](at-game-design/SKILL.md)** (v1.3.4)
+- **[at-game-design](at-game-design/SKILL.md)** (v1.4.0)
   - Iterative loop for games and other feel-driven work, where "does it feel
     right?" is the real test
   - Loop: Clarify → Concept to Spec → Spec to Build → Play → Learn
