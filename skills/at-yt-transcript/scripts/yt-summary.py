@@ -154,7 +154,9 @@ def slugify(title):
 def summarize(meta, transcript, model):
     context = (f"Title: {meta['title']}\nChannel: {meta['channel']}\n"
                f"Description:\n{meta['description']}\n\nTranscript:\n{transcript}")
-    result = subprocess.run(["claude", "-p", "--model", model, PROMPT],
+    # Hooks off: a SessionStart hook's reminder otherwise leaks into the summary.
+    result = subprocess.run(["claude", "-p", "--model", model,
+                             "--settings", '{"disableAllHooks": true}', PROMPT],
                             input=context, capture_output=True, text=True)
     if result.returncode != 0:
         sys.exit(f"Summary failed:\n{result.stderr}")
