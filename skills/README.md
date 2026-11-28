@@ -63,6 +63,11 @@ Reusable Claude Code skills and workflows.
 - **[at-prioritize](at-prioritize/SKILL.md)** (v1.9.0) — **generic, any list of options**
   - Picks the most valuable space over 1–2 years from stakeholder preferences, business data and a scored matrix
   - Dated asks to named deciders, send-by and check dates; hints never move scores
+- **[at-yt-transcript](at-yt-transcript/SKILL.md)** (v1.0.0)
+  - YouTube links → clean transcript, Haiku summary and metadata, one folder per topic
+  - Speaker authority tier (A builder → D unclear) plus bias; index ranked by tier, then views
+  - Bundled `scripts/yt-summary.py`: 429 fallback, duplicate skip, `--reindex`
+
 - **[at-game-design](at-game-design/SKILL.md)** (v1.4.0)
   - Iterative loop for games and other feel-driven work, where "does it feel
     right?" is the real test
